@@ -1,0 +1,505 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>RTL Voice Procurement System — Testing Tool</title>
+  <style>
+    :root {
+      --bg: #f4f6f8;
+      --card: #ffffff;
+      --border: #e1e5ea;
+      --text: #1a2733;
+      --muted: #5c6b7a;
+      --accent: #1f6feb;
+      --accent-dark: #0a4dbf;
+      --success: #1f9d55;
+      --warn: #c97a0a;
+      --error: #c0392b;
+      --code-bg: #0d1117;
+      --code-text: #d6deeb;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.5;
+    }
+    header {
+      background: linear-gradient(135deg, #1f3a5f, #1f6feb);
+      color: white;
+      padding: 32px 24px;
+    }
+    header .container { max-width: 1100px; margin: 0 auto; }
+    header h1 { margin: 0 0 8px; font-size: 28px; font-weight: 600; }
+    header p { margin: 0; opacity: 0.9; }
+    .container { max-width: 1100px; margin: 0 auto; padding: 24px; }
+    .status-bar {
+      display: flex;
+      gap: 12px;
+      align-items: center;
+      flex-wrap: wrap;
+      margin-top: 16px;
+    }
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 4px 12px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.15);
+      font-size: 13px;
+      font-weight: 500;
+    }
+    .pill .dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #ffd66e;
+    }
+    .pill.live .dot { background: #4ade80; }
+    .pill.down .dot { background: #f87171; }
+    .intro {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 20px 24px;
+      margin: 24px 0;
+    }
+    .intro h2 { margin: 0 0 12px; font-size: 18px; }
+    .intro p { margin: 8px 0; color: var(--muted); }
+    .intro .phone {
+      display: inline-block;
+      padding: 6px 12px;
+      background: #eef4ff;
+      border-radius: 6px;
+      font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+      color: var(--accent-dark);
+      font-weight: 600;
+    }
+    .tool {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      margin-bottom: 20px;
+      overflow: hidden;
+    }
+    .tool-header {
+      padding: 18px 24px;
+      border-bottom: 1px solid var(--border);
+      background: #fafbfc;
+    }
+    .tool-header h3 {
+      margin: 0 0 4px;
+      font-size: 18px;
+    }
+    .tool-header .tech {
+      font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+      font-size: 12px;
+      color: var(--muted);
+    }
+    .tool-body {
+      padding: 20px 24px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+    }
+    @media (max-width: 760px) {
+      .tool-body { grid-template-columns: 1fr; }
+    }
+    .col h4 {
+      margin: 0 0 8px;
+      font-size: 13px;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      color: var(--muted);
+      font-weight: 600;
+    }
+    .examples {
+      margin: 0 0 16px;
+      padding-left: 18px;
+      color: var(--text);
+    }
+    .examples li { margin-bottom: 6px; }
+    .examples li::marker { color: var(--accent); }
+    .expected {
+      background: #f0f5fb;
+      border-left: 3px solid var(--accent);
+      padding: 12px 14px;
+      border-radius: 4px;
+      font-size: 14px;
+      color: var(--text);
+      margin: 0;
+    }
+    .tester {
+      background: #fafbfc;
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 14px;
+    }
+    .tester label {
+      display: block;
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      color: var(--muted);
+      margin-bottom: 6px;
+      font-weight: 600;
+    }
+    .tester input, .tester textarea {
+      width: 100%;
+      padding: 8px 10px;
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      font-size: 14px;
+      font-family: inherit;
+      margin-bottom: 10px;
+    }
+    .tester textarea { resize: vertical; min-height: 60px; }
+    .tester button {
+      background: var(--accent);
+      color: white;
+      border: none;
+      padding: 8px 16px;
+      font-size: 14px;
+      font-weight: 600;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+    .tester button:hover { background: var(--accent-dark); }
+    .tester button:disabled { background: #9aa5b1; cursor: not-allowed; }
+    .quick-fills {
+      display: flex;
+      gap: 6px;
+      flex-wrap: wrap;
+      margin-bottom: 10px;
+    }
+    .quick-fills button {
+      background: white;
+      border: 1px solid var(--border);
+      color: var(--text);
+      padding: 4px 10px;
+      font-size: 12px;
+      font-weight: 500;
+      border-radius: 999px;
+      cursor: pointer;
+    }
+    .quick-fills button:hover { background: #f0f5fb; border-color: var(--accent); }
+    .result {
+      margin-top: 12px;
+      background: var(--code-bg);
+      color: var(--code-text);
+      padding: 12px 14px;
+      border-radius: 4px;
+      font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+      font-size: 12px;
+      white-space: pre-wrap;
+      word-break: break-word;
+      max-height: 280px;
+      overflow-y: auto;
+      display: none;
+    }
+    .result.show { display: block; }
+    .result.error { background: #2d1717; color: #ffb3b3; }
+    .loading {
+      display: inline-flex;
+      gap: 8px;
+      align-items: center;
+      color: var(--muted);
+      font-size: 13px;
+      margin-top: 8px;
+    }
+    .spinner {
+      width: 14px;
+      height: 14px;
+      border: 2px solid var(--border);
+      border-top-color: var(--accent);
+      border-radius: 50%;
+      animation: spin 0.8s linear infinite;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+    .footer-note {
+      background: #fff8e6;
+      border: 1px solid #f0d68a;
+      border-radius: 6px;
+      padding: 12px 16px;
+      margin: 24px 0;
+      font-size: 13px;
+      color: #5a4615;
+    }
+    footer {
+      text-align: center;
+      padding: 24px;
+      color: var(--muted);
+      font-size: 13px;
+    }
+    footer a { color: var(--accent); text-decoration: none; }
+    footer a:hover { text-decoration: underline; }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container">
+      <h1>RTL Voice Procurement System</h1>
+      <p>Testing tool — verify what the voice AI can answer and what data it sees</p>
+      <div class="status-bar">
+        <span class="pill" id="serverPill"><span class="dot"></span><span id="serverStatus">Checking server…</span></span>
+        <span class="pill" id="dataPill"><span class="dot"></span><span id="dataStatus">Loading data counts…</span></span>
+      </div>
+    </div>
+  </header>
+
+  <div class="container">
+
+    <div class="intro">
+      <h2>How to test the voice AI</h2>
+      <p><strong>Option 1 — Real phone call:</strong> Dial <span class="phone">+1 (930) 254-9264</span>. The AI greets you with <em>"Hello, you've reached the RTL Procurement Office."</em> Try the example phrases below.</p>
+      <p><strong>Option 2 — Verify the data directly:</strong> Each section below has a live tester that hits the same backend endpoint the voice AI uses. If the tester returns the right data, the AI can use it on a call.</p>
+    </div>
+
+    <div class="footer-note">
+      <strong>Cold-start note:</strong> The backend sleeps after 15 min of no traffic on Render's free tier. The first request after sleep takes ~30 seconds to wake up. The voice AI tools are set to wait 45 seconds, but if you hear a long pause on a call, that's why.
+    </div>
+
+    <!-- Tool 1: Employee Lookup -->
+    <div class="tool">
+      <div class="tool-header">
+        <h3>1. Employee Lookup</h3>
+        <div class="tech">tool: <code>lookup_employee</code> &nbsp;·&nbsp; endpoint: <code>POST /lookup-employee</code></div>
+      </div>
+      <div class="tool-body">
+        <div class="col">
+          <h4>What you can say on a call</h4>
+          <ul class="examples">
+            <li>"This is Andrea calling."</li>
+            <li>"My name is James Chen, I have a procurement question."</li>
+            <li>"Can you look up Sarah Mitchell?"</li>
+          </ul>
+          <h4>What the AI should say back</h4>
+          <p class="expected">"Hi Andrea, I see you're the Procurement Manager — what can I help you with today?" The AI personalizes greetings using each employee's role, team, and notes (e.g. communication style preference).</p>
+          <p style="font-size: 13px; color: var(--muted); margin-top: 12px;"><strong>Employees in the database:</strong> Andrea Smith, Maria Santos, James Chen, Sarah Mitchell, Tom Harrison.</p>
+        </div>
+        <div class="col">
+          <h4>Try it live</h4>
+          <div class="tester">
+            <div class="quick-fills">
+              <button onclick="fill('lookupName','Andrea')">Andrea</button>
+              <button onclick="fill('lookupName','Maria Santos')">Maria Santos</button>
+              <button onclick="fill('lookupName','James')">James</button>
+              <button onclick="fill('lookupName','Bob Nobody')">unknown name</button>
+            </div>
+            <label for="lookupName">Employee name</label>
+            <input id="lookupName" placeholder="e.g. Andrea Smith" />
+            <button onclick="callTool('lookup-employee', { name: document.getElementById('lookupName').value }, 'lookupResult')">Look up</button>
+            <div class="result" id="lookupResult"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Tool 2: Policy Search -->
+    <div class="tool">
+      <div class="tool-header">
+        <h3>2. Procurement Policy Search (RAG)</h3>
+        <div class="tech">tool: <code>search_procurement_policies</code> &nbsp;·&nbsp; endpoint: <code>POST /search-policies</code></div>
+      </div>
+      <div class="tool-body">
+        <div class="col">
+          <h4>What you can say on a call</h4>
+          <ul class="examples">
+            <li>"What's the vendor onboarding process?"</li>
+            <li>"Can I pay a vendor 30% upfront?"</li>
+            <li>"Which contract template do I use for a fixed-price project?"</li>
+            <li>"Do contracts over 100K need extra approval?"</li>
+          </ul>
+          <h4>What the AI should say back</h4>
+          <p class="expected">"RTL's policy caps upfront payments at 20% on fixed-price contracts. Paying more requires CFO written approval. Want me to walk you through restructuring the payment terms?" The AI cites the relevant policy section from the indexed docs.</p>
+          <p style="font-size: 13px; color: var(--muted); margin-top: 12px;"><strong>Policy docs indexed:</strong> vendor onboarding, contract templates, payment rules, procurement FAQ. 146 searchable chunks total.</p>
+        </div>
+        <div class="col">
+          <h4>Try it live</h4>
+          <div class="tester">
+            <div class="quick-fills">
+              <button onclick="fill('policyQuery','vendor onboarding')">vendor onboarding</button>
+              <button onclick="fill('policyQuery','upfront payment rules')">upfront payment</button>
+              <button onclick="fill('policyQuery','fixed price contract template')">contract template</button>
+              <button onclick="fill('policyQuery','approval over 100k')">approval threshold</button>
+            </div>
+            <label for="policyQuery">Search query</label>
+            <input id="policyQuery" placeholder="e.g. upfront payment rules" />
+            <button onclick="callTool('search-policies', { query: document.getElementById('policyQuery').value }, 'policyResult')">Search policies</button>
+            <div class="result" id="policyResult"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Tool 3: Vendor Search -->
+    <div class="tool">
+      <div class="tool-header">
+        <h3>3. Vendor History Search</h3>
+        <div class="tech">tool: <code>search_vendor_history</code> &nbsp;·&nbsp; endpoint: <code>POST /search-vendors</code></div>
+      </div>
+      <div class="tool-body">
+        <div class="col">
+          <h4>What you can say on a call</h4>
+          <ul class="examples">
+            <li>"Do we have vendors who do Rust development?"</li>
+            <li>"Who's worked on the Leos project before?"</li>
+            <li>"Find me vendors for marketing automation."</li>
+            <li>"What's TechForge's discount history?"</li>
+          </ul>
+          <h4>What the AI should say back</h4>
+          <p class="expected">"Yes — TechForge Solutions has strong Rust expertise. They've delivered Leos backend work and the Cardano smart contract audit, average 8% discount, rated 4.8 out of 5. Want me to pull up their contract history?" The AI ranks vendors by skill and project match.</p>
+          <p style="font-size: 13px; color: var(--muted); margin-top: 12px;"><strong>12 approved vendors</strong> covering Rust, blockchain, DevOps/cloud, design, analytics, content, QA, security audits, marketing automation, and frontend.</p>
+        </div>
+        <div class="col">
+          <h4>Try it live</h4>
+          <div class="tester">
+            <div class="quick-fills">
+              <button onclick="fill('vendorQuery','Rust engineers')">Rust engineers</button>
+              <button onclick="fill('vendorQuery','Leos')">Leos project</button>
+              <button onclick="fill('vendorQuery','marketing automation')">marketing automation</button>
+              <button onclick="fill('vendorQuery','DevOps Kubernetes')">DevOps</button>
+            </div>
+            <label for="vendorQuery">Search query</label>
+            <input id="vendorQuery" placeholder="e.g. Rust engineers" />
+            <button onclick="callTool('search-vendors', { query: document.getElementById('vendorQuery').value }, 'vendorResult')">Search vendors</button>
+            <div class="result" id="vendorResult"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Tool 4: Validate Request -->
+    <div class="tool">
+      <div class="tool-header">
+        <h3>4. Request Validation</h3>
+        <div class="tech">tool: <code>validate_request</code> &nbsp;·&nbsp; endpoint: <code>POST /validate-request</code></div>
+      </div>
+      <div class="tool-body">
+        <div class="col">
+          <h4>What you can say on a call</h4>
+          <ul class="examples">
+            <li>"I need to submit a procurement request."</li>
+            <li>"I want to engage a new vendor for [project]."</li>
+            <li>"I'm trying to file a request for [thing]."</li>
+          </ul>
+          <h4>What the AI should say back</h4>
+          <p class="expected">The AI gathers four required fields by asking follow-ups: <strong>budget number, milestones, costs, description</strong> (and optionally deadline). If anything's missing it asks for it. Only complete requests get routed — this is what prevents the 50% incomplete-request waste.</p>
+          <p style="font-size: 13px; color: var(--muted); margin-top: 12px;">Try submitting partial fields below to see what validation flags as missing.</p>
+        </div>
+        <div class="col">
+          <h4>Try it live</h4>
+          <div class="tester">
+            <div class="quick-fills">
+              <button onclick="fillRequest('complete')">complete request</button>
+              <button onclick="fillRequest('missing')">missing fields</button>
+              <button onclick="fillRequest('empty')">empty</button>
+            </div>
+            <label>Budget number</label>
+            <input id="reqBudget" placeholder="e.g. BUD-2025-ENG-014" />
+            <label>Milestones / timeline</label>
+            <input id="reqMilestones" placeholder="e.g. Q2 2025 delivery" />
+            <label>Costs</label>
+            <input id="reqCosts" placeholder="e.g. $75,000" />
+            <label>Description</label>
+            <textarea id="reqDescription" placeholder="e.g. Rust backend engineer for 3 months"></textarea>
+            <button onclick="validateRequest()">Validate</button>
+            <div class="result" id="validateResult"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <footer>
+    <p>
+      Backend: <code id="apiUrl">https://rtl-procurement-mcp.onrender.com</code>
+      &nbsp;·&nbsp;
+      <a href="https://github.com/ianpilon/RTL-Voice-Procurement-System" target="_blank">Source</a>
+      &nbsp;·&nbsp;
+      <a href="https://dashboard.vapi.ai/calls" target="_blank">Vapi call logs</a>
+    </p>
+  </footer>
+
+  <script>
+    const API = "https://rtl-procurement-mcp.onrender.com";
+
+    function fill(id, value) {
+      document.getElementById(id).value = value;
+    }
+
+    function fillRequest(mode) {
+      const map = {
+        complete: { reqBudget: "BUD-2025-ENG-014", reqMilestones: "Q2 2025 delivery", reqCosts: "$75,000", reqDescription: "Rust backend engineer for 3 months on Leos" },
+        missing:  { reqBudget: "BUD-2025-ENG-014", reqMilestones: "",                  reqCosts: "",        reqDescription: "Rust backend engineer" },
+        empty:    { reqBudget: "",                  reqMilestones: "",                  reqCosts: "",        reqDescription: "" }
+      };
+      Object.entries(map[mode]).forEach(([k, v]) => document.getElementById(k).value = v);
+    }
+
+    async function callTool(path, body, resultId) {
+      const result = document.getElementById(resultId);
+      result.className = "result show";
+      result.textContent = "Sending request… (first call after sleep can take ~30s)";
+      try {
+        const t0 = performance.now();
+        const res = await fetch(`${API}/${path}`, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(body)
+        });
+        const ms = Math.round(performance.now() - t0);
+        const data = await res.json();
+        result.className = "result show";
+        result.textContent = `HTTP ${res.status} · ${ms}ms\n\n` + JSON.stringify(data, null, 2);
+      } catch (err) {
+        result.className = "result show error";
+        result.textContent = "Error: " + err.message + "\n\n" +
+          "Likely causes:\n" +
+          "  • Server is still waking up (try again in 30s)\n" +
+          "  • CORS not yet deployed (push the latest commit)\n" +
+          "  • Network blocked";
+      }
+    }
+
+    function validateRequest() {
+      const body = {
+        budget_number: document.getElementById("reqBudget").value,
+        milestones:    document.getElementById("reqMilestones").value,
+        costs:         document.getElementById("reqCosts").value,
+        description:   document.getElementById("reqDescription").value
+      };
+      callTool("validate-request", body, "validateResult");
+    }
+
+    async function checkHealth() {
+      const serverStatus = document.getElementById("serverStatus");
+      const serverPill   = document.getElementById("serverPill");
+      const dataStatus   = document.getElementById("dataStatus");
+      const dataPill     = document.getElementById("dataPill");
+      try {
+        const t0 = performance.now();
+        const res = await fetch(`${API}/health`);
+        const ms = Math.round(performance.now() - t0);
+        const data = await res.json();
+        serverPill.classList.add("live");
+        serverStatus.textContent = `Server live (${ms}ms)`;
+        dataPill.classList.add("live");
+        dataStatus.textContent = `${data.employees} employees · ${data.vendors} vendors · ${data.documents} doc chunks`;
+      } catch (err) {
+        serverPill.classList.add("down");
+        serverStatus.textContent = "Server unreachable";
+        dataPill.classList.add("down");
+        dataStatus.textContent = "Could not load data counts";
+      }
+    }
+
+    checkHealth();
+  </script>
+</body>
+</html>
