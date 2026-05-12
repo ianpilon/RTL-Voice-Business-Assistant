@@ -404,6 +404,28 @@ app.get('/health', (req, res) => {
   });
 });
 
+// ============================================
+// DATA BROWSER ENDPOINTS (read-only views of what the AI sees)
+// ============================================
+
+app.get('/data/employees', (req, res) => {
+  res.json({ employees: employeeDB.employees });
+});
+
+app.get('/data/vendors', (req, res) => {
+  res.json({ vendors: vendorDB.vendors });
+});
+
+app.get('/data/policies', (req, res) => {
+  const grouped = {};
+  for (const doc of documents) {
+    if (!grouped[doc.filename]) grouped[doc.filename] = [];
+    grouped[doc.filename].push({ id: doc.id, content: doc.content });
+  }
+  const files = Object.entries(grouped).map(([filename, chunks]) => ({ filename, chunks }));
+  res.json({ files, totalChunks: documents.length });
+});
+
 app.post('/reload', (req, res) => {
   employeeDB = loadEmployeeDB();
   vendorDB = loadVendorDB();

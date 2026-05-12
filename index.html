@@ -220,6 +220,142 @@
       animation: spin 0.8s linear infinite;
     }
     @keyframes spin { to { transform: rotate(360deg); } }
+    .tabs {
+      display: flex;
+      gap: 4px;
+      padding-top: 12px;
+    }
+    .tab {
+      background: transparent;
+      border: none;
+      padding: 10px 16px;
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--muted);
+      cursor: pointer;
+      border-bottom: 2px solid transparent;
+      margin-bottom: -1px;
+    }
+    .tab:hover { color: var(--text); }
+    .tab.active { color: var(--accent); border-bottom-color: var(--accent); }
+    .tab .count {
+      display: inline-block;
+      margin-left: 6px;
+      padding: 1px 8px;
+      background: #eef0f3;
+      border-radius: 999px;
+      font-size: 12px;
+      color: var(--muted);
+    }
+    .tab.active .count { background: #dde9fc; color: var(--accent-dark); }
+    .data-panel { padding: 4px 0; }
+    .data-card {
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 14px 16px;
+      margin-bottom: 10px;
+      background: white;
+    }
+    .data-card .name {
+      font-weight: 600;
+      font-size: 15px;
+      margin-bottom: 2px;
+    }
+    .data-card .subtitle {
+      color: var(--muted);
+      font-size: 13px;
+      margin-bottom: 10px;
+    }
+    .data-card .row {
+      display: flex;
+      gap: 12px;
+      margin-bottom: 6px;
+      font-size: 13px;
+    }
+    .data-card .row .label {
+      flex: 0 0 110px;
+      color: var(--muted);
+      text-transform: uppercase;
+      font-size: 11px;
+      letter-spacing: 0.04em;
+      padding-top: 2px;
+    }
+    .data-card .row .value { flex: 1; color: var(--text); }
+    .tag {
+      display: inline-block;
+      background: #eef4ff;
+      color: var(--accent-dark);
+      padding: 2px 8px;
+      border-radius: 999px;
+      font-size: 12px;
+      margin-right: 4px;
+      margin-bottom: 4px;
+    }
+    .tag.muted { background: #f0f2f5; color: var(--muted); }
+    .tag.success { background: #e6f7ed; color: var(--success); }
+    .tag.warn { background: #fdf2dd; color: var(--warn); }
+    .expand-toggle {
+      background: none;
+      border: none;
+      color: var(--accent);
+      font-size: 12px;
+      cursor: pointer;
+      padding: 4px 0;
+      margin-top: 6px;
+    }
+    .expand-toggle:hover { text-decoration: underline; }
+    .expand-content {
+      display: none;
+      margin-top: 8px;
+      padding-top: 10px;
+      border-top: 1px dashed var(--border);
+    }
+    .expand-content.open { display: block; }
+    .policy-file {
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      margin-bottom: 12px;
+      overflow: hidden;
+    }
+    .policy-file-header {
+      padding: 12px 16px;
+      background: #fafbfc;
+      border-bottom: 1px solid var(--border);
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .policy-file-header:hover { background: #f0f2f5; }
+    .policy-file-header .filename {
+      font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+      font-size: 14px;
+      font-weight: 600;
+    }
+    .policy-chunks { display: none; padding: 12px 16px; }
+    .policy-chunks.open { display: block; }
+    .policy-chunk {
+      background: #fafbfc;
+      border-left: 3px solid var(--accent);
+      padding: 10px 14px;
+      margin-bottom: 8px;
+      border-radius: 0 4px 4px 0;
+      font-size: 13px;
+      white-space: pre-wrap;
+    }
+    .policy-chunk .chunk-id {
+      font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+      font-size: 11px;
+      color: var(--muted);
+      display: block;
+      margin-bottom: 6px;
+    }
+    .empty-state {
+      padding: 24px;
+      text-align: center;
+      color: var(--muted);
+      font-size: 14px;
+    }
     .footer-note {
       background: #fff8e6;
       border: 1px solid #f0d68a;
@@ -261,6 +397,26 @@
 
     <div class="footer-note">
       <strong>Cold-start note:</strong> The backend sleeps after 15 min of no traffic on Render's free tier. The first request after sleep takes ~30 seconds to wake up. The voice AI tools are set to wait 45 seconds, but if you hear a long pause on a call, that's why.
+    </div>
+
+    <!-- Data Browser -->
+    <div class="tool">
+      <div class="tool-header">
+        <h3>Data Browser</h3>
+        <div class="tech">Exactly what the voice AI has loaded into memory right now</div>
+      </div>
+      <div style="padding: 0 24px; border-bottom: 1px solid var(--border); background: #fafbfc;">
+        <div class="tabs" role="tablist">
+          <button class="tab active" data-tab="employees" onclick="switchTab('employees')">Employees <span class="count" id="empCount">…</span></button>
+          <button class="tab" data-tab="vendors" onclick="switchTab('vendors')">Vendors <span class="count" id="vendCount">…</span></button>
+          <button class="tab" data-tab="policies" onclick="switchTab('policies')">Policy Docs <span class="count" id="polCount">…</span></button>
+        </div>
+      </div>
+      <div class="tool-body" style="display: block;">
+        <div id="dataPanel-employees" class="data-panel"></div>
+        <div id="dataPanel-vendors" class="data-panel" style="display: none;"></div>
+        <div id="dataPanel-policies" class="data-panel" style="display: none;"></div>
+      </div>
     </div>
 
     <!-- Tool 1: Employee Lookup -->
@@ -500,6 +656,140 @@
     }
 
     checkHealth();
+
+    // ---- Data Browser ----
+    function switchTab(name) {
+      document.querySelectorAll(".tab").forEach(t => t.classList.toggle("active", t.dataset.tab === name));
+      ["employees", "vendors", "policies"].forEach(t => {
+        document.getElementById(`dataPanel-${t}`).style.display = (t === name) ? "block" : "none";
+      });
+    }
+
+    function escapeHtml(s) {
+      return String(s ?? "").replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+    }
+
+    function tagList(items, cls = "") {
+      if (!items || !items.length) return '<span style="color:var(--muted);font-size:13px;">none</span>';
+      return items.map(i => `<span class="tag ${cls}">${escapeHtml(i)}</span>`).join("");
+    }
+
+    function row(label, valueHtml) {
+      return `<div class="row"><div class="label">${escapeHtml(label)}</div><div class="value">${valueHtml}</div></div>`;
+    }
+
+    function toggleExpand(btn) {
+      const content = btn.nextElementSibling;
+      content.classList.toggle("open");
+      btn.textContent = content.classList.contains("open") ? "Show less" : "Show more details";
+    }
+
+    async function loadEmployees() {
+      const panel = document.getElementById("dataPanel-employees");
+      panel.innerHTML = '<div class="empty-state">Loading…</div>';
+      try {
+        const res = await fetch(`${API}/data/employees`);
+        const { employees } = await res.json();
+        document.getElementById("empCount").textContent = employees.length;
+        panel.innerHTML = employees.map(e => `
+          <div class="data-card">
+            <div class="name">${escapeHtml(e.name)}</div>
+            <div class="subtitle">${escapeHtml(e.title)} · ${escapeHtml(e.department)}</div>
+            ${row("Team", escapeHtml(e.team))}
+            ${row("Manager", escapeHtml(e.manager || "—"))}
+            ${row("Specialties", tagList(e.specialties))}
+            ${row("Comm style", escapeHtml(e.preferences?.communicationStyle || "—"))}
+            <button class="expand-toggle" onclick="toggleExpand(this)">Show more details</button>
+            <div class="expand-content">
+              ${row("Email", escapeHtml(e.email))}
+              ${row("Location", escapeHtml(e.location))}
+              ${row("Timezone", escapeHtml(e.preferences?.timezone || "—"))}
+              ${row("Urgent contact", escapeHtml(e.preferences?.urgentContactMethod || "—"))}
+              ${row("Direct reports", tagList(e.directReports, "muted"))}
+              ${row("Projects", tagList(e.projects, "muted"))}
+              ${row("Procurement history", e.procurementHistory?.length
+                ? '<ul style="margin:0;padding-left:18px;font-size:13px;">' + e.procurementHistory.map(h =>
+                    `<li><strong>${escapeHtml(h.date)}</strong> — ${escapeHtml(h.type)}: ${escapeHtml(h.description)}</li>`
+                  ).join("") + '</ul>'
+                : '<span style="color:var(--muted);">none</span>')}
+              ${row("Notes", escapeHtml(e.notes))}
+            </div>
+          </div>
+        `).join("");
+      } catch (err) {
+        panel.innerHTML = `<div class="empty-state">Could not load employees: ${escapeHtml(err.message)}</div>`;
+      }
+    }
+
+    async function loadVendors() {
+      const panel = document.getElementById("dataPanel-vendors");
+      panel.innerHTML = '<div class="empty-state">Loading…</div>';
+      try {
+        const res = await fetch(`${API}/data/vendors`);
+        const { vendors } = await res.json();
+        document.getElementById("vendCount").textContent = vendors.length;
+        panel.innerHTML = vendors.map(v => `
+          <div class="data-card">
+            <div class="name">${escapeHtml(v.name)} <span style="font-weight:400;color:var(--muted);font-size:13px;">${escapeHtml(v.rating || "")}</span></div>
+            <div class="subtitle">${escapeHtml(v.notes || "")}</div>
+            ${row("Status", `<span class="tag ${v.status === "approved" ? "success" : "warn"}">${escapeHtml(v.status)}</span>`)}
+            ${row("Skills", tagList(v.skills))}
+            ${row("Past projects", tagList(v.pastProjects, "muted"))}
+            ${row("Avg discount", escapeHtml(v.averageDiscount || "—"))}
+            <button class="expand-toggle" onclick="toggleExpand(this)">Show contracts and contact</button>
+            <div class="expand-content">
+              ${row("Email", escapeHtml(v.contactInfo?.email || "—"))}
+              ${row("Phone", escapeHtml(v.contactInfo?.phone || "—"))}
+              ${row("Website", escapeHtml(v.contactInfo?.website || "—"))}
+              ${row("Contracts", v.contracts?.length
+                ? '<ul style="margin:0;padding-left:18px;font-size:13px;">' + v.contracts.map(c =>
+                    `<li><strong>${escapeHtml(c.date)}</strong> — ${escapeHtml(c.value)} ${escapeHtml(c.type)} · ${escapeHtml(c.project)} (${escapeHtml(c.duration)})</li>`
+                  ).join("") + '</ul>'
+                : '<span style="color:var(--muted);">none</span>')}
+            </div>
+          </div>
+        `).join("");
+      } catch (err) {
+        panel.innerHTML = `<div class="empty-state">Could not load vendors: ${escapeHtml(err.message)}</div>`;
+      }
+    }
+
+    function togglePolicy(header) {
+      header.nextElementSibling.classList.toggle("open");
+    }
+
+    async function loadPolicies() {
+      const panel = document.getElementById("dataPanel-policies");
+      panel.innerHTML = '<div class="empty-state">Loading…</div>';
+      try {
+        const res = await fetch(`${API}/data/policies`);
+        const { files, totalChunks } = await res.json();
+        document.getElementById("polCount").textContent = totalChunks;
+        panel.innerHTML = `<p style="color:var(--muted);font-size:13px;margin:0 0 12px;">
+          ${files.length} policy files indexed as ${totalChunks} searchable chunks. Click a file to see the exact chunks the AI searches.
+        </p>` + files.map(f => `
+          <div class="policy-file">
+            <div class="policy-file-header" onclick="togglePolicy(this)">
+              <span class="filename">${escapeHtml(f.filename)}</span>
+              <span class="tag muted">${f.chunks.length} chunks</span>
+            </div>
+            <div class="policy-chunks">
+              ${f.chunks.map(c => `
+                <div class="policy-chunk">
+                  <span class="chunk-id">${escapeHtml(c.id)}</span>${escapeHtml(c.content)}
+                </div>
+              `).join("")}
+            </div>
+          </div>
+        `).join("");
+      } catch (err) {
+        panel.innerHTML = `<div class="empty-state">Could not load policies: ${escapeHtml(err.message)}</div>`;
+      }
+    }
+
+    loadEmployees();
+    loadVendors();
+    loadPolicies();
   </script>
 </body>
 </html>
