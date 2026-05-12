@@ -1,0 +1,877 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Procurement Voice AI - Workflow Diagram</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background: #f7fafc;
+            padding: 40px 20px;
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+        
+        .title {
+            text-align: center;
+            color: #2d3748;
+            font-size: 2em;
+            margin-bottom: 10px;
+            font-weight: 600;
+        }
+        
+        .subtitle {
+            text-align: center;
+            color: #718096;
+            font-size: 1.1em;
+            margin-bottom: 40px;
+        }
+        
+        .controls {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        .controls button {
+            background: #4299e1;
+            color: white;
+            border: none;
+            padding: 10px 25px;
+            margin: 0 8px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        
+        .controls button:hover {
+            background: #3182ce;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+        }
+        
+        /* Workflow Steps */
+        .workflow {
+            position: relative;
+        }
+        
+        .step {
+            background: white;
+            border-radius: 12px;
+            padding: 24px;
+            margin: 20px auto;
+            max-width: 600px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            border: 2px solid #e2e8f0;
+            position: relative;
+            transition: all 0.3s ease;
+        }
+        
+        .step:hover {
+            box-shadow: 0 4px 16px rgba(0,0,0,0.15);
+            transform: translateY(-2px);
+        }
+        
+        .step-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 12px;
+        }
+        
+        .step-icon {
+            width: 48px;
+            height: 48px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            margin-right: 16px;
+            flex-shrink: 0;
+        }
+        
+        .step-title {
+            font-size: 18px;
+            font-weight: 600;
+            color: #2d3748;
+        }
+        
+        .step-subtitle {
+            font-size: 14px;
+            color: #718096;
+            margin-top: 4px;
+        }
+        
+        .step-content {
+            margin-top: 16px;
+            padding: 16px;
+            background: #f7fafc;
+            border-radius: 8px;
+            font-size: 14px;
+            color: #4a5568;
+            line-height: 1.6;
+        }
+        
+        .step-field {
+            display: flex;
+            justify-content: space-between;
+            padding: 8px 0;
+            border-bottom: 1px solid #e2e8f0;
+        }
+        
+        .step-field:last-child {
+            border-bottom: none;
+        }
+        
+        .field-label {
+            font-weight: 600;
+            color: #4a5568;
+        }
+        
+        .field-value {
+            color: #718096;
+            font-style: italic;
+        }
+        
+        /* Arrow Connector */
+        .arrow {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 40px;
+            position: relative;
+        }
+        
+        .arrow-line {
+            width: 2px;
+            height: 30px;
+            background: #fc8181;
+            position: relative;
+        }
+        
+        .arrow-line::after {
+            content: '';
+            position: absolute;
+            bottom: -6px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 0;
+            height: 0;
+            border-left: 6px solid transparent;
+            border-right: 6px solid transparent;
+            border-top: 8px solid #fc8181;
+        }
+        
+        .arrow-label {
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #fff;
+            padding: 4px 12px;
+            border-radius: 12px;
+            font-size: 12px;
+            color: #718096;
+            white-space: nowrap;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        
+        /* Branch Node */
+        .branch {
+            background: white;
+            border-radius: 12px;
+            padding: 24px;
+            margin: 20px auto;
+            max-width: 600px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            border: 2px solid #90cdf4;
+            position: relative;
+        }
+        
+        .branch-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 12px;
+        }
+        
+        .branch-icon {
+            width: 48px;
+            height: 48px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            margin-right: 16px;
+            background: #bee3f8;
+            color: #2c5282;
+        }
+        
+        .branch-title {
+            font-size: 18px;
+            font-weight: 600;
+            color: #2d3748;
+        }
+        
+        .branch-subtitle {
+            font-size: 14px;
+            color: #718096;
+            margin-top: 4px;
+        }
+        
+        .branch-condition {
+            margin-top: 16px;
+            padding: 16px;
+            background: #ebf8ff;
+            border-radius: 8px;
+            font-size: 14px;
+            color: #2c5282;
+            text-align: center;
+            font-family: 'Courier New', monospace;
+        }
+        
+        /* Split Paths */
+        .split-container {
+            display: flex;
+            gap: 40px;
+            margin: 20px auto;
+            max-width: 1200px;
+            position: relative;
+        }
+        
+        .split-path {
+            flex: 1;
+            position: relative;
+        }
+        
+        .path-label {
+            text-align: center;
+            margin: 20px 0;
+            padding: 8px 16px;
+            background: #c6f6d5;
+            color: #22543d;
+            border-radius: 20px;
+            font-weight: 600;
+            font-size: 14px;
+            display: inline-block;
+            width: 100%;
+        }
+        
+        .path-label.false {
+            background: #fed7d7;
+            color: #742a2a;
+        }
+        
+        /* Merge Arrow */
+        .merge-arrow {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 60px;
+            position: relative;
+            margin: 20px 0;
+        }
+        
+        .merge-line {
+            width: 2px;
+            height: 50px;
+            background: #fc8181;
+            position: relative;
+        }
+        
+        .merge-line::after {
+            content: '';
+            position: absolute;
+            bottom: -6px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 0;
+            height: 0;
+            border-left: 6px solid transparent;
+            border-right: 6px solid transparent;
+            border-top: 8px solid #fc8181;
+        }
+        
+        /* End Node */
+        .end-node {
+            background: white;
+            border-radius: 12px;
+            padding: 24px;
+            margin: 20px auto;
+            max-width: 600px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            border: 2px solid #48bb78;
+            text-align: center;
+        }
+        
+        .end-icon {
+            width: 64px;
+            height: 64px;
+            border-radius: 50%;
+            background: #c6f6d5;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 32px;
+            margin: 0 auto 16px;
+        }
+        
+        .end-title {
+            font-size: 20px;
+            font-weight: 600;
+            color: #2d3748;
+            margin-bottom: 8px;
+        }
+        
+        .end-subtitle {
+            font-size: 14px;
+            color: #718096;
+        }
+        
+        /* Add Step Button */
+        .add-button {
+            display: flex;
+            justify-content: center;
+            margin: 20px 0;
+        }
+        
+        .add-btn {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: #fc8181;
+            color: white;
+            border: none;
+            font-size: 24px;
+            cursor: pointer;
+            box-shadow: 0 2px 8px rgba(252, 129, 129, 0.4);
+            transition: all 0.3s ease;
+        }
+        
+        .add-btn:hover {
+            background: #f56565;
+            transform: scale(1.1);
+        }
+        
+        /* Color Variants */
+        .step.trigger .step-icon {
+            background: #c6f6d5;
+            color: #22543d;
+        }
+        
+        .step.email .step-icon {
+            background: #fbb6ce;
+            color: #702459;
+        }
+        
+        .step.function .step-icon {
+            background: #b794f4;
+            color: #44337a;
+        }
+        
+        .step.validation .step-icon {
+            background: #fbd38d;
+            color: #744210;
+        }
+        
+        .step.notification .step-icon {
+            background: #fc8181;
+            color: #742a2a;
+        }
+        
+        .step.database .step-icon {
+            background: #90cdf4;
+            color: #2c5282;
+        }
+        
+        @media print {
+            .controls {
+                display: none;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .split-container {
+                flex-direction: column;
+                gap: 20px;
+            }
+            
+            .path-label {
+                margin: 10px 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 class="title">Procurement Voice AI Workflow</h1>
+        <p class="subtitle">End-to-End Call Flow and Decision Logic</p>
+        
+        <div class="controls">
+            <button onclick="window.location.href='procurement-voice-ai-architecture.html'">🏗️ Architecture</button>
+            <button onclick="window.location.href='procurement-voice-ai-architecture-dark.html'">🌙 Dark Theme</button>
+            <button onclick="window.print()">🖨️ Print Workflow</button>
+            <button onclick="exportWorkflow()">📥 Export</button>
+            <button onclick="toggleFullscreen()">⛶ Fullscreen</button>
+        </div>
+        
+        <div class="workflow">
+            <!-- Start: Incoming Call -->
+            <div class="step trigger">
+                <div class="step-header">
+                    <div class="step-icon">▶️</div>
+                    <div>
+                        <div class="step-title">Start</div>
+                        <div class="step-subtitle">Entry point of the workflow</div>
+                    </div>
+                </div>
+                <div class="step-content">
+                    <div class="step-field">
+                        <span class="field-label">Trigger</span>
+                        <span class="field-value">Incoming phone call</span>
+                    </div>
+                    <div class="step-field">
+                        <span class="field-label">Phone Number</span>
+                        <span class="field-value">+1 (930) 254-9264</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="arrow">
+                <div class="arrow-line"></div>
+                <span class="arrow-label">Call received</span>
+            </div>
+            
+            <!-- Vapi Voice Interface -->
+            <div class="step function">
+                <div class="step-header">
+                    <div class="step-icon">🎤</div>
+                    <div>
+                        <div class="step-title">Vapi Voice Interface</div>
+                        <div class="step-subtitle">Convert speech to text and manage call</div>
+                    </div>
+                </div>
+                <div class="step-content">
+                    <div class="step-field">
+                        <span class="field-label">Speech-to-Text</span>
+                        <span class="field-value">Deepgram</span>
+                    </div>
+                    <div class="step-field">
+                        <span class="field-label">First Message</span>
+                        <span class="field-value">"Hello, you've reached Input Output Procurement..."</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="arrow">
+                <div class="arrow-line"></div>
+                <span class="arrow-label">Transcribed text</span>
+            </div>
+            
+            <!-- AI Processing -->
+            <div class="step function">
+                <div class="step-header">
+                    <div class="step-icon">🤖</div>
+                    <div>
+                        <div class="step-title">AI Processing (GPT-4)</div>
+                        <div class="step-subtitle">Understand intent and determine action</div>
+                    </div>
+                </div>
+                <div class="step-content">
+                    <div class="step-field">
+                        <span class="field-label">Model</span>
+                        <span class="field-value">OpenAI GPT-4</span>
+                    </div>
+                    <div class="step-field">
+                        <span class="field-label">Temperature</span>
+                        <span class="field-value">0.7</span>
+                    </div>
+                    <div class="step-field">
+                        <span class="field-label">System Prompt</span>
+                        <span class="field-value">3,800+ word procurement assistant prompt</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="arrow">
+                <div class="arrow-line"></div>
+                <span class="arrow-label">Analyze request</span>
+            </div>
+            
+            <!-- Decision: Request Type -->
+            <div class="branch">
+                <div class="branch-header">
+                    <div class="branch-icon">🔀</div>
+                    <div>
+                        <div class="branch-title">If/else: Request Type</div>
+                        <div class="branch-subtitle">Branch based on caller's needs</div>
+                    </div>
+                </div>
+                <div class="branch-condition">
+                    What does the caller need?
+                </div>
+            </div>
+            
+            <div class="arrow">
+                <div class="arrow-line"></div>
+            </div>
+            
+            <!-- Split into 4 paths -->
+            <div class="split-container">
+                <!-- Path 1: Employee Lookup -->
+                <div class="split-path">
+                    <div class="path-label">Employee Info</div>
+                    
+                    <div class="step database">
+                        <div class="step-header">
+                            <div class="step-icon">👤</div>
+                            <div>
+                                <div class="step-title">Lookup Employee</div>
+                                <div class="step-subtitle">Find employee context</div>
+                            </div>
+                        </div>
+                        <div class="step-content">
+                            <div class="step-field">
+                                <span class="field-label">Function</span>
+                                <span class="field-value">lookup_employee(name)</span>
+                            </div>
+                            <div class="step-field">
+                                <span class="field-label">Endpoint</span>
+                                <span class="field-value">POST /lookup-employee</span>
+                            </div>
+                            <div class="step-field">
+                                <span class="field-label">Database</span>
+                                <span class="field-value">employee-database.json</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Path 2: Policy Search -->
+                <div class="split-path">
+                    <div class="path-label">Policy Question</div>
+                    
+                    <div class="step database">
+                        <div class="step-header">
+                            <div class="step-icon">📚</div>
+                            <div>
+                                <div class="step-title">Search Policies</div>
+                                <div class="step-subtitle">RAG-based policy search</div>
+                            </div>
+                        </div>
+                        <div class="step-content">
+                            <div class="step-field">
+                                <span class="field-label">Function</span>
+                                <span class="field-value">search_policies(query)</span>
+                            </div>
+                            <div class="step-field">
+                                <span class="field-label">Endpoint</span>
+                                <span class="field-value">POST /search-policies</span>
+                            </div>
+                            <div class="step-field">
+                                <span class="field-label">Database</span>
+                                <span class="field-value">146 policy chunks</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Path 3: Vendor Search -->
+                <div class="split-path">
+                    <div class="path-label">Vendor Info</div>
+                    
+                    <div class="step database">
+                        <div class="step-header">
+                            <div class="step-icon">🏢</div>
+                            <div>
+                                <div class="step-title">Search Vendors</div>
+                                <div class="step-subtitle">Find approved vendors</div>
+                            </div>
+                        </div>
+                        <div class="step-content">
+                            <div class="step-field">
+                                <span class="field-label">Function</span>
+                                <span class="field-value">search_vendors(query)</span>
+                            </div>
+                            <div class="step-field">
+                                <span class="field-label">Endpoint</span>
+                                <span class="field-value">POST /search-vendors</span>
+                            </div>
+                            <div class="step-field">
+                                <span class="field-label">Database</span>
+                                <span class="field-value">12 approved vendors</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Path 4: New Request -->
+                <div class="split-path">
+                    <div class="path-label">New Request</div>
+                    
+                    <div class="step validation">
+                        <div class="step-header">
+                            <div class="step-icon">📋</div>
+                            <div>
+                                <div class="step-title">Collect Request</div>
+                                <div class="step-subtitle">Gather required fields</div>
+                            </div>
+                        </div>
+                        <div class="step-content">
+                            <div class="step-field">
+                                <span class="field-label">Budget</span>
+                                <span class="field-value">(enter value)</span>
+                            </div>
+                            <div class="step-field">
+                                <span class="field-label">Milestones</span>
+                                <span class="field-value">(enter value)</span>
+                            </div>
+                            <div class="step-field">
+                                <span class="field-label">Cost</span>
+                                <span class="field-value">(enter value)</span>
+                            </div>
+                            <div class="step-field">
+                                <span class="field-label">Description</span>
+                                <span class="field-value">(enter value)</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="arrow">
+                        <div class="arrow-line"></div>
+                    </div>
+                    
+                    <div class="step validation">
+                        <div class="step-header">
+                            <div class="step-icon">✅</div>
+                            <div>
+                                <div class="step-title">Validate Request</div>
+                                <div class="step-subtitle">Check completeness</div>
+                            </div>
+                        </div>
+                        <div class="step-content">
+                            <div class="step-field">
+                                <span class="field-label">Function</span>
+                                <span class="field-value">validate_request(fields)</span>
+                            </div>
+                            <div class="step-field">
+                                <span class="field-label">Endpoint</span>
+                                <span class="field-value">POST /validate-request</span>
+                            </div>
+                            <div class="step-field">
+                                <span class="field-label">Result</span>
+                                <span class="field-value">Complete / Incomplete</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="arrow">
+                        <div class="arrow-line"></div>
+                    </div>
+                    
+                    <!-- Validation Branch -->
+                    <div class="branch">
+                        <div class="branch-header">
+                            <div class="branch-icon">🔀</div>
+                            <div>
+                                <div class="branch-title">If/else: Complete?</div>
+                                <div class="branch-subtitle">Check if all fields provided</div>
+                            </div>
+                        </div>
+                        <div class="branch-condition">
+                            Is request 100% complete?
+                        </div>
+                    </div>
+                    
+                    <div class="arrow">
+                        <div class="arrow-line"></div>
+                    </div>
+                    
+                    <div style="display: flex; gap: 20px;">
+                        <div style="flex: 1;">
+                            <div class="path-label false">No - Incomplete</div>
+                            <div class="step notification">
+                                <div class="step-header">
+                                    <div class="step-icon">🔄</div>
+                                    <div>
+                                        <div class="step-title">Request More Info</div>
+                                        <div class="step-subtitle">Loop back for missing fields</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div style="flex: 1;">
+                            <div class="path-label">Yes - Complete</div>
+                            <div class="step email">
+                                <div class="step-header">
+                                    <div class="step-icon">📧</div>
+                                    <div>
+                                        <div class="step-title">Route to Team</div>
+                                        <div class="step-subtitle">Send to procurement team</div>
+                                    </div>
+                                </div>
+                                <div class="step-content">
+                                    <div class="step-field">
+                                        <span class="field-label">To</span>
+                                        <span class="field-value">Andrea Smith</span>
+                                    </div>
+                                    <div class="step-field">
+                                        <span class="field-label">Subject</span>
+                                        <span class="field-value">New Procurement Request</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Merge paths -->
+            <div class="merge-arrow">
+                <div class="merge-line"></div>
+            </div>
+            
+            <!-- AI Response -->
+            <div class="step function">
+                <div class="step-header">
+                    <div class="step-icon">💬</div>
+                    <div>
+                        <div class="step-title">Generate Response</div>
+                        <div class="step-subtitle">AI creates natural language response</div>
+                    </div>
+                </div>
+                <div class="step-content">
+                    <div class="step-field">
+                        <span class="field-label">Process</span>
+                        <span class="field-value">GPT-4 synthesizes data into conversational response</span>
+                    </div>
+                    <div class="step-field">
+                        <span class="field-label">Output</span>
+                        <span class="field-value">Natural language text</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="arrow">
+                <div class="arrow-line"></div>
+                <span class="arrow-label">Convert to speech</span>
+            </div>
+            
+            <!-- Text-to-Speech -->
+            <div class="step function">
+                <div class="step-header">
+                    <div class="step-icon">🔊</div>
+                    <div>
+                        <div class="step-title">Text-to-Speech</div>
+                        <div class="step-subtitle">Convert response to voice</div>
+                    </div>
+                </div>
+                <div class="step-content">
+                    <div class="step-field">
+                        <span class="field-label">TTS Engine</span>
+                        <span class="field-value">PlayHT</span>
+                    </div>
+                    <div class="step-field">
+                        <span class="field-label">Output</span>
+                        <span class="field-value">Natural voice audio</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="arrow">
+                <div class="arrow-line"></div>
+                <span class="arrow-label">Play to caller</span>
+            </div>
+            
+            <!-- Decision: Continue or End -->
+            <div class="branch">
+                <div class="branch-header">
+                    <div class="branch-icon">🔀</div>
+                    <div>
+                        <div class="branch-title">If/else: Continue?</div>
+                        <div class="branch-subtitle">Does caller need more help?</div>
+                    </div>
+                </div>
+                <div class="branch-condition">
+                    Caller has more questions?
+                </div>
+            </div>
+            
+            <div class="arrow">
+                <div class="arrow-line"></div>
+            </div>
+            
+            <div style="display: flex; gap: 40px; max-width: 800px; margin: 0 auto;">
+                <div style="flex: 1;">
+                    <div class="path-label">Yes - Continue</div>
+                    <div class="step notification">
+                        <div class="step-header">
+                            <div class="step-icon">🔄</div>
+                            <div>
+                                <div class="step-title">Loop Back</div>
+                                <div class="step-subtitle">Return to AI processing</div>
+                            </div>
+                        </div>
+                        <div class="step-content">
+                            <div class="step-field">
+                                <span class="field-label">Action</span>
+                                <span class="field-value">Continue conversation loop</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div style="flex: 1;">
+                    <div class="path-label">No - Complete</div>
+                    <div class="end-node">
+                        <div class="end-icon">🎉</div>
+                        <div class="end-title">End Call</div>
+                        <div class="end-subtitle">Workflow complete - Call successfully handled</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="add-button">
+                <button class="add-btn" onclick="alert('This is a visual representation. The workflow is complete!')">+</button>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        function exportWorkflow() {
+            alert('To export this workflow:\n\n1. Print to PDF (Cmd/Ctrl + P)\n2. Or use browser screenshot tools\n3. Or select all and copy to your documentation');
+        }
+        
+        function toggleFullscreen() {
+            if (!document.fullscreenElement) {
+                document.documentElement.requestFullscreen();
+            } else {
+                document.exitFullscreen();
+            }
+        }
+        
+        // Add smooth scroll behavior
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth' });
+                }
+            });
+        });
+    </script>
+</body>
+</html>

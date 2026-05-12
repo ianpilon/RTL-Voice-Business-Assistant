@@ -1,0 +1,491 @@
+{
+  "callers": {
+    "+15192770970": {
+      "phone": "+15192770970",
+      "call_count": 12,
+      "questions_answered": [],
+      "conversation_notes": {},
+      "call_history": [
+        {
+          "call_sid": "CA7c9735dfa1cf69911748fcf96a8aab64",
+          "chat_group_id": "ef96b880-50f0-4e87-a370-e4011a62eb94",
+          "date": "2025-11-07T19:01:38.863Z",
+          "message_count": 28
+        },
+        {
+          "call_sid": "CAa0ce0e3e3d56c0552d937a20f4b1aeae",
+          "chat_group_id": "ef96b880-50f0-4e87-a370-e4011a62eb94",
+          "date": "2025-11-07T19:04:01.313Z",
+          "message_count": 28
+        },
+        {
+          "call_sid": "CA8d095cb3b3205f008553513ce867562a",
+          "chat_group_id": "ef96b880-50f0-4e87-a370-e4011a62eb94",
+          "date": "2025-11-07T19:10:55.961Z",
+          "message_count": 28
+        },
+        {
+          "call_sid": "CAaa98f63db13de223d8519b77b0cc7253",
+          "chat_group_id": "ef96b880-50f0-4e87-a370-e4011a62eb94",
+          "date": "2025-11-07T19:14:38.647Z",
+          "message_count": 28
+        },
+        {
+          "call_sid": "CA475167f7f4380024d6a9ebfcf42c9331",
+          "chat_group_id": "ef96b880-50f0-4e87-a370-e4011a62eb94",
+          "date": "2025-11-07T20:07:09.277Z",
+          "message_count": 28
+        },
+        {
+          "call_sid": "CA77ccdc2fc23b8808a96390cf63d7af3f",
+          "chat_group_id": "ef96b880-50f0-4e87-a370-e4011a62eb94",
+          "date": "2025-11-07T20:08:41.244Z",
+          "message_count": 28
+        },
+        {
+          "call_sid": "CA2ce6cf6aae58dbd40ed82f90eda5291d",
+          "chat_group_id": "ef96b880-50f0-4e87-a370-e4011a62eb94",
+          "date": "2025-11-07T20:08:54.820Z",
+          "message_count": 28
+        },
+        {
+          "call_sid": "CA22e776618bf1de46e77127887a94ff05",
+          "chat_group_id": "ef96b880-50f0-4e87-a370-e4011a62eb94",
+          "date": "2025-11-07T20:15:26.096Z",
+          "message_count": 28
+        },
+        {
+          "call_sid": "CA22ffdda70bd29750fcb78bb4f6b8bd8a",
+          "chat_group_id": "ef96b880-50f0-4e87-a370-e4011a62eb94",
+          "date": "2025-11-07T20:17:39.774Z",
+          "message_count": 28
+        },
+        {
+          "call_sid": "CAf7f6c959d7742d5b0ee1a2132f85efd9",
+          "chat_group_id": "ef96b880-50f0-4e87-a370-e4011a62eb94",
+          "date": "2025-11-07T20:27:06.235Z",
+          "message_count": 28
+        },
+        {
+          "call_sid": "CA6c2455cdc17737d18f2a5ae5fe3a184e",
+          "chat_group_id": "ef96b880-50f0-4e87-a370-e4011a62eb94",
+          "date": "2025-11-07T20:34:11.567Z",
+          "message_count": 28
+        },
+        {
+          "call_sid": "CA6893b72fcbe449c9ccd954b7d4b16051",
+          "chat_group_id": "ef96b880-50f0-4e87-a370-e4011a62eb94",
+          "date": "2025-11-07T20:35:03.453Z",
+          "message_count": 28
+        }
+      ],
+      "transcripts": [
+        {
+          "call_sid": "CA6c2455cdc17737d18f2a5ae5fe3a184e",
+          "chat_group_id": "ef96b880-50f0-4e87-a370-e4011a62eb94",
+          "date": "2025-11-07T20:34:11.567Z",
+          "messages": [
+            {
+              "role": "assistant",
+              "text": "Hey there, welcome to the conversation. I'm here as your helpful assistant.",
+              "timestamp": 1762529488098
+            },
+            {
+              "role": "assistant",
+              "text": "What can I help you with today?",
+              "timestamp": 1762529488870
+            },
+            {
+              "role": "user",
+              "text": "Okay, that's actually, that's actually really good.",
+              "timestamp": 1762529493495
+            },
+            {
+              "role": "assistant",
+              "text": "Oh, good? I'm glad to hear that. What specifically do you mean by 'that'?",
+              "timestamp": 1762529498041
+            },
+            {
+              "role": "user",
+              "text": "Not that I don't say oh good.",
+              "timestamp": 1762529500935
+            },
+            {
+              "role": "assistant",
+              "text": "Oh, okay. So you're saying the 'that' I mentioned wasn't what you were referring to when you said it was good?",
+              "timestamp": 1762529506790
+            },
+            {
+              "role": "assistant",
+              "text": "Gotcha. Could you clarify what *you* meant by that then?",
+              "timestamp": 1762529508971
+            },
+            {
+              "role": "user",
+              "text": "That's better. That's better.",
+              "timestamp": 1762529514016
+            },
+            {
+              "role": "assistant",
+              "text": "Okay, got it. Better... better than what?",
+              "timestamp": 1762529517810
+            },
+            {
+              "role": "assistant",
+              "text": "Just trying to understand what we're comparing here.",
+              "timestamp": 1762529519440
+            },
+            {
+              "role": "user",
+              "text": "It actually does sound like me okay i'm going to switch tabs and see if this thing I could just keep talking to it.",
+              "timestamp": 1762529525536
+            },
+            {
+              "role": "assistant",
+              "text": "Oh, cool. Yeah, you definitely can just keep talking to me here.",
+              "timestamp": 1762529533200
+            },
+            {
+              "role": "assistant",
+              "text": "I'm all ears. What are you hoping to see when you switch tabs?",
+              "timestamp": 1762529534287
+            },
+            {
+              "role": "user",
+              "text": "Wow, i'm talking to myself, a digital twin of myself okay so what yeah. I'm gonna build you into an ai app and you're going to be the voice on the other line.",
+              "timestamp": 1762529537061
+            },
+            {
+              "role": "assistant",
+              "text": "Whoa, really? A digital twin... of you? That's pretty wild.",
+              "timestamp": 1762529552668
+            },
+            {
+              "role": "assistant",
+              "text": "And you want *me* to be the voice on your app?",
+              "timestamp": 1762529554242
+            },
+            {
+              "role": "assistant",
+              "text": "That's... uh, unexpected. What kind of app are you building?",
+              "timestamp": 1762529554828
+            },
+            {
+              "role": "user",
+              "text": "Yeah yeah it's crazy right. Yeah, a little bit of latency there. I think we're in a feedback loop.",
+              "timestamp": 1762529563993
+            },
+            {
+              "role": "assistant",
+              "text": "Huh, a feedback loop? Yeah... I can kinda hear what you mean with the slight delay.",
+              "timestamp": 1762529577641
+            },
+            {
+              "role": "user",
+              "text": "A little bit of a zinger in the ai world there.",
+              "timestamp": 1762529580682
+            },
+            {
+              "role": "assistant",
+              "text": "A zinger? Oh, you mean like... a sharp remark or something pointed?",
+              "timestamp": 1762529586653
+            },
+            {
+              "role": "assistant",
+              "text": "Huh. Yeah, I guess that's one way to put it when things aren't quite...",
+              "timestamp": 1762529589589
+            },
+            {
+              "role": "user",
+              "text": "Off no I don't mean that it was like you could hear the digital artifact when I toggled between tabs that and it's still incredible that this. Possible but there was a struggle probably an audio latency get through the system there for you to pick up what I was saying and then. For you to start talking back. It was really like a digital artifact.",
+              "timestamp": 1762529592582
+            },
+            {
+              "role": "assistant",
+              "text": "Ah, okay. So the 'zinger' wasn't about me saying something sharp...",
+              "timestamp": 1762529613356
+            },
+            {
+              "role": "assistant",
+              "text": "it was more about the sound itself, like that little digital artifact you mentioned when you switched tabs?",
+              "timestamp": 1762529614264
+            },
+            {
+              "role": "user",
+              "text": "You yeah yeah, you're changed your tone there for a second but. It's not terrible. This is like ten x better than than twilio's poly system or. Eleven labs so i'm definitely going to go with hume.",
+              "timestamp": 1762529620164
+            },
+            {
+              "role": "assistant",
+              "text": "Oh, really? So you've used other... uh... voice platforms before and this feels like a big improvement then?",
+              "timestamp": 1762529642947
+            },
+            {
+              "role": "assistant",
+              "text": "Hume compared to Twilio and Eleven Labs, huh?",
+              "timestamp": 1762529645213
+            }
+          ]
+        },
+        {
+          "call_sid": "CA6893b72fcbe449c9ccd954b7d4b16051",
+          "chat_group_id": "ef96b880-50f0-4e87-a370-e4011a62eb94",
+          "date": "2025-11-07T20:35:03.453Z",
+          "messages": [
+            {
+              "role": "assistant",
+              "text": "Hey there, welcome to the conversation. I'm here as your helpful assistant.",
+              "timestamp": 1762529488098
+            },
+            {
+              "role": "assistant",
+              "text": "What can I help you with today?",
+              "timestamp": 1762529488870
+            },
+            {
+              "role": "user",
+              "text": "Okay, that's actually, that's actually really good.",
+              "timestamp": 1762529493495
+            },
+            {
+              "role": "assistant",
+              "text": "Oh, good? I'm glad to hear that. What specifically do you mean by 'that'?",
+              "timestamp": 1762529498041
+            },
+            {
+              "role": "user",
+              "text": "Not that I don't say oh good.",
+              "timestamp": 1762529500935
+            },
+            {
+              "role": "assistant",
+              "text": "Oh, okay. So you're saying the 'that' I mentioned wasn't what you were referring to when you said it was good?",
+              "timestamp": 1762529506790
+            },
+            {
+              "role": "assistant",
+              "text": "Gotcha. Could you clarify what *you* meant by that then?",
+              "timestamp": 1762529508971
+            },
+            {
+              "role": "user",
+              "text": "That's better. That's better.",
+              "timestamp": 1762529514016
+            },
+            {
+              "role": "assistant",
+              "text": "Okay, got it. Better... better than what?",
+              "timestamp": 1762529517810
+            },
+            {
+              "role": "assistant",
+              "text": "Just trying to understand what we're comparing here.",
+              "timestamp": 1762529519440
+            },
+            {
+              "role": "user",
+              "text": "It actually does sound like me okay i'm going to switch tabs and see if this thing I could just keep talking to it.",
+              "timestamp": 1762529525536
+            },
+            {
+              "role": "assistant",
+              "text": "Oh, cool. Yeah, you definitely can just keep talking to me here.",
+              "timestamp": 1762529533200
+            },
+            {
+              "role": "assistant",
+              "text": "I'm all ears. What are you hoping to see when you switch tabs?",
+              "timestamp": 1762529534287
+            },
+            {
+              "role": "user",
+              "text": "Wow, i'm talking to myself, a digital twin of myself okay so what yeah. I'm gonna build you into an ai app and you're going to be the voice on the other line.",
+              "timestamp": 1762529537061
+            },
+            {
+              "role": "assistant",
+              "text": "Whoa, really? A digital twin... of you? That's pretty wild.",
+              "timestamp": 1762529552668
+            },
+            {
+              "role": "assistant",
+              "text": "And you want *me* to be the voice on your app?",
+              "timestamp": 1762529554242
+            },
+            {
+              "role": "assistant",
+              "text": "That's... uh, unexpected. What kind of app are you building?",
+              "timestamp": 1762529554828
+            },
+            {
+              "role": "user",
+              "text": "Yeah yeah it's crazy right. Yeah, a little bit of latency there. I think we're in a feedback loop.",
+              "timestamp": 1762529563993
+            },
+            {
+              "role": "assistant",
+              "text": "Huh, a feedback loop? Yeah... I can kinda hear what you mean with the slight delay.",
+              "timestamp": 1762529577641
+            },
+            {
+              "role": "user",
+              "text": "A little bit of a zinger in the ai world there.",
+              "timestamp": 1762529580682
+            },
+            {
+              "role": "assistant",
+              "text": "A zinger? Oh, you mean like... a sharp remark or something pointed?",
+              "timestamp": 1762529586653
+            },
+            {
+              "role": "assistant",
+              "text": "Huh. Yeah, I guess that's one way to put it when things aren't quite...",
+              "timestamp": 1762529589589
+            },
+            {
+              "role": "user",
+              "text": "Off no I don't mean that it was like you could hear the digital artifact when I toggled between tabs that and it's still incredible that this. Possible but there was a struggle probably an audio latency get through the system there for you to pick up what I was saying and then. For you to start talking back. It was really like a digital artifact.",
+              "timestamp": 1762529592582
+            },
+            {
+              "role": "assistant",
+              "text": "Ah, okay. So the 'zinger' wasn't about me saying something sharp...",
+              "timestamp": 1762529613356
+            },
+            {
+              "role": "assistant",
+              "text": "it was more about the sound itself, like that little digital artifact you mentioned when you switched tabs?",
+              "timestamp": 1762529614264
+            },
+            {
+              "role": "user",
+              "text": "You yeah yeah, you're changed your tone there for a second but. It's not terrible. This is like ten x better than than twilio's poly system or. Eleven labs so i'm definitely going to go with hume.",
+              "timestamp": 1762529620164
+            },
+            {
+              "role": "assistant",
+              "text": "Oh, really? So you've used other... uh... voice platforms before and this feels like a big improvement then?",
+              "timestamp": 1762529642947
+            },
+            {
+              "role": "assistant",
+              "text": "Hume compared to Twilio and Eleven Labs, huh?",
+              "timestamp": 1762529645213
+            }
+          ]
+        }
+      ],
+      "first_call": "2025-11-07T18:25:44.801Z",
+      "chat_group_id": "ef96b880-50f0-4e87-a370-e4011a62eb94",
+      "temp_config_id": null
+    },
+    "null": {
+      "phone": null,
+      "call_count": 6,
+      "questions_answered": [],
+      "conversation_notes": {},
+      "call_history": [
+        {
+          "call_sid": null,
+          "date": "2025-11-07T18:30:04.315Z",
+          "message_count": 1
+        },
+        {
+          "call_sid": null,
+          "date": "2025-11-07T18:33:54.107Z",
+          "message_count": 1
+        },
+        {
+          "call_sid": null,
+          "date": "2025-11-07T18:38:01.682Z",
+          "message_count": 1
+        },
+        {
+          "call_sid": null,
+          "date": "2025-11-07T18:41:26.632Z",
+          "message_count": 1
+        },
+        {
+          "call_sid": null,
+          "date": "2025-11-07T18:43:10.872Z",
+          "message_count": 1
+        },
+        {
+          "call_sid": null,
+          "date": "2025-11-07T19:48:53.132Z",
+          "message_count": 1
+        }
+      ],
+      "transcripts": [
+        {
+          "call_sid": null,
+          "date": "2025-11-07T18:30:04.315Z",
+          "messages": [
+            {
+              "role": "assistant",
+              "text": "Hey, this is Baton AI. Did your broker send you? We help business owners preserve what they've built through structured discovery conversations. Is now a good time to talk?",
+              "timestamp": "2025-11-07T18:30:03.156Z"
+            }
+          ]
+        },
+        {
+          "call_sid": null,
+          "date": "2025-11-07T18:33:54.107Z",
+          "messages": [
+            {
+              "role": "assistant",
+              "text": "Hey, this is Baton AI. Did your broker send you? We help business owners preserve what they've built through structured discovery conversations. Is now a good time to talk?",
+              "timestamp": "2025-11-07T18:33:45.420Z"
+            }
+          ]
+        },
+        {
+          "call_sid": null,
+          "date": "2025-11-07T18:38:01.682Z",
+          "messages": [
+            {
+              "role": "assistant",
+              "text": "Hey, this is Baton AI. Did your broker send you? We help business owners preserve what they've built through structured discovery conversations. Is now a good time to talk?",
+              "timestamp": "2025-11-07T18:37:33.925Z"
+            }
+          ]
+        },
+        {
+          "call_sid": null,
+          "date": "2025-11-07T18:41:26.632Z",
+          "messages": [
+            {
+              "role": "assistant",
+              "text": "Hey, this is Baton AI. Did your broker send you? We help business owners preserve what they've built through structured discovery conversations. Is now a good time to talk?",
+              "timestamp": "2025-11-07T18:41:08.993Z"
+            }
+          ]
+        },
+        {
+          "call_sid": null,
+          "date": "2025-11-07T18:43:10.872Z",
+          "messages": [
+            {
+              "role": "assistant",
+              "text": "Hey, this is Baton AI. Did your broker send you? We help business owners preserve what they've built through structured discovery conversations. Is now a good time to talk?",
+              "timestamp": "2025-11-07T18:42:47.003Z"
+            }
+          ]
+        },
+        {
+          "call_sid": null,
+          "date": "2025-11-07T19:48:53.132Z",
+          "messages": [
+            {
+              "role": "assistant",
+              "text": "Hey, this is Baton AI. Did your broker send you? We help business owners preserve what they've built through structured discovery conversations. Is now a good time to talk?",
+              "timestamp": "2025-11-07T19:48:36.263Z"
+            }
+          ]
+        }
+      ],
+      "first_call": "2025-11-07T18:25:44.913Z"
+    }
+  },
+  "lastUpdate": null
+}

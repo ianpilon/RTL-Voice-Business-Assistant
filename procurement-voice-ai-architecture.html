@@ -1,0 +1,622 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Procurement Voice AI - Architecture Diagram</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 20px;
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 1600px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            overflow: hidden;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            color: white;
+            padding: 30px 40px;
+            text-align: center;
+        }
+        
+        .header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            font-weight: 600;
+        }
+        
+        .header p {
+            font-size: 1.2em;
+            opacity: 0.9;
+        }
+        
+        .info-section {
+            padding: 30px 40px;
+            background: #f8f9fa;
+            border-bottom: 1px solid #e0e0e0;
+        }
+        
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+        
+        .info-card {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            border-left: 4px solid #667eea;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+        
+        .info-card h3 {
+            color: #1e3c72;
+            margin-bottom: 10px;
+            font-size: 1.1em;
+        }
+        
+        .info-card p {
+            color: #555;
+            line-height: 1.6;
+            font-size: 0.95em;
+        }
+        
+        .info-card ul {
+            list-style: none;
+            padding-left: 0;
+        }
+        
+        .info-card li {
+            color: #555;
+            line-height: 1.8;
+            padding-left: 20px;
+            position: relative;
+        }
+        
+        .info-card li:before {
+            content: "→";
+            position: absolute;
+            left: 0;
+            color: #667eea;
+            font-weight: bold;
+        }
+        
+        .diagram-section {
+            padding: 40px;
+            background: white;
+        }
+        
+        .diagram-container {
+            background: #fafafa;
+            border-radius: 10px;
+            padding: 30px;
+            box-shadow: inset 0 2px 10px rgba(0, 0, 0, 0.05);
+        }
+        
+        .diagram-container svg {
+            width: 100%;
+            height: auto;
+            display: block;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .controls {
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        
+        .controls button {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            margin: 0 10px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 1em;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+        }
+        
+        .controls button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(102, 126, 234, 0.6);
+        }
+        
+        .controls button:active {
+            transform: translateY(0);
+        }
+        
+        .footer {
+            background: #2a2a2a;
+            color: #aaa;
+            padding: 20px 40px;
+            text-align: center;
+            font-size: 0.9em;
+        }
+        
+        .footer a {
+            color: #667eea;
+            text-decoration: none;
+        }
+        
+        .footer a:hover {
+            text-decoration: underline;
+        }
+        
+        @media print {
+            body {
+                background: white;
+                padding: 0;
+            }
+            
+            .container {
+                box-shadow: none;
+            }
+            
+            .controls {
+                display: none;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 1.8em;
+            }
+            
+            .header p {
+                font-size: 1em;
+            }
+            
+            .info-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .diagram-section {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🎤 Procurement Voice AI</h1>
+            <p>System Architecture Documentation</p>
+            <p style="font-size: 0.9em; margin-top: 10px; opacity: 0.8;">Input Output Global - Intelligent Voice Assistant</p>
+        </div>
+        
+        <div class="info-section">
+            <h2 style="color: #1e3c72; margin-bottom: 20px;">System Overview</h2>
+            <div class="info-grid">
+                <div class="info-card">
+                    <h3>🎯 Primary Goal</h3>
+                    <p>Eliminate 50% of wasted time on incomplete procurement requests and repetitive questions by validating requests and enabling self-service before routing to the human procurement team.</p>
+                </div>
+                
+                <div class="info-card">
+                    <h3>📞 Phone Number</h3>
+                    <p><strong>+1 (930) 254-9264</strong></p>
+                    <p style="margin-top: 10px;">24/7 intelligent voice assistant for internal department procurement requests</p>
+                </div>
+                
+                <div class="info-card">
+                    <h3>⚡ Key Features</h3>
+                    <ul>
+                        <li>Request validation (100% complete)</li>
+                        <li>Self-service policy answers</li>
+                        <li>Vendor information lookup</li>
+                        <li>Employee context awareness</li>
+                    </ul>
+                </div>
+                
+                <div class="info-card">
+                    <h3>🛠️ Technology Stack</h3>
+                    <ul>
+                        <li>Vapi AI Platform</li>
+                        <li>OpenAI GPT-4</li>
+                        <li>Node.js + Express</li>
+                        <li>Deepgram (Speech-to-Text)</li>
+                        <li>PlayHT (Text-to-Speech)</li>
+                    </ul>
+                </div>
+                
+                <div class="info-card">
+                    <h3>📊 System Data</h3>
+                    <ul>
+                        <li>5 Employee profiles</li>
+                        <li>12 Approved vendors</li>
+                        <li>146 Policy document chunks</li>
+                        <li>4 Core functions</li>
+                    </ul>
+                </div>
+                
+                <div class="info-card">
+                    <h3>🔧 Architecture Layers</h3>
+                    <ul>
+                        <li>Voice Interface (Vapi)</li>
+                        <li>AI Processing (GPT-4)</li>
+                        <li>Backend Server (Node.js)</li>
+                        <li>Data Storage (JSON/MD)</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        
+        <div class="diagram-section">
+            <div class="controls">
+                <button onclick="window.location.href='procurement-voice-ai-workflow.html'">📊 Flow Diagram</button>
+                <button onclick="window.location.href='procurement-voice-ai-architecture-dark.html'">🌙 Dark Theme</button>
+                <button onclick="window.print()">🖨️ Print Diagram</button>
+                <button onclick="downloadSVG()">⬇️ Download SVG</button>
+                <button onclick="zoomIn()">🔍 Zoom In</button>
+                <button onclick="zoomOut()">🔍 Zoom Out</button>
+                <button onclick="resetZoom()">↺ Reset Zoom</button>
+            </div>
+            
+            <div class="diagram-container">
+                <div id="svgContainer">
+                    <svg viewBox="0 0 1400 2200" xmlns="http://www.w3.org/2000/svg" id="architectureSVG">
+  <defs>
+    <style>
+      .title { font-family: Arial, sans-serif; font-size: 28px; font-weight: bold; fill: #1a1a1a; }
+      .subtitle { font-family: Arial, sans-serif; font-size: 16px; fill: #4a4a4a; }
+      .component-title { font-family: Arial, sans-serif; font-size: 18px; font-weight: bold; fill: #1a1a1a; }
+      .component-text { font-family: Arial, sans-serif; font-size: 14px; fill: #2a2a2a; }
+      .small-text { font-family: Arial, sans-serif; font-size: 12px; fill: #3a3a3a; }
+      .label { font-family: Arial, sans-serif; font-size: 13px; fill: #555; font-weight: 600; }
+      .endpoint { font-family: monospace; font-size: 11px; fill: #0066cc; }
+      
+      .user-layer { fill: #e3f2fd; stroke: #1976d2; stroke-width: 2; }
+      .vapi-layer { fill: #fff3e0; stroke: #f57c00; stroke-width: 2; }
+      .tunnel-layer { fill: #f3e5f5; stroke: #7b1fa2; stroke-width: 2; }
+      .server-layer { fill: #e8f5e9; stroke: #388e3c; stroke-width: 2; }
+      .data-layer { fill: #fce4ec; stroke: #c2185b; stroke-width: 2; }
+      
+      .component-box { fill: white; stroke: #666; stroke-width: 2; rx: 8; }
+      .sub-component { fill: #f5f5f5; stroke: #999; stroke-width: 1.5; rx: 5; }
+      
+      .arrow { stroke: #333; stroke-width: 2; fill: none; marker-end: url(#arrowhead); }
+      .arrow-label { font-family: Arial, sans-serif; font-size: 11px; fill: #333; font-style: italic; }
+      
+      .data-arrow { stroke: #d32f2f; stroke-width: 2; fill: none; marker-end: url(#data-arrowhead); stroke-dasharray: 5,5; }
+    </style>
+    
+    <marker id="arrowhead" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+      <polygon points="0 0, 10 3, 0 6" fill="#333" />
+    </marker>
+    
+    <marker id="data-arrowhead" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+      <polygon points="0 0, 10 3, 0 6" fill="#d32f2f" />
+    </marker>
+  </defs>
+  
+  <!-- Title -->
+  <text x="700" y="40" class="title" text-anchor="middle">Procurement Voice AI - System Architecture</text>
+  <text x="700" y="65" class="subtitle" text-anchor="middle">Input Output Global - Intelligent Voice Assistant</text>
+  
+  <!-- Layer 1: Caller (User) -->
+  <rect x="50" y="100" width="1300" height="120" class="user-layer"/>
+  <text x="700" y="130" class="component-title" text-anchor="middle">INTERNAL DEPARTMENT CALLERS</text>
+  <text x="700" y="155" class="component-text" text-anchor="middle">Marketing, Engineering, Finance, Operations Teams</text>
+  
+  <circle cx="550" cy="185" r="15" fill="#1976d2"/>
+  <text x="575" y="192" class="small-text">Incoming Call</text>
+  
+  <circle cx="850" cy="185" r="15" fill="#1976d2"/>
+  <text x="875" y="192" class="small-text">+1 (930) 254-9264</text>
+  
+  <!-- Arrow from caller to Vapi -->
+  <path d="M 700 220 L 700 260" class="arrow"/>
+  <text x="720" y="245" class="arrow-label">Phone Call</text>
+  
+  <!-- Layer 2: Vapi AI Platform -->
+  <rect x="50" y="260" width="1300" height="520" class="vapi-layer"/>
+  <text x="700" y="290" class="component-title" text-anchor="middle">VAPI AI PLATFORM</text>
+  <text x="700" y="310" class="small-text" text-anchor="middle">Assistant ID: d42c88a5-1e26-40b9-8fbb-8f41e5b9a2fc</text>
+  
+  <!-- Voice Interface Layer -->
+  <rect x="100" y="330" width="550" height="160" class="component-box"/>
+  <text x="375" y="360" class="component-title" text-anchor="middle">Voice Interface Layer</text>
+  
+  <rect x="120" y="380" width="240" height="90" class="sub-component"/>
+  <text x="240" y="405" class="component-text" text-anchor="middle" font-weight="bold">Speech Processing</text>
+  <text x="240" y="425" class="small-text" text-anchor="middle">• Speech-to-Text: Deepgram</text>
+  <text x="240" y="445" class="small-text" text-anchor="middle">• Text-to-Speech: PlayHT</text>
+  <text x="240" y="465" class="small-text" text-anchor="middle">• Call Management</text>
+  
+  <rect x="380" y="380" width="240" height="90" class="sub-component"/>
+  <text x="500" y="405" class="component-text" text-anchor="middle" font-weight="bold">Session Management</text>
+  <text x="500" y="425" class="small-text" text-anchor="middle">• Call State Tracking</text>
+  <text x="500" y="445" class="small-text" text-anchor="middle">• Context Preservation</text>
+  <text x="500" y="465" class="small-text" text-anchor="middle">• Telephony Infrastructure</text>
+  
+  <!-- AI Model Layer -->
+  <rect x="700" y="330" width="600" height="160" class="component-box"/>
+  <text x="1000" y="360" class="component-title" text-anchor="middle">AI Processing Engine</text>
+  
+  <rect x="720" y="380" width="260" height="90" class="sub-component"/>
+  <text x="850" y="405" class="component-text" text-anchor="middle" font-weight="bold">OpenAI GPT-4</text>
+  <text x="850" y="425" class="small-text" text-anchor="middle">• Temperature: 0.7</text>
+  <text x="850" y="445" class="small-text" text-anchor="middle">• 3,800+ word system prompt</text>
+  <text x="850" y="465" class="small-text" text-anchor="middle">• Natural conversation flow</text>
+  
+  <rect x="1000" y="380" width="270" height="90" class="sub-component"/>
+  <text x="1135" y="405" class="component-text" text-anchor="middle" font-weight="bold">Conversation Logic</text>
+  <text x="1135" y="425" class="small-text" text-anchor="middle">• Request validation</text>
+  <text x="1135" y="445" class="small-text" text-anchor="middle">• Self-service routing</text>
+  <text x="1135" y="465" class="small-text" text-anchor="middle">• Function orchestration</text>
+  
+  <!-- Function Tools Layer -->
+  <rect x="100" y="530" width="1200" height="230" class="component-box"/>
+  <text x="700" y="560" class="component-title" text-anchor="middle">Function Calling Tools (4 Functions)</text>
+  
+  <rect x="130" y="585" width="260" height="140" class="sub-component"/>
+  <text x="260" y="610" class="component-text" text-anchor="middle" font-weight="bold">1. lookup_employee</text>
+  <text x="260" y="635" class="small-text" text-anchor="middle">Parameter: name (string)</text>
+  <text x="260" y="655" class="small-text" text-anchor="middle">Returns: Employee context,</text>
+  <text x="260" y="675" class="small-text" text-anchor="middle">projects, preferences,</text>
+  <text x="260" y="695" class="small-text" text-anchor="middle">procurement history</text>
+  <text x="260" y="715" class="endpoint">/lookup-employee</text>
+  
+  <rect x="420" y="585" width="260" height="140" class="sub-component"/>
+  <text x="550" y="610" class="component-text" text-anchor="middle" font-weight="bold">2. search_policies</text>
+  <text x="550" y="635" class="small-text" text-anchor="middle">Parameter: query (string)</text>
+  <text x="550" y="655" class="small-text" text-anchor="middle">Returns: Relevant policy</text>
+  <text x="550" y="675" class="small-text" text-anchor="middle">sections with RAG-based</text>
+  <text x="550" y="695" class="small-text" text-anchor="middle">semantic search</text>
+  <text x="550" y="715" class="endpoint">/search-policies</text>
+  
+  <rect x="710" y="585" width="260" height="140" class="sub-component"/>
+  <text x="840" y="610" class="component-text" text-anchor="middle" font-weight="bold">3. search_vendors</text>
+  <text x="840" y="635" class="small-text" text-anchor="middle">Parameter: query (string)</text>
+  <text x="840" y="655" class="small-text" text-anchor="middle">Returns: Vendor details,</text>
+  <text x="840" y="675" class="small-text" text-anchor="middle">capabilities, pricing,</text>
+  <text x="840" y="695" class="small-text" text-anchor="middle">contact information</text>
+  <text x="840" y="715" class="endpoint">/search-vendors</text>
+  
+  <rect x="1000" y="585" width="260" height="140" class="sub-component"/>
+  <text x="1130" y="610" class="component-text" text-anchor="middle" font-weight="bold">4. validate_request</text>
+  <text x="1130" y="635" class="small-text" text-anchor="middle">Parameter: fields (object)</text>
+  <text x="1130" y="655" class="small-text" text-anchor="middle">Returns: Validation result,</text>
+  <text x="1130" y="675" class="small-text" text-anchor="middle">missing fields,</text>
+  <text x="1130" y="695" class="small-text" text-anchor="middle">completeness status</text>
+  <text x="1130" y="715" class="endpoint">/validate-request</text>
+  
+  <!-- Arrow from Vapi to Ngrok -->
+  <path d="M 700 780 L 700 820" class="arrow"/>
+  <text x="720" y="805" class="arrow-label">HTTPS Webhooks</text>
+  
+  <!-- Layer 3: Ngrok Tunnel -->
+  <rect x="50" y="820" width="1300" height="140" class="tunnel-layer"/>
+  <text x="700" y="850" class="component-title" text-anchor="middle">NGROK TUNNEL (Development)</text>
+  <text x="700" y="875" class="endpoint" text-anchor="middle" font-size="14">https://sprier-sulfurously-wendy.ngrok-free.dev</text>
+  
+  <rect x="200" y="895" width="1000" height="45" class="sub-component"/>
+  <text x="700" y="920" class="small-text" text-anchor="middle">Exposes local development server (localhost:3001) to internet for Vapi webhooks</text>
+  
+  <!-- Arrow from Ngrok to Server -->
+  <path d="M 700 960 L 700 1000" class="arrow"/>
+  <text x="720" y="985" class="arrow-label">Routes to localhost:3001</text>
+  
+  <!-- Layer 4: Unified MCP Server -->
+  <rect x="50" y="1000" width="1300" height="400" class="server-layer"/>
+  <text x="700" y="1030" class="component-title" text-anchor="middle">UNIFIED MCP SERVER (Node.js + Express)</text>
+  <text x="700" y="1055" class="small-text" text-anchor="middle">File: mcp-servers/unified-server.js | Port: 3001</text>
+  
+  <!-- Server Endpoints -->
+  <rect x="100" y="1080" width="560" height="130" class="component-box"/>
+  <text x="380" y="1110" class="component-title" text-anchor="middle">REST API Endpoints</text>
+  <text x="150" y="1140" class="endpoint">POST /lookup-employee</text>
+  <text x="450" y="1140" class="small-text">Employee context lookup</text>
+  <text x="150" y="1165" class="endpoint">POST /search-policies</text>
+  <text x="450" y="1165" class="small-text">Policy document RAG search</text>
+  <text x="150" y="1190" class="endpoint">POST /search-vendors</text>
+  <text x="450" y="1190" class="small-text">Vendor database search</text>
+  
+  <rect x="690" y="1080" width="560" height="130" class="component-box"/>
+  <text x="970" y="1110" class="component-title" text-anchor="middle">Additional Endpoints</text>
+  <text x="740" y="1140" class="endpoint">POST /validate-request</text>
+  <text x="1040" y="1140" class="small-text">Request completeness check</text>
+  <text x="740" y="1165" class="endpoint">GET /health</text>
+  <text x="1040" y="1165" class="small-text">Health check & status</text>
+  <text x="740" y="1190" class="endpoint">POST /reload</text>
+  <text x="1040" y="1190" class="small-text">Reload all data sources</text>
+  
+  <!-- Processing Modules -->
+  <rect x="100" y="1240" width="280" height="130" class="component-box"/>
+  <text x="240" y="1270" class="component-text" text-anchor="middle" font-weight="bold">Employee Context</text>
+  <text x="240" y="1270" class="component-text" text-anchor="middle" font-weight="bold">System</text>
+  <text x="240" y="1295" class="small-text" text-anchor="middle">• Name matching (exact/fuzzy)</text>
+  <text x="240" y="1315" class="small-text" text-anchor="middle">• Context retrieval</text>
+  <text x="240" y="1335" class="small-text" text-anchor="middle">• History lookup</text>
+  <text x="240" y="1355" class="small-text" text-anchor="middle">• 5 employees loaded</text>
+  
+  <rect x="410" y="1240" width="280" height="130" class="component-box"/>
+  <text x="550" y="1265" class="component-text" text-anchor="middle" font-weight="bold">Procurement RAG</text>
+  <text x="550" y="1285" class="component-text" text-anchor="middle" font-weight="bold">System</text>
+  <text x="550" y="1310" class="small-text" text-anchor="middle">• Document chunking</text>
+  <text x="550" y="1330" class="small-text" text-anchor="middle">• TF-IDF scoring</text>
+  <text x="550" y="1350" class="small-text" text-anchor="middle">• 146 chunks from 4 docs</text>
+  
+  <rect x="720" y="1240" width="250" height="130" class="component-box"/>
+  <text x="845" y="1270" class="component-text" text-anchor="middle" font-weight="bold">Vendor Search</text>
+  <text x="845" y="1290" class="component-text" text-anchor="middle" font-weight="bold">Engine</text>
+  <text x="845" y="1315" class="small-text" text-anchor="middle">• Keyword matching</text>
+  <text x="845" y="1335" class="small-text" text-anchor="middle">• Capability filtering</text>
+  <text x="845" y="1355" class="small-text" text-anchor="middle">• 12 vendors indexed</text>
+  
+  <rect x="1000" y="1240" width="250" height="130" class="component-box"/>
+  <text x="1125" y="1265" class="component-text" text-anchor="middle" font-weight="bold">Validation Logic</text>
+  <text x="1125" y="1290" class="small-text" text-anchor="middle">Required fields check:</text>
+  <text x="1125" y="1310" class="small-text" text-anchor="middle">• Budget authority</text>
+  <text x="1125" y="1330" class="small-text" text-anchor="middle">• Delivery milestones</text>
+  <text x="1125" y="1350" class="small-text" text-anchor="middle">• Cost estimates</text>
+  
+  <!-- Data arrows to data layer -->
+  <path d="M 240 1370 L 240 1450" class="data-arrow"/>
+  <path d="M 550 1370 L 550 1450" class="data-arrow"/>
+  <path d="M 845 1370 L 845 1450" class="data-arrow"/>
+  
+  <!-- Layer 5: Data Storage -->
+  <rect x="50" y="1450" width="1300" height="330" class="data-layer"/>
+  <text x="700" y="1480" class="component-title" text-anchor="middle">DATA STORAGE LAYER</text>
+  <text x="700" y="1505" class="small-text" text-anchor="middle">Local JSON files and Markdown documents</text>
+  
+  <!-- Employee Database -->
+  <rect x="100" y="1530" width="360" height="220" class="component-box"/>
+  <text x="280" y="1560" class="component-text" text-anchor="middle" font-weight="bold">Employee Database</text>
+  <text x="280" y="1580" class="endpoint" text-anchor="middle">employee-database.json</text>
+  <text x="280" y="1610" class="small-text" text-anchor="middle" font-weight="bold">5 Employees:</text>
+  <text x="280" y="1635" class="small-text" text-anchor="middle">• Andrea Smith (Procurement Mgr)</text>
+  <text x="280" y="1655" class="small-text" text-anchor="middle">• Maria Santos (Buyer)</text>
+  <text x="280" y="1675" class="small-text" text-anchor="middle">• James Chen (Contract Specialist)</text>
+  <text x="280" y="1695" class="small-text" text-anchor="middle">• Sarah Kim (Marketing Manager)</text>
+  <text x="280" y="1715" class="small-text" text-anchor="middle">• Robert Taylor (Engineering Lead)</text>
+  <text x="280" y="1735" class="small-text" text-anchor="middle" font-style="italic">Full context, history, preferences</text>
+  
+  <!-- Procurement Documents -->
+  <rect x="490" y="1530" width="420" height="220" class="component-box"/>
+  <text x="700" y="1560" class="component-text" text-anchor="middle" font-weight="bold">Procurement Policy Documents</text>
+  <text x="700" y="1580" class="endpoint" text-anchor="middle">procurement-docs/*.md</text>
+  <text x="700" y="1610" class="small-text" text-anchor="middle" font-weight="bold">4 Documents (146 chunks):</text>
+  <text x="700" y="1635" class="small-text" text-anchor="middle">• vendor-onboarding.md</text>
+  <text x="700" y="1655" class="small-text" text-anchor="middle">  (Vendor approval & onboarding process)</text>
+  <text x="700" y="1680" class="small-text" text-anchor="middle">• contract-templates.md</text>
+  <text x="700" y="1700" class="small-text" text-anchor="middle">  (Contract types & template selection)</text>
+  <text x="700" y="1720" class="small-text" text-anchor="middle">• payment-rules.md (Payment terms)</text>
+  <text x="700" y="1740" class="small-text" text-anchor="middle">• procurement-faq.md (Common Q&A)</text>
+  
+  <!-- Vendor Database -->
+  <rect x="940" y="1530" width="360" height="220" class="component-box"/>
+  <text x="1120" y="1560" class="component-text" text-anchor="middle" font-weight="bold">Vendor Database</text>
+  <text x="1120" y="1580" class="endpoint" text-anchor="middle">vendor-database.json</text>
+  <text x="1120" y="1610" class="small-text" text-anchor="middle" font-weight="bold">12 Approved Vendors:</text>
+  <text x="1120" y="1635" class="small-text" text-anchor="middle">• Tech Solutions Inc. (IT Hardware)</text>
+  <text x="1120" y="1655" class="small-text" text-anchor="middle">• Creative Agency Co. (Marketing)</text>
+  <text x="1120" y="1675" class="small-text" text-anchor="middle">• Office Supplies Plus (Supplies)</text>
+  <text x="1120" y="1695" class="small-text" text-anchor="middle">• CloudCo (Cloud Services)</text>
+  <text x="1120" y="1715" class="small-text" text-anchor="middle">• + 8 more vendors</text>
+  <text x="1120" y="1735" class="small-text" text-anchor="middle" font-style="italic">Capabilities, pricing, contacts</text>
+  
+  <!-- Key Metrics Box -->
+  <rect x="50" y="1820" width="1300" height="160" class="component-box" fill="#fff9c4" stroke="#f57f17"/>
+  <text x="700" y="1850" class="component-title" text-anchor="middle">📊 SYSTEM CAPABILITIES & METRICS</text>
+  
+  <text x="150" y="1885" class="small-text" font-weight="bold">Primary Goal:</text>
+  <text x="150" y="1905" class="small-text">Eliminate 50% wasted time on incomplete requests</text>
+  
+  <text x="550" y="1885" class="small-text" font-weight="bold">Key Features:</text>
+  <text x="550" y="1905" class="small-text">• Request validation (100% complete)</text>
+  <text x="550" y="1925" class="small-text">• Self-service policy answers</text>
+  <text x="550" y="1945" class="small-text">• Vendor information lookup</text>
+  
+  <text x="950" y="1885" class="small-text" font-weight="bold">Performance:</text>
+  <text x="950" y="1905" class="small-text">• Natural conversation flow</text>
+  <text x="950" y="1925" class="small-text">• Context-aware responses</text>
+  <text x="950" y="1945" class="small-text">• 24/7 availability</text>
+  
+  <!-- Data Flow Legend -->
+  <rect x="50" y="2020" width="1300" height="140" class="component-box" fill="#f5f5f5"/>
+  <text x="700" y="2050" class="component-title" text-anchor="middle">DATA FLOW & INTEGRATION SUMMARY</text>
+  
+  <line x1="150" y1="2080" x2="250" y2="2080" stroke="#333" stroke-width="2" marker-end="url(#arrowhead)"/>
+  <text x="270" y="2085" class="small-text">API Request/Response (HTTPS)</text>
+  
+  <line x1="150" y1="2110" x2="250" y2="2110" stroke="#d32f2f" stroke-width="2" stroke-dasharray="5,5" marker-end="url(#data-arrowhead)"/>
+  <text x="270" y="2115" class="small-text">Data Access (Read from storage)</text>
+  
+  <text x="750" y="2085" class="small-text" font-weight="bold">Technology Stack:</text>
+  <text x="750" y="2105" class="small-text">Node.js, Express, OpenAI GPT-4, Deepgram, PlayHT</text>
+  <text x="750" y="2125" class="small-text">Vapi Platform, Ngrok (dev), JSON storage</text>
+  
+  <!-- Footer -->
+  <text x="700" y="2180" class="small-text" text-anchor="middle" font-style="italic">Architecture v1.0 | Input Output Global Procurement AI | Last Updated: 2025-01-12</text>
+</svg>
+                </div>
+            </div>
+        </div>
+        
+        <div class="footer">
+            <p><strong>Procurement Voice AI</strong> - Architecture Documentation v1.0</p>
+            <p style="margin-top: 10px;">Input Output Global | Last Updated: January 12, 2025</p>
+        </div>
+    </div>
+    
+    <script>
+        let currentZoom = 1;
+        const svgContainer = document.getElementById('svgContainer');
+        
+        function zoomIn() {
+            currentZoom = Math.min(currentZoom + 0.2, 3);
+            applyZoom();
+        }
+        
+        function zoomOut() {
+            currentZoom = Math.max(currentZoom - 0.2, 0.5);
+            applyZoom();
+        }
+        
+        function resetZoom() {
+            currentZoom = 1;
+            applyZoom();
+        }
+        
+        function applyZoom() {
+            svgContainer.style.transform = `scale(${currentZoom})`;
+            svgContainer.style.transformOrigin = 'top center';
+            svgContainer.style.transition = 'transform 0.3s ease';
+        }
+        
+        function downloadSVG() {
+            const svg = document.getElementById('architectureSVG');
+            const serializer = new XMLSerializer();
+            const svgString = serializer.serializeToString(svg);
+            const blob = new Blob([svgString], { type: 'image/svg+xml' });
+            const url = URL.createObjectURL(blob);
+            const link = document.createElement('a');
+            link.href = url;
+            link.download = 'procurement-voice-ai-architecture.svg';
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+            URL.revokeObjectURL(url);
+        }
+        
+        // Add keyboard shortcuts
+        document.addEventListener('keydown', function(e) {
+            if (e.ctrlKey || e.metaKey) {
+                if (e.key === '=' || e.key === '+') {
+                    e.preventDefault();
+                    zoomIn();
+                } else if (e.key === '-') {
+                    e.preventDefault();
+                    zoomOut();
+                } else if (e.key === '0') {
+                    e.preventDefault();
+                    resetZoom();
+                }
+            }
+        });
+    </script>
+</body>
+</html>

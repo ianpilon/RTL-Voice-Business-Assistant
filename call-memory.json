@@ -1,0 +1,19 @@
+{
+  "callers": {
+    "+15192770970": {
+      "phone": "+15192770970",
+      "current_tier": 2,
+      "call_count": 1,
+      "first_call_date": "2025-11-07T17:23:54.059Z",
+      "last_call_date": "2025-11-07T17:28:06.158Z",
+      "call_history": [
+        {
+          "tier": 1,
+          "date": "2025-11-07T17:28:06.158Z",
+          "duration": "0",
+          "call_sid": "CA2fc45f047049ee6f19e9e28762fa3276"
+        }
+      ]
+    }
+  }
+}
