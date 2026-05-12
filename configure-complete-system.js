@@ -40,26 +40,26 @@ async function configureCompleteSystem() {
             }
           ],
           tools: [
-            // Employee Lookup Function
+            // Reefer Trailer / Asset Lookup Function
             {
               type: "function",
               async: false,
               function: {
-                name: "lookup_employee",
-                description: "Look up an IOG employee by name to get their department, team, role, and past procurement interactions. Use this when the caller mentions their name or when you need context.",
+                name: "lookup_asset",
+                description: "Look up an RTL reefer trailer by its unit number to find out where it is and what it's doing right now. Returns status (in the yard, on the road, leased to a customer, or in the shop being serviced), current location, driver and load if on the road, lessee and lease end date if leased, mileage, and next service date. Use this whenever a caller asks about the location, status, driver, load, customer, or service status of a trailer.",
                 parameters: {
                   type: "object",
                   properties: {
-                    name: {
+                    unit_number: {
                       type: "string",
-                      description: "The employee's name (first name, last name, or full name)"
+                      description: "The trailer's unit number (e.g. RTL-1042, or just the digits like 1042)"
                     }
                   },
-                  required: ["name"]
+                  required: ["unit_number"]
                 }
               },
               server: {
-                url: `${NGROK_URL}/lookup-employee`,
+                url: `${NGROK_URL}/lookup-asset`,
                 timeoutSeconds: 45
               }
             },
@@ -165,9 +165,9 @@ async function configureCompleteSystem() {
     console.log('✅ IOG Procurement Services AI fully configured!\n');
     console.log('Configuration Summary:');
     console.log('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━');
-    console.log('  ✓ Employee Context Lookup');
-    console.log('    - Endpoint:', `${NGROK_URL}/lookup-employee`);
-    console.log('    - Employees: Andrea Smith & team');
+    console.log('  ✓ Reefer Trailer Asset Lookup');
+    console.log('    - Endpoint:', `${NGROK_URL}/lookup-asset`);
+    console.log('    - Fleet: RTL-1001 through RTL-1015 (status, location, driver, lease, service)');
     console.log('');
     console.log('  ✓ Procurement Policy Search (RAG)');
     console.log('    - Endpoint:', `${NGROK_URL}/search-policies`);

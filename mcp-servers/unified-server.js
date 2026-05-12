@@ -11,90 +11,101 @@ app.use(cors());
 app.use(express.json());
 
 // ============================================
-// EMPLOYEE CONTEXT FUNCTIONALITY
+// ASSET (REEFER TRAILER) FUNCTIONALITY
 // ============================================
 
-const EMPLOYEE_DB_PATH = path.join(__dirname, 'employee-context/employee-database.json');
+const ASSET_DB_PATH = path.join(__dirname, 'asset-context/asset-database.json');
 
-function loadEmployeeDB() {
-  if (fs.existsSync(EMPLOYEE_DB_PATH)) {
-    return JSON.parse(fs.readFileSync(EMPLOYEE_DB_PATH, 'utf8'));
+function loadAssetDB() {
+  if (fs.existsSync(ASSET_DB_PATH)) {
+    return JSON.parse(fs.readFileSync(ASSET_DB_PATH, 'utf8'));
   }
-  return { employees: [] };
+  return { trailers: [] };
 }
 
-let employeeDB = loadEmployeeDB();
+let assetDB = loadAssetDB();
 
-function findEmployeeByName(name) {
-  const nameLower = name.toLowerCase().trim();
-
-  let employee = employeeDB.employees.find(emp =>
-    emp.name.toLowerCase() === nameLower ||
-    emp.firstName.toLowerCase() === nameLower ||
-    `${emp.firstName.toLowerCase()} ${emp.lastName.toLowerCase()}` === nameLower
-  );
-
-  if (!employee) {
-    employee = employeeDB.employees.find(emp =>
-      emp.firstName.toLowerCase().includes(nameLower) ||
-      emp.lastName.toLowerCase().includes(nameLower) ||
-      emp.name.toLowerCase().includes(nameLower)
-    );
-  }
-
-  return employee;
+function normalizeUnit(s) {
+  return String(s || '').toUpperCase().replace(/[^A-Z0-9]/g, '');
 }
 
-// Employee lookup endpoint
-app.post('/lookup-employee', (req, res) => {
-  // Log the full request for debugging
+function findTrailerByUnitNumber(unitNumber) {
+  const target = normalizeUnit(unitNumber);
+  if (!target) return null;
+
+  let trailer = assetDB.trailers.find(t => normalizeUnit(t.unit_number) === target);
+  if (trailer) return trailer;
+
+  trailer = assetDB.trailers.find(t => normalizeUnit(t.unit_number).endsWith(target));
+  if (trailer) return trailer;
+
+  return assetDB.trailers.find(t => normalizeUnit(t.unit_number).includes(target)) || null;
+}
+
+const STATUS_PHRASE = {
+  in_yard: 'in the Toronto yard, ready for dispatch',
+  on_road: 'currently on the road',
+  leased: 'out on lease',
+  in_shop: 'in the shop for service'
+};
+
+function describeTrailer(t) {
+  const phrase = STATUS_PHRASE[t.status] || `marked as ${t.status}`;
+  let line = `Trailer ${t.unit_number} (${t.year} ${t.make} ${t.model}, ${t.reefer_unit}) is ${phrase} at ${t.location}.`;
+  if (t.status === 'on_road' && t.current_driver) {
+    line += ` Driver is ${t.current_driver} hauling ${t.current_load}.`;
+  } else if (t.status === 'leased' && t.leased_to) {
+    line += ` Leased to ${t.leased_to} through ${t.lease_end_date}.`;
+  } else if (t.status === 'in_shop') {
+    line += ` ${t.notes}`;
+  }
+  line += ` Mileage ${t.mileage.toLocaleString()}; next service due ${t.next_service_due}.`;
+  return line;
+}
+
+// Trailer / asset lookup endpoint
+app.post('/lookup-asset', (req, res) => {
   console.log('\n📥 Full request body:', JSON.stringify(req.body, null, 2));
 
-  // Extract toolCallId for Vapi response format
   const toolCallId = req.body.message?.toolCallList?.[0]?.id;
 
-  // Vapi might send parameters in different formats
-  let name = req.body.name
-    || req.body.parameters?.name
-    || req.body.message?.toolCalls?.[0]?.function?.arguments?.name
-    || req.body.message?.toolCallList?.[0]?.function?.arguments?.name;
+  let unitNumber = req.body.unit_number
+    || req.body.parameters?.unit_number
+    || req.body.message?.toolCalls?.[0]?.function?.arguments?.unit_number
+    || req.body.message?.toolCallList?.[0]?.function?.arguments?.unit_number;
 
-  console.log(`\n👤 Employee lookup: "${name}"`);
+  console.log(`\n🚛 Trailer lookup: "${unitNumber}"`);
   console.log(`   Tool Call ID: ${toolCallId}`);
 
-  if (!name) {
-    console.log('❌ No name found in request body');
+  if (!unitNumber) {
+    console.log('❌ No unit_number found in request body');
     console.log('Available keys:', Object.keys(req.body));
     return res.status(400).json({
       results: [{
         toolCallId: toolCallId || 'unknown',
-        result: 'Error: Name parameter is required'
+        result: 'Error: unit_number parameter is required'
       }]
     });
   }
 
-  const employee = findEmployeeByName(name);
+  const trailer = findTrailerByUnitNumber(unitNumber);
 
-  if (!employee) {
+  if (!trailer) {
     console.log('   ❌ Not found');
-    const resultText = `I don't have information for "${name}" in our employee directory.`;
     return res.json({
       results: [{
         toolCallId: toolCallId || 'unknown',
-        result: resultText
+        result: `I couldn't find a trailer matching "${unitNumber}" in our fleet.`
       }]
     });
   }
 
-  console.log(`   ✅ Found: ${employee.name} (${employee.team})`);
-
-  // Format result as single-line text for Vapi
-  const resultText = `Employee found: ${employee.firstName} ${employee.lastName}, ${employee.title} in ${employee.department}. Team: ${employee.team}. ${employee.notes} Communication style: ${employee.preferences.communicationStyle}.`;
+  console.log(`   ✅ Found: ${trailer.unit_number} (${trailer.status})`);
 
   res.json({
     results: [{
       toolCallId: toolCallId || 'unknown',
-      result: resultText
+      result: describeTrailer(trailer)
     }]
   });
 });
@@ -397,10 +408,10 @@ app.post('/validate-request', (req, res) => {
 app.get('/health', (req, res) => {
   res.json({
     status: 'ok',
-    employees: employeeDB.employees.length,
+    trailers: assetDB.trailers.length,
     documents: documents.length,
     vendors: vendorDB.vendors.length,
-    message: 'Procurement MCP server is running'
+    message: 'RTL MCP server is running'
   });
 });
 
@@ -408,8 +419,8 @@ app.get('/health', (req, res) => {
 // DATA BROWSER ENDPOINTS (read-only views of what the AI sees)
 // ============================================
 
-app.get('/data/employees', (req, res) => {
-  res.json({ employees: employeeDB.employees });
+app.get('/data/trailers', (req, res) => {
+  res.json({ trailers: assetDB.trailers });
 });
 
 app.get('/data/vendors', (req, res) => {
@@ -427,12 +438,12 @@ app.get('/data/policies', (req, res) => {
 });
 
 app.post('/reload', (req, res) => {
-  employeeDB = loadEmployeeDB();
+  assetDB = loadAssetDB();
   vendorDB = loadVendorDB();
   loadDocuments();
   res.json({
     success: true,
-    employees: employeeDB.employees.length,
+    trailers: assetDB.trailers.length,
     documents: documents.length,
     vendors: vendorDB.vendors.length,
     message: 'All data reloaded'
@@ -446,12 +457,12 @@ app.post('/reload', (req, res) => {
 loadDocuments();
 
 app.listen(port, () => {
-  console.log('\n🚀 IOG Procurement Services - Unified MCP Server');
+  console.log('\n🚀 RTL Voice Procurement - Unified MCP Server');
   console.log('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━');
   console.log(`📍 Server URL: http://localhost:${port}`);
   console.log('');
   console.log('📋 Available Endpoints:');
-  console.log('  👤 POST /lookup-employee   - Employee context lookup');
+  console.log('  🚛 POST /lookup-asset      - Reefer trailer asset lookup');
   console.log('  📚 POST /search-policies   - Procurement policy search');
   console.log('  🏢 POST /search-vendors    - Vendor history search');
   console.log('  ✅ POST /validate-request  - Request completeness validation');
@@ -460,7 +471,7 @@ app.listen(port, () => {
   console.log('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━');
   console.log('');
   console.log('📊 Data Loaded:');
-  console.log(`  Employees: ${employeeDB.employees.length}`);
+  console.log(`  Trailers: ${assetDB.trailers.length}`);
   console.log(`  Vendors: ${vendorDB.vendors.length}`);
   console.log(`  Document chunks: ${documents.length}`);
   console.log('');

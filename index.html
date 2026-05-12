@@ -407,48 +407,50 @@
       </div>
       <div style="padding: 0 24px; border-bottom: 1px solid var(--border); background: #fafbfc;">
         <div class="tabs" role="tablist">
-          <button class="tab active" data-tab="employees" onclick="switchTab('employees')">Employees <span class="count" id="empCount">…</span></button>
+          <button class="tab active" data-tab="trailers" onclick="switchTab('trailers')">Reefer Trailers <span class="count" id="trailerCount">…</span></button>
           <button class="tab" data-tab="vendors" onclick="switchTab('vendors')">Vendors <span class="count" id="vendCount">…</span></button>
           <button class="tab" data-tab="policies" onclick="switchTab('policies')">Policy Docs <span class="count" id="polCount">…</span></button>
         </div>
       </div>
       <div class="tool-body" style="display: block;">
-        <div id="dataPanel-employees" class="data-panel"></div>
+        <div id="dataPanel-trailers" class="data-panel"></div>
         <div id="dataPanel-vendors" class="data-panel" style="display: none;"></div>
         <div id="dataPanel-policies" class="data-panel" style="display: none;"></div>
       </div>
     </div>
 
-    <!-- Tool 1: Employee Lookup -->
+    <!-- Tool 1: Reefer Trailer Asset Lookup -->
     <div class="tool">
       <div class="tool-header">
-        <h3>1. Employee Lookup</h3>
-        <div class="tech">tool: <code>lookup_employee</code> &nbsp;·&nbsp; endpoint: <code>POST /lookup-employee</code></div>
+        <h3>1. Reefer Trailer Asset Lookup</h3>
+        <div class="tech">tool: <code>lookup_asset</code> &nbsp;·&nbsp; endpoint: <code>POST /lookup-asset</code></div>
       </div>
       <div class="tool-body">
         <div class="col">
           <h4>What you can say on a call</h4>
           <ul class="examples">
-            <li>"This is Andrea calling."</li>
-            <li>"My name is James Chen, I have a procurement question."</li>
-            <li>"Can you look up Sarah Mitchell?"</li>
+            <li>"Where is RTL-1002?"</li>
+            <li>"Is 1004 still in the shop?"</li>
+            <li>"Who do we have 1003 leased to?"</li>
+            <li>"When is 1010 due for service?"</li>
           </ul>
           <h4>What the AI should say back</h4>
-          <p class="expected">"Hi Andrea, I see you're the Procurement Manager — what can I help you with today?" The AI personalizes greetings using each employee's role, team, and notes (e.g. communication style preference).</p>
-          <p style="font-size: 13px; color: var(--muted); margin-top: 12px;"><strong>Employees in the database:</strong> Andrea Smith, Maria Santos, James Chen, Sarah Mitchell, Tom Harrison.</p>
+          <p class="expected">"RTL-1002 is currently on the road on I-90 westbound near Cleveland. Mike Petrov is hauling frozen seafood from Boston to Seattle, ETA Seattle May 15. Mileage 142,880, next service due August 28." The AI states the trailer's status, location, and the most relevant context (driver/load for on-road, lessee/lease end for leased, service info for in-shop).</p>
+          <p style="font-size: 13px; color: var(--muted); margin-top: 12px;"><strong>Fleet:</strong> RTL-1001 through RTL-1015. Statuses are <em>in yard</em>, <em>on road</em>, <em>leased</em>, or <em>in shop</em>. See the Reefer Trailers tab above for the full list.</p>
         </div>
         <div class="col">
           <h4>Try it live</h4>
           <div class="tester">
             <div class="quick-fills">
-              <button onclick="fill('lookupName','Andrea')">Andrea</button>
-              <button onclick="fill('lookupName','Maria Santos')">Maria Santos</button>
-              <button onclick="fill('lookupName','James')">James</button>
-              <button onclick="fill('lookupName','Bob Nobody')">unknown name</button>
+              <button onclick="fill('lookupUnit','RTL-1002')">on the road</button>
+              <button onclick="fill('lookupUnit','RTL-1003')">leased</button>
+              <button onclick="fill('lookupUnit','RTL-1004')">in the shop</button>
+              <button onclick="fill('lookupUnit','RTL-1001')">in the yard</button>
+              <button onclick="fill('lookupUnit','1042')">unknown unit</button>
             </div>
-            <label for="lookupName">Employee name</label>
-            <input id="lookupName" placeholder="e.g. Andrea Smith" />
-            <button onclick="callTool('lookup-employee', { name: document.getElementById('lookupName').value }, 'lookupResult')">Look up</button>
+            <label for="lookupUnit">Trailer unit number</label>
+            <input id="lookupUnit" placeholder="e.g. RTL-1002 or just 1002" />
+            <button onclick="callTool('lookup-asset', { unit_number: document.getElementById('lookupUnit').value }, 'lookupResult')">Look up trailer</button>
             <div class="result" id="lookupResult"></div>
           </div>
         </div>
@@ -646,7 +648,7 @@
         serverPill.classList.add("live");
         serverStatus.textContent = `Server live (${ms}ms)`;
         dataPill.classList.add("live");
-        dataStatus.textContent = `${data.employees} employees · ${data.vendors} vendors · ${data.documents} doc chunks`;
+        dataStatus.textContent = `${data.trailers} trailers · ${data.vendors} vendors · ${data.documents} doc chunks`;
       } catch (err) {
         serverPill.classList.add("down");
         serverStatus.textContent = "Server unreachable";
@@ -660,7 +662,7 @@
     // ---- Data Browser ----
     function switchTab(name) {
       document.querySelectorAll(".tab").forEach(t => t.classList.toggle("active", t.dataset.tab === name));
-      ["employees", "vendors", "policies"].forEach(t => {
+      ["trailers", "vendors", "policies"].forEach(t => {
         document.getElementById(`dataPanel-${t}`).style.display = (t === name) ? "block" : "none";
       });
     }
@@ -684,40 +686,56 @@
       btn.textContent = content.classList.contains("open") ? "Show less" : "Show more details";
     }
 
-    async function loadEmployees() {
-      const panel = document.getElementById("dataPanel-employees");
+    const STATUS_TAG = {
+      in_yard:  { label: "In yard",  cls: "success" },
+      on_road:  { label: "On road",  cls: "" },
+      leased:   { label: "Leased",   cls: "muted" },
+      in_shop:  { label: "In shop",  cls: "warn" }
+    };
+
+    async function loadTrailers() {
+      const panel = document.getElementById("dataPanel-trailers");
       panel.innerHTML = '<div class="empty-state">Loading…</div>';
       try {
-        const res = await fetch(`${API}/data/employees`);
-        const { employees } = await res.json();
-        document.getElementById("empCount").textContent = employees.length;
-        panel.innerHTML = employees.map(e => `
-          <div class="data-card">
-            <div class="name">${escapeHtml(e.name)}</div>
-            <div class="subtitle">${escapeHtml(e.title)} · ${escapeHtml(e.department)}</div>
-            ${row("Team", escapeHtml(e.team))}
-            ${row("Manager", escapeHtml(e.manager || "—"))}
-            ${row("Specialties", tagList(e.specialties))}
-            ${row("Comm style", escapeHtml(e.preferences?.communicationStyle || "—"))}
-            <button class="expand-toggle" onclick="toggleExpand(this)">Show more details</button>
-            <div class="expand-content">
-              ${row("Email", escapeHtml(e.email))}
-              ${row("Location", escapeHtml(e.location))}
-              ${row("Timezone", escapeHtml(e.preferences?.timezone || "—"))}
-              ${row("Urgent contact", escapeHtml(e.preferences?.urgentContactMethod || "—"))}
-              ${row("Direct reports", tagList(e.directReports, "muted"))}
-              ${row("Projects", tagList(e.projects, "muted"))}
-              ${row("Procurement history", e.procurementHistory?.length
-                ? '<ul style="margin:0;padding-left:18px;font-size:13px;">' + e.procurementHistory.map(h =>
-                    `<li><strong>${escapeHtml(h.date)}</strong> — ${escapeHtml(h.type)}: ${escapeHtml(h.description)}</li>`
-                  ).join("") + '</ul>'
-                : '<span style="color:var(--muted);">none</span>')}
-              ${row("Notes", escapeHtml(e.notes))}
+        const res = await fetch(`${API}/data/trailers`);
+        const { trailers } = await res.json();
+        document.getElementById("trailerCount").textContent = trailers.length;
+
+        const counts = trailers.reduce((acc, t) => { acc[t.status] = (acc[t.status] || 0) + 1; return acc; }, {});
+        const summary = `<p style="color:var(--muted);font-size:13px;margin:0 0 12px;">
+          <strong>${trailers.length}</strong> trailers in fleet ·
+          ${counts.in_yard || 0} in yard · ${counts.on_road || 0} on road · ${counts.leased || 0} leased · ${counts.in_shop || 0} in shop
+        </p>`;
+
+        panel.innerHTML = summary + trailers.map(t => {
+          const status = STATUS_TAG[t.status] || { label: t.status, cls: "muted" };
+          let context = "";
+          if (t.status === "on_road") {
+            context = row("Driver", escapeHtml(t.current_driver || "—")) + row("Load", escapeHtml(t.current_load || "—"));
+          } else if (t.status === "leased") {
+            context = row("Leased to", escapeHtml(t.leased_to || "—")) + row("Lease ends", escapeHtml(t.lease_end_date || "—"));
+          }
+          return `
+            <div class="data-card">
+              <div class="name">${escapeHtml(t.unit_number)}
+                <span style="font-weight:400;color:var(--muted);font-size:13px;">${t.year} ${escapeHtml(t.make)} ${escapeHtml(t.model)} · ${t.length_ft} ft</span>
+              </div>
+              <div class="subtitle">${escapeHtml(t.reefer_unit)} · ${escapeHtml(t.temp_range_f)} °F</div>
+              ${row("Status", `<span class="tag ${status.cls}">${status.label}</span>`)}
+              ${row("Location", escapeHtml(t.location))}
+              ${context}
+              ${row("Mileage", t.mileage.toLocaleString() + " mi")}
+              <button class="expand-toggle" onclick="toggleExpand(this)">Show service & notes</button>
+              <div class="expand-content">
+                ${row("Last service", escapeHtml(t.last_service_date))}
+                ${row("Next service", escapeHtml(t.next_service_due))}
+                ${row("Notes", escapeHtml(t.notes))}
+              </div>
             </div>
-          </div>
-        `).join("");
+          `;
+        }).join("");
       } catch (err) {
-        panel.innerHTML = `<div class="empty-state">Could not load employees: ${escapeHtml(err.message)}</div>`;
+        panel.innerHTML = `<div class="empty-state">Could not load trailers: ${escapeHtml(err.message)}</div>`;
       }
     }
 
@@ -787,7 +805,7 @@
       }
     }
 
-    loadEmployees();
+    loadTrailers();
     loadVendors();
     loadPolicies();
   </script>
