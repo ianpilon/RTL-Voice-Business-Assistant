@@ -504,26 +504,28 @@
         <div class="col">
           <h4>What you can say on a call</h4>
           <ul class="examples">
-            <li>"Do we have vendors who do Rust development?"</li>
-            <li>"Who's worked on the Leos project before?"</li>
-            <li>"Find me vendors for marketing automation."</li>
-            <li>"What's TechForge's discount history?"</li>
+            <li>"Who do we use for Carrier reefer repairs?"</li>
+            <li>"Find me a vendor for tire retreading."</li>
+            <li>"Who handles our fleet GPS tracking?"</li>
+            <li>"What's Polar Refrigeration's discount history?"</li>
+            <li>"Who's our 24/7 roadside vendor?"</li>
           </ul>
           <h4>What the AI should say back</h4>
-          <p class="expected">"Yes — TechForge Solutions has strong Rust expertise. They've delivered Leos backend work and the Cardano smart contract audit, average 8% discount, rated 4.8 out of 5. Want me to pull up their contract history?" The AI ranks vendors by skill and project match.</p>
-          <p style="font-size: 13px; color: var(--muted); margin-top: 12px;"><strong>12 approved vendors</strong> covering Rust, blockchain, DevOps/cloud, design, analytics, content, QA, security audits, marketing automation, and frontend.</p>
+          <p class="expected">"We use Polar Refrigeration Services for Carrier reefer repairs. They're our Carrier Transicold authorized service center, with a 5 percent average discount and a 4.6 out of 5 rating. For roadside work we use Thermal Edge Mobile Service. Want me to pull up their contract history?" The AI ranks vendors by skill and past-work match.</p>
+          <p style="font-size: 13px; color: var(--muted); margin-top: 12px;"><strong>12 approved vendors</strong> covering reefer repair (Carrier and Thermo King), trailer OEM sales, parts wholesale, tires and retreading, refrigerant supply, telematics, fleet wash, roadside assistance, and fleet insurance.</p>
         </div>
         <div class="col">
           <h4>Try it live</h4>
           <div class="tester">
             <div class="quick-fills">
-              <button onclick="fill('vendorQuery','Rust engineers')">Rust engineers</button>
-              <button onclick="fill('vendorQuery','Leos')">Leos project</button>
-              <button onclick="fill('vendorQuery','marketing automation')">marketing automation</button>
-              <button onclick="fill('vendorQuery','DevOps Kubernetes')">DevOps</button>
+              <button onclick="fill('vendorQuery','reefer repair')">reefer repair</button>
+              <button onclick="fill('vendorQuery','tire retreading')">tire retreading</button>
+              <button onclick="fill('vendorQuery','fleet GPS tracking')">fleet tracking</button>
+              <button onclick="fill('vendorQuery','roadside assistance')">roadside</button>
+              <button onclick="fill('vendorQuery','refrigerant supply')">refrigerant</button>
             </div>
             <label for="vendorQuery">Search query</label>
-            <input id="vendorQuery" placeholder="e.g. Rust engineers" />
+            <input id="vendorQuery" placeholder="e.g. reefer repair, tire retreading" />
             <button onclick="callTool('search-vendors', { query: document.getElementById('vendorQuery').value }, 'vendorResult')">Search vendors</button>
             <div class="result" id="vendorResult"></div>
           </div>
@@ -564,7 +566,7 @@
             <label>Costs</label>
             <input id="reqCosts" placeholder="e.g. $75,000" />
             <label>Description</label>
-            <textarea id="reqDescription" placeholder="e.g. Rust backend engineer for 3 months"></textarea>
+            <textarea id="reqDescription" placeholder="e.g. Bulk Carrier Vector compressor parts for PM program"></textarea>
             <button onclick="validateRequest()">Validate</button>
             <div class="result" id="validateResult"></div>
           </div>
@@ -593,8 +595,8 @@
 
     function fillRequest(mode) {
       const map = {
-        complete: { reqBudget: "BUD-2025-ENG-014", reqMilestones: "Q2 2025 delivery", reqCosts: "$75,000", reqDescription: "Rust backend engineer for 3 months on Leos" },
-        missing:  { reqBudget: "BUD-2025-ENG-014", reqMilestones: "",                  reqCosts: "",        reqDescription: "Rust backend engineer" },
+        complete: { reqBudget: "BUD-2026-MAINT-014", reqMilestones: "Delivery within 2 weeks", reqCosts: "$22,800", reqDescription: "Bulk Carrier Vector compressor and evaporator parts for PM program" },
+        missing:  { reqBudget: "BUD-2026-MAINT-014", reqMilestones: "",                         reqCosts: "",         reqDescription: "Carrier compressor parts" },
         empty:    { reqBudget: "",                  reqMilestones: "",                  reqCosts: "",        reqDescription: "" }
       };
       Object.entries(map[mode]).forEach(([k, v]) => document.getElementById(k).value = v);

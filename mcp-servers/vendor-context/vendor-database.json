@@ -2,305 +2,305 @@
   "vendors": [
     {
       "id": "vendor001",
-      "name": "TechForge Solutions",
-      "skills": ["Rust engineers", "Blockchain development", "Smart contracts", "Backend engineering"],
-      "pastProjects": ["Leos", "Cardano integration", "Wallet infrastructure"],
-      "averageDiscount": "8%",
-      "contracts": [
-        {
-          "date": "2024-05-15",
-          "value": "$180,000",
-          "type": "Fixed price",
-          "project": "Leos backend development",
-          "duration": "6 months"
-        },
-        {
-          "date": "2023-11-20",
-          "value": "$95,000",
-          "type": "Time and materials",
-          "project": "Cardano smart contract audit",
-          "duration": "3 months"
-        }
-      ],
-      "contactInfo": {
-        "email": "contracts@techforge.io",
-        "phone": "+1-555-0100",
-        "website": "techforge.io"
-      },
-      "status": "approved",
-      "notes": "Highly reliable for blockchain projects. Strong Rust expertise. Prefers fixed-price contracts.",
-      "rating": "4.8/5"
-    },
-    {
-      "id": "vendor002",
-      "name": "CloudScale Engineering",
-      "skills": ["DevOps", "Cloud infrastructure", "Kubernetes", "AWS", "System architecture"],
-      "pastProjects": ["Infrastructure Modernization", "Leos deployment"],
+      "name": "Polar Refrigeration Services",
+      "skills": ["Carrier Vector 8500 repair", "Carrier Vector 8600 repair", "Compressor replacement", "Evaporator coil service", "Refrigerant recharge", "Reefer preventive maintenance"],
+      "pastProjects": ["Compressor replacement on RTL-1004", "Quarterly PM contract for 8 trailers", "Emergency reefer rebuild for Maple Logistics"],
       "averageDiscount": "5%",
       "contracts": [
         {
-          "date": "2024-08-01",
-          "value": "$220,000",
-          "type": "Time and materials",
-          "project": "Infrastructure modernization",
+          "date": "2026-01-12",
+          "value": "$48,000",
+          "type": "Service agreement",
+          "project": "Annual PM contract, 8 trailers",
           "duration": "12 months"
+        },
+        {
+          "date": "2025-09-20",
+          "value": "$12,500",
+          "type": "Repair invoice",
+          "project": "RTL-1004 compressor replacement",
+          "duration": "5 days"
         }
       ],
       "contactInfo": {
-        "email": "sales@cloudscale.com",
-        "phone": "+1-555-0200",
-        "website": "cloudscale.com"
+        "email": "service@polarrefrig.ca",
+        "phone": "+1-905-555-0140",
+        "website": "polarrefrig.ca"
       },
       "status": "approved",
-      "notes": "Excellent for large infrastructure projects. Responsive team. Minimal discount flexibility.",
+      "notes": "Carrier Transicold authorized service center. 24/7 emergency response. Average repair turnaround 3-5 days.",
       "rating": "4.6/5"
     },
     {
-      "id": "vendor003",
-      "name": "Creative Bloom Agency",
-      "skills": ["Marketing automation", "Campaign management", "Content creation", "Social media"],
-      "pastProjects": ["Q4 Campaign", "Brand Partnership Program", "Brand Refresh Initiative"],
-      "averageDiscount": "10%",
+      "id": "vendor002",
+      "name": "Thermal Edge Mobile Service",
+      "skills": ["Mobile reefer repair", "Roadside reefer service", "Thermo King authorized service", "Refrigerant top-up", "Compressor diagnostics", "On-route emergency repair"],
+      "pastProjects": ["Roadside compressor failure RTL-1008 on I-94", "Emergency rebuild on I-90 for Northern Foods load"],
+      "averageDiscount": "0%",
       "contracts": [
         {
-          "date": "2024-09-10",
-          "value": "$150,000",
-          "type": "Fixed price",
-          "project": "Q4 Marketing Campaign",
-          "duration": "4 months"
-        },
-        {
-          "date": "2024-02-05",
-          "value": "$80,000",
-          "type": "Fixed price",
-          "project": "Brand Refresh Initiative",
-          "duration": "3 months"
+          "date": "2025-11-08",
+          "value": "$8,400",
+          "type": "Per-incident invoice",
+          "project": "RTL-1008 roadside compressor failure",
+          "duration": "1 day"
         }
       ],
       "contactInfo": {
-        "email": "partnerships@creativebloom.com",
-        "phone": "+1-555-0300",
-        "website": "creativebloom.com"
+        "email": "dispatch@thermaledge.ca",
+        "phone": "+1-800-555-0220",
+        "website": "thermaledge.ca"
       },
       "status": "approved",
-      "notes": "Great for marketing campaigns. Very flexible on pricing. Quick turnaround times.",
+      "notes": "Mobile-only service across Ontario, Quebec, and Eastern US. Premium emergency pricing but fastest roadside response. No annual discount but flat rate per incident.",
+      "rating": "4.5/5"
+    },
+    {
+      "id": "vendor003",
+      "name": "Northbridge Trailer Sales",
+      "skills": ["New reefer trailers", "Used reefer trailers", "Utility trailer dealer", "Trailer financing", "Trade-in evaluations", "53-foot reefer trailers"],
+      "pastProjects": ["Fleet expansion 4-unit purchase 2024", "Used trailer sale to Apex Distribution", "RTL-1015 new unit delivery"],
+      "averageDiscount": "6%",
+      "contracts": [
+        {
+          "date": "2025-12-02",
+          "value": "$185,000",
+          "type": "Purchase order",
+          "project": "RTL-1015 new Great Dane Everest CL",
+          "duration": "Delivered 2026-01-08"
+        },
+        {
+          "date": "2024-06-15",
+          "value": "$720,000",
+          "type": "Purchase order",
+          "project": "4-unit fleet expansion (RTL-1001, 1005, 1009, 1012)",
+          "duration": "Delivered Q3 2024"
+        }
+      ],
+      "contactInfo": {
+        "email": "sales@northbridgetrailer.com",
+        "phone": "+1-905-555-0310",
+        "website": "northbridgetrailer.com"
+      },
+      "status": "approved",
+      "notes": "Authorized Utility Trailer dealer in southern Ontario. Volume pricing tiers above 3 units. Trade-in program for older trailers.",
       "rating": "4.7/5"
     },
     {
       "id": "vendor004",
-      "name": "DataFlow Analytics",
-      "skills": ["Data analysis", "Business intelligence", "Python", "Data visualization", "Reporting"],
-      "pastProjects": ["Vendor Performance Tracking", "Cost Analysis"],
-      "averageDiscount": "7%",
-      "contracts": [
-        {
-          "date": "2024-06-15",
-          "value": "$65,000",
-          "type": "Time and materials",
-          "project": "Vendor performance analytics platform",
-          "duration": "5 months"
-        }
-      ],
-      "contactInfo": {
-        "email": "hello@dataflow.io",
-        "phone": "+1-555-0400",
-        "website": "dataflow.io"
-      },
-      "status": "approved",
-      "notes": "Strong data expertise. Good for procurement analytics. Reasonable pricing.",
-      "rating": "4.5/5"
-    },
-    {
-      "id": "vendor005",
-      "name": "Nexus Software Group",
-      "skills": ["Full-stack development", "React", "Node.js", "Mobile development", "API integration"],
-      "pastProjects": ["Mobile App Redesign", "Internal tools"],
-      "averageDiscount": "6%",
-      "contracts": [
-        {
-          "date": "2024-07-20",
-          "value": "$195,000",
-          "type": "Fixed price",
-          "project": "Mobile app redesign",
-          "duration": "8 months"
-        }
-      ],
-      "contactInfo": {
-        "email": "contracts@nexussoftware.com",
-        "phone": "+1-555-0500",
-        "website": "nexussoftware.com"
-      },
-      "status": "approved",
-      "notes": "Solid full-stack team. Good for web and mobile projects. Prefers agile contracts.",
-      "rating": "4.4/5"
-    },
-    {
-      "id": "vendor006",
-      "name": "Quantum Rust Labs",
-      "skills": ["Rust engineers", "Systems programming", "Performance optimization", "Embedded systems"],
-      "pastProjects": ["Leos", "Performance optimization"],
-      "averageDiscount": "9%",
-      "contracts": [
-        {
-          "date": "2024-03-10",
-          "value": "$120,000",
-          "type": "Time and materials",
-          "project": "Leos performance optimization",
-          "duration": "4 months"
-        }
-      ],
-      "contactInfo": {
-        "email": "team@quantumrust.dev",
-        "phone": "+1-555-0600",
-        "website": "quantumrust.dev"
-      },
-      "status": "approved",
-      "notes": "Specialized Rust expertise. Small but highly skilled team. Open to negotiation.",
-      "rating": "4.9/5"
-    },
-    {
-      "id": "vendor007",
-      "name": "BrandWorks Studio",
-      "skills": ["Graphic design", "Brand strategy", "Video production", "UI/UX design"],
-      "pastProjects": ["Brand Refresh Initiative", "Design System 2.0"],
+      "name": "CoolHaul Parts Direct",
+      "skills": ["Reefer compressor parts", "Evaporator fans", "Carrier Vector parts", "Thermo King parts", "Refrigerant filters", "Heat exchangers", "Reefer electrical components"],
+      "pastProjects": ["Bulk compressor order Q4 2025", "Quarterly Carrier parts standing order"],
       "averageDiscount": "12%",
       "contracts": [
         {
-          "date": "2024-04-01",
-          "value": "$75,000",
-          "type": "Fixed price",
-          "project": "Brand identity refresh",
-          "duration": "2 months"
+          "date": "2025-10-30",
+          "value": "$22,800",
+          "type": "Parts order",
+          "project": "Bulk compressor and evaporator parts",
+          "duration": "Delivered 5 days"
         }
       ],
       "contactInfo": {
-        "email": "hello@brandworks.design",
-        "phone": "+1-555-0700",
-        "website": "brandworks.design"
+        "email": "orders@coolhaulparts.com",
+        "phone": "+1-877-555-0440",
+        "website": "coolhaulparts.com"
       },
       "status": "approved",
-      "notes": "Creative team with strong portfolio. Generous discount policy. Fast iteration cycles.",
+      "notes": "Best pricing on Carrier Vector and Thermo King OEM parts. Free shipping over 500 dollars. Same-day shipping if ordered before 2pm ET.",
+      "rating": "4.4/5"
+    },
+    {
+      "id": "vendor005",
+      "name": "Maple Heavy-Duty Parts",
+      "skills": ["Brake drums", "Brake chambers", "Axle bearings", "LED trailer lights", "Air suspension parts", "Landing gear", "DOT-required components", "ABS modules"],
+      "pastProjects": ["10-unit fleet brake refresh Q1 2026", "Suspension rebuild RTL-1011", "Landing gear replacement RTL-1013"],
+      "averageDiscount": "8%",
+      "contracts": [
+        {
+          "date": "2026-02-14",
+          "value": "$31,200",
+          "type": "Parts order",
+          "project": "10-unit brake refresh program",
+          "duration": "Delivered over 4 weeks"
+        }
+      ],
+      "contactInfo": {
+        "email": "fleet@maplehd.ca",
+        "phone": "+1-905-555-0550",
+        "website": "maplehd.ca"
+      },
+      "status": "approved",
+      "notes": "Full-line heavy-duty trailer parts wholesaler. Same-day pickup in GTA. Fleet account pricing.",
+      "rating": "4.5/5"
+    },
+    {
+      "id": "vendor006",
+      "name": "Continental Fleet Tire Co.",
+      "skills": ["Commercial truck tires", "Trailer tires", "On-site tire replacement", "Mounting and balancing", "Bridgestone authorized", "Michelin authorized", "Tire pressure monitoring"],
+      "pastProjects": ["Fleet-wide tire rotation Q1 2026", "Roadside service RTL-1006", "Annual tire replacement program"],
+      "averageDiscount": "7%",
+      "contracts": [
+        {
+          "date": "2026-01-20",
+          "value": "$54,600",
+          "type": "Annual contract",
+          "project": "Fleet tire supply and rotation",
+          "duration": "12 months"
+        }
+      ],
+      "contactInfo": {
+        "email": "fleet@continentaltire.ca",
+        "phone": "+1-905-555-0660",
+        "website": "continentaltire.ca"
+      },
+      "status": "approved",
+      "notes": "On-site mobile tire service within 80 km of Toronto. Volume pricing on fleet contracts. Tire rotation included in annual deal.",
+      "rating": "4.7/5"
+    },
+    {
+      "id": "vendor007",
+      "name": "Apex Retread Services",
+      "skills": ["Tire retreading", "Used tire inspection", "Retread warranty service", "Bandag-process retreading", "Casing inspection"],
+      "pastProjects": ["100-tire retread contract Q4 2025", "Recap program for trailer position tires"],
+      "averageDiscount": "15%",
+      "contracts": [
+        {
+          "date": "2025-11-15",
+          "value": "$18,400",
+          "type": "Service order",
+          "project": "100-tire retread program",
+          "duration": "Completed over 6 weeks"
+        }
+      ],
+      "contactInfo": {
+        "email": "service@apexretread.ca",
+        "phone": "+1-905-555-0770",
+        "website": "apexretread.ca"
+      },
+      "status": "approved",
+      "notes": "Bandag-certified retreader. About 40 percent savings vs new tires. 12-month tread warranty. Best value for trailer position tires.",
       "rating": "4.6/5"
     },
     {
       "id": "vendor008",
-      "name": "SecureChain Auditors",
-      "skills": ["Security auditing", "Smart contract review", "Penetration testing", "Compliance"],
-      "pastProjects": ["Cardano integration", "Security assessment"],
-      "averageDiscount": "3%",
+      "name": "WayPoint Telematics",
+      "skills": ["GPS fleet tracking", "Reefer temperature monitoring", "Door sensor monitoring", "Geofencing", "ELD compliance", "Fleet dashboard software", "Temperature excursion alerts"],
+      "pastProjects": ["Fleet-wide telematics rollout 2024", "Reefer monitoring integration for all 15 units"],
+      "averageDiscount": "10%",
       "contracts": [
         {
-          "date": "2024-10-05",
-          "value": "$140,000",
-          "type": "Fixed price",
-          "project": "Comprehensive security audit",
-          "duration": "6 weeks"
+          "date": "2024-04-01",
+          "value": "$13,500",
+          "type": "Subscription",
+          "project": "Fleet-wide telematics, 15 trailers",
+          "duration": "Renews annually at 75 dollars per trailer per month"
         }
       ],
       "contactInfo": {
-        "email": "audits@securechain.io",
-        "phone": "+1-555-0800",
-        "website": "securechain.io"
+        "email": "support@waypointtelematics.com",
+        "phone": "+1-888-555-0880",
+        "website": "waypointtelematics.com"
       },
       "status": "approved",
-      "notes": "Premium security firm. Limited discount availability. Industry-leading expertise.",
-      "rating": "5.0/5"
-    },
-    {
-      "id": "vendor009",
-      "name": "AutomateFlow Systems",
-      "skills": ["Marketing automation", "CRM integration", "Workflow automation", "Salesforce", "HubSpot"],
-      "pastProjects": ["Marketing automation platform"],
-      "averageDiscount": "8%",
-      "contracts": [
-        {
-          "date": "2024-01-15",
-          "value": "$85,000",
-          "type": "Time and materials",
-          "project": "Marketing automation setup",
-          "duration": "3 months"
-        }
-      ],
-      "contactInfo": {
-        "email": "sales@automateflow.com",
-        "phone": "+1-555-0900",
-        "website": "automateflow.com"
-      },
-      "status": "approved",
-      "notes": "Specialists in marketing tech. Good for integration projects. Fair pricing.",
-      "rating": "4.3/5"
-    },
-    {
-      "id": "vendor010",
-      "name": "FrontEnd Masters",
-      "skills": ["Frontend development", "React", "Vue.js", "TypeScript", "UI implementation"],
-      "pastProjects": ["Design System 2.0", "Mobile App Redesign"],
-      "averageDiscount": "7%",
-      "contracts": [
-        {
-          "date": "2024-05-20",
-          "value": "$105,000",
-          "type": "Fixed price",
-          "project": "Design system implementation",
-          "duration": "5 months"
-        }
-      ],
-      "contactInfo": {
-        "email": "projects@frontendmasters.io",
-        "phone": "+1-555-1000",
-        "website": "frontendmasters.io"
-      },
-      "status": "approved",
-      "notes": "Strong frontend expertise. Great for design system work. Collaborative approach.",
-      "rating": "4.7/5"
-    },
-    {
-      "id": "vendor011",
-      "name": "Global Content Collective",
-      "skills": ["Content strategy", "Technical writing", "Blog content", "Documentation", "SEO"],
-      "pastProjects": ["Q4 Campaign", "Content Strategy"],
-      "averageDiscount": "11%",
-      "contracts": [
-        {
-          "date": "2024-07-01",
-          "value": "$45,000",
-          "type": "Time and materials",
-          "project": "Content creation for Q4 campaign",
-          "duration": "4 months"
-        }
-      ],
-      "contactInfo": {
-        "email": "team@globalcontent.co",
-        "phone": "+1-555-1100",
-        "website": "globalcontent.co"
-      },
-      "status": "approved",
-      "notes": "Versatile content team. Good rates. Fast turnaround on blog posts and social content.",
+      "notes": "Cloud dashboard sends alerts on temperature excursions and unauthorized door openings. Per-trailer monthly pricing. Discount applies above 10 units.",
       "rating": "4.4/5"
     },
     {
-      "id": "vendor012",
-      "name": "TestPro Quality Assurance",
-      "skills": ["QA testing", "Test automation", "Performance testing", "Mobile testing"],
-      "pastProjects": ["Mobile App Redesign", "Quality assurance"],
+      "id": "vendor009",
+      "name": "Cardinal Refrigerant Supply",
+      "skills": ["R-452A refrigerant", "R-404A refrigerant", "Refrigerant recovery", "EPA Section 608 certified handling", "Bulk drum delivery"],
+      "pastProjects": ["Q1 2026 bulk refrigerant order", "Quarterly drum delivery contract"],
       "averageDiscount": "6%",
       "contracts": [
         {
-          "date": "2024-09-01",
-          "value": "$55,000",
-          "type": "Time and materials",
-          "project": "Mobile app QA testing",
-          "duration": "3 months"
+          "date": "2026-01-10",
+          "value": "$9,200",
+          "type": "Bulk order",
+          "project": "Q1 2026 refrigerant supply",
+          "duration": "Quarterly recurring"
         }
       ],
       "contactInfo": {
-        "email": "contracts@testpro.com",
-        "phone": "+1-555-1200",
-        "website": "testpro.com"
+        "email": "orders@cardinalrefrigerant.com",
+        "phone": "+1-800-555-0990",
+        "website": "cardinalrefrigerant.com"
       },
       "status": "approved",
-      "notes": "Thorough QA process. Good for mobile and web testing. Detailed bug reporting.",
+      "notes": "Bulk-only supplier, 50-pound drums minimum. EPA Section 608 certified handling. Reliable supply during industry shortages.",
       "rating": "4.5/5"
+    },
+    {
+      "id": "vendor010",
+      "name": "GreatLakes Fleet Wash",
+      "skills": ["Trailer exterior wash", "Reefer interior sanitation", "Food-grade cleaning", "Pressure washing", "Detailing", "Allergen-protocol sanitation"],
+      "pastProjects": ["Weekly fleet wash standing order", "Food-grade sanitation between hauls for Northern Foods Co."],
+      "averageDiscount": "12%",
+      "contracts": [
+        {
+          "date": "2025-08-01",
+          "value": "$28,800",
+          "type": "Standing order",
+          "project": "Weekly fleet wash, 15 trailers",
+          "duration": "12 months"
+        }
+      ],
+      "contactInfo": {
+        "email": "schedule@greatlakesfleetwash.ca",
+        "phone": "+1-905-555-1010",
+        "website": "greatlakesfleetwash.ca"
+      },
+      "status": "approved",
+      "notes": "Food-grade interior sanitation certification for reefer boxes between frozen-food hauls. Mobile or yard-pickup service.",
+      "rating": "4.6/5"
+    },
+    {
+      "id": "vendor011",
+      "name": "SureRoad Roadside Network",
+      "skills": ["24/7 commercial roadside assistance", "Heavy-duty towing", "Mobile tire service", "Mobile jump-start", "Trailer recovery", "Cross-border coverage"],
+      "pastProjects": ["RTL-1002 roadside tire repair I-90", "Recovery and tow for failed landing gear"],
+      "averageDiscount": "0%",
+      "contracts": [
+        {
+          "date": "2025-12-18",
+          "value": "$1,850",
+          "type": "Per-incident",
+          "project": "Landing gear recovery and tow",
+          "duration": "Same-day"
+        }
+      ],
+      "contactInfo": {
+        "email": "dispatch@sureroad.com",
+        "phone": "+1-855-555-1111",
+        "website": "sureroad.com"
+      },
+      "status": "approved",
+      "notes": "North American network coverage. Per-incident pricing, no monthly fee. Average response 45 minutes in urban areas, 90 minutes rural.",
+      "rating": "4.3/5"
+    },
+    {
+      "id": "vendor012",
+      "name": "Hayward Fleet Insurance Brokers",
+      "skills": ["Commercial fleet insurance", "Cargo insurance", "Reefer breakdown coverage", "Liability policies", "Surety bonds", "Cross-border coverage"],
+      "pastProjects": ["Annual fleet policy renewal 2026", "Surety bond for Apex Distribution lease arrangement"],
+      "averageDiscount": "Negotiable",
+      "contracts": [
+        {
+          "date": "2026-03-01",
+          "value": "$94,200",
+          "type": "Annual policy",
+          "project": "Fleet liability and cargo coverage, 15 trailers",
+          "duration": "12 months"
+        }
+      ],
+      "contactInfo": {
+        "email": "brokers@haywardfleet.ca",
+        "phone": "+1-416-555-1212",
+        "website": "haywardfleet.ca"
+      },
+      "status": "approved",
+      "notes": "Specializes in refrigerated fleet operators. Reefer breakdown rider available. Handles cross-border policy work for US routes.",
+      "rating": "4.7/5"
     }
   ]
 }
