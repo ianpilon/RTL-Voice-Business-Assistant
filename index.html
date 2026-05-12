@@ -565,12 +565,14 @@
           <button class="tab active" data-tab="trailers" onclick="switchTab('trailers')">Reefer Trailers <span class="count" id="trailerCount">…</span></button>
           <button class="tab" data-tab="vendors" onclick="switchTab('vendors')">Vendors <span class="count" id="vendCount">…</span></button>
           <button class="tab" data-tab="policies" onclick="switchTab('policies')">Policy Docs <span class="count" id="polCount">…</span></button>
+          <button class="tab" data-tab="requests" onclick="switchTab('requests')">Requests</button>
         </div>
       </div>
       <div class="tool-body" style="display: block;">
         <div id="dataPanel-trailers" class="data-panel"></div>
         <div id="dataPanel-vendors" class="data-panel" style="display: none;"></div>
         <div id="dataPanel-policies" class="data-panel" style="display: none;"></div>
+        <div id="dataPanel-requests" class="data-panel" style="display: none;"></div>
       </div>
     </div>
 
@@ -578,9 +580,9 @@
       <div class="layout-right">
 
     <!-- Tool 1: Reefer Trailer Asset Lookup -->
-    <div class="tool">
+    <div class="tool" id="tool-trailers">
       <div class="tool-header">
-        <h3>1. Reefer Trailer Asset Lookup</h3>
+        <h3>Reefer Trailer Asset Lookup</h3>
         <div class="tech">tool: <code>lookup_asset</code> &nbsp;·&nbsp; endpoint: <code>POST /lookup-asset</code></div>
       </div>
       <div class="tool-body">
@@ -616,9 +618,9 @@
     </div>
 
     <!-- Tool 2: Policy Search -->
-    <div class="tool">
+    <div class="tool" id="tool-policies" style="display: none;">
       <div class="tool-header">
-        <h3>2. Procurement Policy Search (RAG)</h3>
+        <h3>Procurement Policy Search (RAG)</h3>
         <div class="tech">tool: <code>search_procurement_policies</code> &nbsp;·&nbsp; endpoint: <code>POST /search-policies</code></div>
       </div>
       <div class="tool-body">
@@ -655,9 +657,9 @@
     </div>
 
     <!-- Tool 3: Vendor Search -->
-    <div class="tool">
+    <div class="tool" id="tool-vendors" style="display: none;">
       <div class="tool-header">
-        <h3>3. Vendor History Search</h3>
+        <h3>Vendor History Search</h3>
         <div class="tech">tool: <code>search_vendor_history</code> &nbsp;·&nbsp; endpoint: <code>POST /search-vendors</code></div>
       </div>
       <div class="tool-body">
@@ -694,9 +696,9 @@
     </div>
 
     <!-- Tool 4: Validate Request -->
-    <div class="tool">
+    <div class="tool" id="tool-requests" style="display: none;">
       <div class="tool-header">
-        <h3>4. Request Validation</h3>
+        <h3>Request Validation</h3>
         <div class="tech">tool: <code>validate_request</code> &nbsp;·&nbsp; endpoint: <code>POST /validate-request</code></div>
       </div>
       <div class="tool-body">
@@ -941,10 +943,15 @@
     checkHealth();
 
     // ---- Data Browser ----
+    const TABS = ["trailers", "vendors", "policies", "requests"];
+
     function switchTab(name) {
       document.querySelectorAll(".tab").forEach(t => t.classList.toggle("active", t.dataset.tab === name));
-      ["trailers", "vendors", "policies"].forEach(t => {
-        document.getElementById(`dataPanel-${t}`).style.display = (t === name) ? "block" : "none";
+      TABS.forEach(t => {
+        const dataPanel = document.getElementById(`dataPanel-${t}`);
+        if (dataPanel) dataPanel.style.display = (t === name) ? "block" : "none";
+        const toolEl = document.getElementById(`tool-${t}`);
+        if (toolEl) toolEl.style.display = (t === name) ? "" : "none";
       });
     }
 
@@ -1086,9 +1093,57 @@
       }
     }
 
+    function loadRequests() {
+      const panel = document.getElementById("dataPanel-requests");
+      panel.innerHTML = `
+        <p style="color:var(--muted);font-size:13px;margin:0 0 12px;">
+          The AI only routes <strong>complete</strong> procurement requests. Incomplete requests get rejected at validation time so they don't reach the procurement team half-formed.
+        </p>
+
+        <div class="data-card">
+          <div class="name">Required fields</div>
+          <div class="subtitle">Every request must include these four before validation passes:</div>
+          ${row("Budget number", "Charge code (e.g., BUD-2026-MAINT-014)")}
+          ${row("Milestones", "Timeline or service-by date")}
+          ${row("Costs", "Estimated total in CAD")}
+          ${row("Description", "What's being requested and what it's for")}
+          ${row("Deadline", '<span style="color:var(--muted);">Optional but recommended</span>')}
+        </div>
+
+        <div class="data-card">
+          <div class="name">Approval thresholds (CAD)</div>
+          ${row("Under 5,000", "Shop Supervisor")}
+          ${row("5,000–25,000", "Fleet Manager")}
+          ${row("25,000–100,000", "Controller")}
+          ${row("100,000–500,000", "CFO")}
+          ${row("Over 500,000", "CEO with board notification")}
+          ${row("Roadside emergency", "Dispatch may authorize up to 10,000 CAD if load is at risk")}
+        </div>
+
+        <div class="data-card">
+          <div class="name">Example complete request</div>
+          ${row("Budget", "BUD-2026-MAINT-014")}
+          ${row("Milestones", "Delivery within 2 weeks")}
+          ${row("Costs", "$22,800")}
+          ${row("Description", "Bulk Carrier Vector compressor and evaporator parts for PM program")}
+        </div>
+
+        <div class="data-card">
+          <div class="name">Common rejection reasons</div>
+          <ul style="margin:0;padding-left:18px;font-size:13px;">
+            <li>Missing budget code</li>
+            <li>No cost estimate provided</li>
+            <li>Description too vague to evaluate</li>
+            <li>Timeline missing for time-sensitive procurement</li>
+          </ul>
+        </div>
+      `;
+    }
+
     loadTrailers();
     loadVendors();
     loadPolicies();
+    loadRequests();
   </script>
 </body>
 </html>
