@@ -4,6 +4,11 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>RTL Voice Procurement System — Testing Tool</title>
+  <script type="module">
+    import Vapi from "https://esm.sh/@vapi-ai/web";
+    window.VapiSDK = Vapi;
+    window.dispatchEvent(new Event("vapi-sdk-ready"));
+  </script>
   <style>
     :root {
       --bg: #f4f6f8;
@@ -78,6 +83,77 @@
       font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
       color: var(--accent-dark);
       font-weight: 600;
+    }
+    .call-section {
+      margin: 8px 0 14px;
+      padding: 14px 16px;
+      background: #eef4ff;
+      border-radius: 8px;
+      border: 1px solid #c7dcfb;
+    }
+    .call-btn {
+      background: var(--accent);
+      color: white;
+      border: none;
+      padding: 10px 22px;
+      font-size: 15px;
+      font-weight: 600;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: background 0.15s;
+    }
+    .call-btn:hover { background: var(--accent-dark); }
+    .call-btn.connecting { background: #c97a0a; cursor: wait; }
+    .call-btn.active { background: var(--error); }
+    .call-btn.active:hover { background: #8e2820; }
+    .call-btn.ended { background: var(--muted); cursor: default; }
+    .call-btn:disabled { background: #9aa5b1; cursor: not-allowed; }
+    .call-status {
+      margin: 8px 0 0;
+      font-size: 13px;
+      color: var(--muted);
+      min-height: 18px;
+    }
+    .call-status.error { color: var(--error); }
+    .transcript-panel {
+      margin-top: 12px;
+      background: white;
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      overflow: hidden;
+    }
+    .transcript-header {
+      padding: 8px 12px;
+      background: #fafbfc;
+      border-bottom: 1px solid var(--border);
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      color: var(--muted);
+      font-weight: 600;
+    }
+    .transcript-lines {
+      padding: 10px 14px;
+      max-height: 200px;
+      overflow-y: auto;
+      font-size: 13px;
+      line-height: 1.55;
+    }
+    .transcript-line { margin-bottom: 6px; }
+    .transcript-line.user { color: var(--text); }
+    .transcript-line.assistant { color: var(--accent-dark); }
+    .transcript-role {
+      display: inline-block;
+      min-width: 36px;
+      font-weight: 600;
+      margin-right: 6px;
+    }
+    .transcript-empty {
+      padding: 16px;
+      text-align: center;
+      color: var(--muted);
+      font-size: 13px;
+      font-style: italic;
     }
     .tool {
       background: var(--card);
@@ -391,8 +467,17 @@
 
     <div class="intro">
       <h2>How to test the voice AI</h2>
-      <p><strong>Option 1 — Real phone call:</strong> Dial <span class="phone">+1 (930) 254-9264</span>. The AI greets you with <em>"Hello, you've reached the RTL Procurement Office."</em> Try the example phrases below.</p>
-      <p><strong>Option 2 — Verify the data directly:</strong> Each section below has a live tester that hits the same backend endpoint the voice AI uses. If the tester returns the right data, the AI can use it on a call.</p>
+      <p><strong>Option 1 — Call from your browser:</strong> Click the button below. Your browser will ask for mic permission (one time), then connect you directly to the AI through your speakers.</p>
+      <div class="call-section">
+        <button id="callBtn" class="call-btn" onclick="toggleCall()">📞 Call AI in browser</button>
+        <p class="call-status" id="callStatus"></p>
+        <div id="transcriptPanel" class="transcript-panel" style="display: none;">
+          <div class="transcript-header">Live transcript</div>
+          <div id="transcriptLines" class="transcript-lines"></div>
+        </div>
+      </div>
+      <p><strong>Option 2 — Real phone call:</strong> Dial <span class="phone">+1 (930) 254-9264</span>. The AI greets you with <em>"Hello, you've reached the RTL Procurement Office."</em></p>
+      <p><strong>Option 3 — Verify the data directly:</strong> Each section below has a live tester that hits the same backend endpoint the voice AI uses. If the tester returns the right data, the AI can use it on a call.</p>
     </div>
 
     <div class="footer-note">
@@ -590,6 +675,112 @@
 
   <script>
     const API = "https://rtl-procurement-mcp.onrender.com";
+    const VAPI_PUBLIC_KEY = "c7d496d8-e4fb-44fe-9ffe-755d41ae32c3";
+    const VAPI_ASSISTANT_ID = "d42c88a5-1e26-40b9-8fbb-8f41e5b9a2fc";
+
+    // ---- Vapi Web Call ----
+    let vapi = null;
+    let callState = "idle"; // idle | connecting | active | ended
+
+    function ensureVapiReady() {
+      if (window.VapiSDK) return Promise.resolve();
+      return new Promise((resolve, reject) => {
+        const timer = setTimeout(() => reject(new Error("Vapi SDK failed to load (network or CDN issue)")), 15000);
+        window.addEventListener("vapi-sdk-ready", () => { clearTimeout(timer); resolve(); }, { once: true });
+      });
+    }
+
+    function initVapi() {
+      if (vapi) return vapi;
+      vapi = new window.VapiSDK(VAPI_PUBLIC_KEY);
+
+      vapi.on("call-start", () => { callState = "active"; updateCallUI(); });
+      vapi.on("call-end",   () => {
+        callState = "ended"; updateCallUI();
+        setTimeout(() => { if (callState === "ended") { callState = "idle"; updateCallUI(); } }, 4000);
+      });
+      vapi.on("error", (err) => {
+        console.error("Vapi error:", err);
+        showCallError(err?.message || err?.error?.message || "Call error — see console");
+        callState = "idle"; updateCallUI();
+      });
+      vapi.on("message", (msg) => {
+        if (msg?.type === "transcript" && msg?.transcriptType === "final" && msg?.transcript) {
+          addTranscriptLine(msg.role === "user" ? "user" : "assistant", msg.transcript);
+        }
+      });
+
+      return vapi;
+    }
+
+    async function toggleCall() {
+      if (callState === "active") { vapi?.stop(); return; }
+      if (callState === "connecting") return;
+
+      callState = "connecting"; updateCallUI();
+      clearTranscript();
+      try {
+        await ensureVapiReady();
+        initVapi();
+        await vapi.start(VAPI_ASSISTANT_ID);
+      } catch (err) {
+        console.error(err);
+        showCallError(err?.message || "Failed to start call");
+        callState = "idle"; updateCallUI();
+      }
+    }
+
+    function updateCallUI() {
+      const btn = document.getElementById("callBtn");
+      const status = document.getElementById("callStatus");
+      const panel = document.getElementById("transcriptPanel");
+      status.classList.remove("error");
+
+      if (callState === "idle") {
+        btn.textContent = "📞 Call AI in browser";
+        btn.className = "call-btn";
+        status.textContent = "";
+      } else if (callState === "connecting") {
+        btn.textContent = "Connecting…";
+        btn.className = "call-btn connecting";
+        status.textContent = "Asking for mic permission and waking the AI (first call after sleep can take ~30s)…";
+      } else if (callState === "active") {
+        btn.textContent = "🛑 End call";
+        btn.className = "call-btn active";
+        status.textContent = "Connected — speak into your mic. Mute your speakers if you get feedback.";
+        panel.style.display = "block";
+        if (!document.getElementById("transcriptLines").children.length) {
+          document.getElementById("transcriptLines").innerHTML = '<div class="transcript-empty">Waiting for the first words…</div>';
+        }
+      } else if (callState === "ended") {
+        btn.textContent = "Call ended";
+        btn.className = "call-btn ended";
+        status.textContent = "";
+      }
+    }
+
+    function addTranscriptLine(role, text) {
+      const lines = document.getElementById("transcriptLines");
+      const empty = lines.querySelector(".transcript-empty");
+      if (empty) empty.remove();
+      const line = document.createElement("div");
+      line.className = "transcript-line " + role;
+      line.innerHTML = `<span class="transcript-role">${role === "user" ? "You:" : "AI:"}</span> ${escapeHtml(text)}`;
+      lines.appendChild(line);
+      lines.scrollTop = lines.scrollHeight;
+    }
+
+    function clearTranscript() {
+      document.getElementById("transcriptLines").innerHTML = "";
+    }
+
+    function showCallError(msg) {
+      const status = document.getElementById("callStatus");
+      status.classList.add("error");
+      status.textContent = "Error: " + msg;
+    }
+
+    window.toggleCall = toggleCall;
 
     function fill(id, value) {
       document.getElementById(id).value = value;
