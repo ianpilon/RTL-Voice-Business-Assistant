@@ -40,6 +40,19 @@
     header .container { max-width: 1100px; margin: 0 auto; }
     header h1 { margin: 0 0 8px; font-size: 28px; font-weight: 600; }
     header p { margin: 0; opacity: 0.9; }
+    .header-row {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 24px;
+      flex-wrap: wrap;
+    }
+    .header-text { flex: 1 1 auto; min-width: 0; }
+    .header-cta { flex: 0 0 auto; }
+    @media (max-width: 640px) {
+      .header-cta { width: 100%; }
+      .header-cta .call-btn { width: 100%; }
+    }
     .container { max-width: 1100px; margin: 0 auto; padding: 24px; }
     .status-bar {
       display: flex;
@@ -84,30 +97,51 @@
       color: var(--accent-dark);
       font-weight: 600;
     }
-    .call-section {
-      margin: 8px 0 14px;
-      padding: 14px 16px;
-      background: #eef4ff;
-      border-radius: 8px;
-      border: 1px solid #c7dcfb;
-    }
     .call-btn {
-      background: var(--accent);
-      color: white;
-      border: none;
+      background: white;
+      color: var(--accent-dark);
+      border: 2px solid white;
       padding: 10px 22px;
       font-size: 15px;
       font-weight: 600;
-      border-radius: 6px;
+      border-radius: 8px;
       cursor: pointer;
-      transition: background 0.15s;
+      transition: all 0.15s;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+      white-space: nowrap;
     }
-    .call-btn:hover { background: var(--accent-dark); }
-    .call-btn.connecting { background: #c97a0a; cursor: wait; }
-    .call-btn.active { background: var(--error); }
-    .call-btn.active:hover { background: #8e2820; }
-    .call-btn.ended { background: var(--muted); cursor: default; }
-    .call-btn:disabled { background: #9aa5b1; cursor: not-allowed; }
+    .call-btn:hover {
+      background: #eef4ff;
+      transform: translateY(-1px);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+    }
+    .call-btn.connecting {
+      background: #fff4dd;
+      color: #8a5306;
+      border-color: #fff4dd;
+      cursor: wait;
+    }
+    .call-btn.active {
+      background: var(--error);
+      color: white;
+      border-color: var(--error);
+    }
+    .call-btn.active:hover { background: #8e2820; border-color: #8e2820; }
+    .call-btn.ended {
+      background: rgba(255,255,255,0.15);
+      color: white;
+      border-color: rgba(255,255,255,0.4);
+      cursor: default;
+    }
+    .call-btn:disabled { opacity: 0.6; cursor: not-allowed; }
+    .call-banner {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 14px 24px;
+      background: #fff;
+      border-bottom: 1px solid var(--border);
+    }
+    .call-banner.active { background: #eef4ff; border-bottom-color: #c7dcfb; }
     .call-status {
       margin: 8px 0 0;
       font-size: 13px;
@@ -454,8 +488,15 @@
 <body>
   <header>
     <div class="container">
-      <h1>RTL Voice Procurement System</h1>
-      <p>Testing tool — verify what the voice AI can answer and what data it sees</p>
+      <div class="header-row">
+        <div class="header-text">
+          <h1>RTL Voice Procurement System</h1>
+          <p>Testing tool — verify what the voice AI can answer and what data it sees</p>
+        </div>
+        <div class="header-cta">
+          <button id="callBtn" class="call-btn" onclick="toggleCall()">📞 Call AI in browser</button>
+        </div>
+      </div>
       <div class="status-bar">
         <span class="pill" id="serverPill"><span class="dot"></span><span id="serverStatus">Checking server…</span></span>
         <span class="pill" id="dataPill"><span class="dot"></span><span id="dataStatus">Loading data counts…</span></span>
@@ -463,19 +504,19 @@
     </div>
   </header>
 
+  <div class="call-banner" id="callBanner" style="display: none;">
+    <p class="call-status" id="callStatus"></p>
+    <div id="transcriptPanel" class="transcript-panel" style="display: none;">
+      <div class="transcript-header">Live transcript</div>
+      <div id="transcriptLines" class="transcript-lines"></div>
+    </div>
+  </div>
+
   <div class="container">
 
     <div class="intro">
       <h2>How to test the voice AI</h2>
-      <p><strong>Option 1 — Call from your browser:</strong> Click the button below. Your browser will ask for mic permission (one time), then connect you directly to the AI through your speakers.</p>
-      <div class="call-section">
-        <button id="callBtn" class="call-btn" onclick="toggleCall()">📞 Call AI in browser</button>
-        <p class="call-status" id="callStatus"></p>
-        <div id="transcriptPanel" class="transcript-panel" style="display: none;">
-          <div class="transcript-header">Live transcript</div>
-          <div id="transcriptLines" class="transcript-lines"></div>
-        </div>
-      </div>
+      <p><strong>Option 1 — Call from your browser:</strong> Click the <em>"📞 Call AI in browser"</em> button in the top right. Your browser will ask for mic permission (one time), then connect you directly to the AI. A live transcript appears below the header during the call.</p>
       <p><strong>Option 2 — Real phone call:</strong> Dial <span class="phone">+1 (930) 254-9264</span>. The AI greets you with <em>"Hello, you've reached the RTL Procurement Office."</em></p>
       <p><strong>Option 3 — Verify the data directly:</strong> Each section below has a live tester that hits the same backend endpoint the voice AI uses. If the tester returns the right data, the AI can use it on a call.</p>
     </div>
@@ -734,20 +775,28 @@
       const btn = document.getElementById("callBtn");
       const status = document.getElementById("callStatus");
       const panel = document.getElementById("transcriptPanel");
+      const banner = document.getElementById("callBanner");
       status.classList.remove("error");
 
       if (callState === "idle") {
         btn.textContent = "📞 Call AI in browser";
         btn.className = "call-btn";
         status.textContent = "";
+        banner.style.display = "none";
+        banner.classList.remove("active");
+        panel.style.display = "none";
       } else if (callState === "connecting") {
         btn.textContent = "Connecting…";
         btn.className = "call-btn connecting";
         status.textContent = "Asking for mic permission and waking the AI (first call after sleep can take ~30s)…";
+        banner.style.display = "block";
+        banner.classList.remove("active");
       } else if (callState === "active") {
         btn.textContent = "🛑 End call";
         btn.className = "call-btn active";
         status.textContent = "Connected — speak into your mic. Mute your speakers if you get feedback.";
+        banner.style.display = "block";
+        banner.classList.add("active");
         panel.style.display = "block";
         if (!document.getElementById("transcriptLines").children.length) {
           document.getElementById("transcriptLines").innerHTML = '<div class="transcript-empty">Waiting for the first words…</div>';
@@ -755,7 +804,9 @@
       } else if (callState === "ended") {
         btn.textContent = "Call ended";
         btn.className = "call-btn ended";
-        status.textContent = "";
+        status.textContent = "Call ended.";
+        banner.style.display = "block";
+        banner.classList.remove("active");
       }
     }
 
