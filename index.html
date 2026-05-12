@@ -37,7 +37,7 @@
       color: white;
       padding: 32px 24px;
     }
-    header .container { max-width: 1100px; margin: 0 auto; }
+    header .container { max-width: 1300px; margin: 0 auto; }
     header h1 { margin: 0 0 8px; font-size: 28px; font-weight: 600; }
     header p { margin: 0; opacity: 0.9; }
     .header-row {
@@ -53,7 +53,33 @@
       .header-cta { width: 100%; }
       .header-cta .call-btn { width: 100%; }
     }
-    .container { max-width: 1100px; margin: 0 auto; padding: 24px; }
+    .container { max-width: 1300px; margin: 0 auto; padding: 24px; }
+    .call-banner { max-width: 1300px; }
+    .layout-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+      align-items: start;
+    }
+    .layout-left { position: sticky; top: 16px; }
+    .layout-left > .tool {
+      display: flex;
+      flex-direction: column;
+      max-height: calc(100vh - 32px);
+    }
+    .layout-left > .tool > .tool-body {
+      flex: 1;
+      overflow-y: auto;
+      min-height: 0;
+    }
+    .layout-right { min-width: 0; }
+    .layout-right > .tool:last-child { margin-bottom: 0; }
+    .layout-right .tool-body { grid-template-columns: 1fr; }
+    @media (max-width: 960px) {
+      .layout-grid { grid-template-columns: 1fr; }
+      .layout-left { position: static; }
+      .layout-left > .tool { max-height: none; }
+    }
     .status-bar {
       display: flex;
       gap: 12px;
@@ -525,6 +551,9 @@
       <strong>Cold-start note:</strong> The backend sleeps after 15 min of no traffic on Render's free tier. The first request after sleep takes ~30 seconds to wake up. The voice AI tools are set to wait 45 seconds, but if you hear a long pause on a call, that's why.
     </div>
 
+    <div class="layout-grid">
+      <div class="layout-left">
+
     <!-- Data Browser -->
     <div class="tool">
       <div class="tool-header">
@@ -544,6 +573,9 @@
         <div id="dataPanel-policies" class="data-panel" style="display: none;"></div>
       </div>
     </div>
+
+      </div><!-- /.layout-left -->
+      <div class="layout-right">
 
     <!-- Tool 1: Reefer Trailer Asset Lookup -->
     <div class="tool">
@@ -701,6 +733,9 @@
         </div>
       </div>
     </div>
+
+      </div><!-- /.layout-right -->
+    </div><!-- /.layout-grid -->
 
   </div>
 
