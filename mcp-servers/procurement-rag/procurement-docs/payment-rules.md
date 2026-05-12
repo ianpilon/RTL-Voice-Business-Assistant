@@ -3,333 +3,161 @@
 ## Standard Payment Terms
 
 ### Net 30 Policy
-IOG's standard payment terms are **Net 30**, meaning payment is due within 30 days of invoice receipt.
+RTL's standard payment term is Net 30 from invoice date. Net 30 applies to:
+- Reefer service invoices (PM contracts, repair invoices)
+- Parts purchases under existing MSAs
+- Tire and retread services
+- Fleet wash standing orders
+- Telematics subscriptions
+- Refrigerant supply orders
 
-**Invoice Requirements**:
-- Must include valid purchase order (PO) number
-- Detailed description of services/products
-- Correct billing address
-- W-9 on file with procurement
-- Submitted to: ap@iog.com
+### Net 60 for Capital Purchases
+Net 60 applies to:
+- New or used trailer purchases over 50,000 CAD
+- Long-tail parts orders (over 30,000 CAD) where vendor production lead times exceed 30 days
 
----
+### Per-Incident and Roadside
+Per-incident roadside and emergency reefer dispatch invoices are paid Net 15 in recognition of the smaller dollar amount and the vendor's exposure to dispatching on short notice without an existing contract.
 
-## Fixed Price Contract Payment Rules
+### Lease Payments to Customers
+Trailer lease invoices issued to RTL customers (e.g., Maple Logistics, Northern Foods Co., Apex Distribution) are billed monthly in advance, due on the 1st of the lease month with a 5-day grace period.
 
-### Upfront Payment Limitation
-**Maximum 20% upfront payment allowed** on fixed price contracts.
+## Upfront Payment Cap
 
-**Rationale**:
-- Protects IOG from vendor non-performance
-- Aligns payment with value delivery
-- Standard industry practice
-- CFO policy (effective 2024)
+### 20 Percent Maximum
+RTL policy caps upfront payments at 20 percent of total contract value. This protects against vendor non-performance and aligns with industry norms for reefer service contracts.
 
-**Exceptions**:
-- Requires CFO written approval
-- Must have strong business justification
-- Vendor financial stability verification required
-- Typically only for vendors with long IOG history
+### Exceptions
+Upfront payments above 20 percent require CFO written approval. Approved exceptions are typically:
+- Trailer purchase deposits (where the OEM requires a higher deposit to lock in build slots)
+- Bulk refrigerant orders during shortage periods (where suppliers require larger upfront commitment)
 
----
+### Never Permitted
+- 100 percent upfront payment for service contracts is never permitted regardless of approval
+- Upfront payments to unproven vendors with less than 12 months of approved status
 
-### Milestone-Based Payment Structure
+## Harmonized Sales Tax (HST)
 
-#### Required Elements:
-All fixed price contracts must have:
-- Minimum 3 milestones (maximum 7)
-- Clear, measurable deliverables for each milestone
-- Acceptance criteria defined
-- Timeline for each milestone
+### Ontario Rate
+The HST rate in Ontario is 13 percent (5 percent federal GST plus 8 percent Ontario provincial portion). HST is a value-added tax that RTL pays to vendors and recovers as Input Tax Credits (ITCs).
 
-####Example Milestone Structure ($150K project):
+### Required on Invoices
+All HST-registered Canadian vendors must include on their invoices:
+- Vendor's HST registration number (9 digits, plus RT suffix)
+- HST as a separate line item
+- Subtotal, HST amount, and grand total clearly itemized
 
-| Milestone | Deliverable | Amount | % |
-|-----------|-------------|--------|---|
-| Contract Signing | N/A | $30,000 | 20% |
-| Milestone 1 | Requirements complete | $22,500 | 15% |
-| Milestone 2 | Design approved | $30,000 | 20% |
-| Milestone 3 | Development complete | $37,500 | 25% |
-| Final Acceptance | Testing & deployment done | $30,000 | 20% |
+Invoices missing HST detail or HST registration numbers will be returned to the vendor and the payment clock will reset to the date of resubmission.
 
-**Total**: $150,000 (100%)
+### Non-HST Vendors
+Vendors not required to register for HST (typically very small businesses below the 30,000 CAD revenue threshold) do not collect HST. Invoices from these vendors should not include an HST line.
 
----
+### Cross-Border (US) Vendors
+US vendors do not collect HST. RTL self-assesses HST on imported goods at the border (handled by the customs broker). Cross-border service work performed in Canada by a US vendor may require the US vendor to register for HST if their Canadian revenue exceeds the threshold; refer questions to the controller.
 
-### Balloon Payment Rules
+## Currency
 
-**Definition**: A balloon payment is a larger final payment upon project completion.
+### Primary Currency: CAD
+All Canadian vendors invoice in Canadian dollars. RTL's accounting system records all transactions in CAD as the functional currency.
 
-**Allowed**: Yes, balloon payments are acceptable and often preferred.
+### USD for Cross-Border Vendors
+US-based vendors invoice in USD. The accounting system records the USD invoice plus the CAD equivalent using the Bank of Canada noon rate on the invoice date. USD invoices over 25,000 CAD equivalent require Controller pre-approval to manage FX exposure.
 
-**Typical Range**: 30-50% of total contract value
+### Mixed Currency Contracts
+Avoided wherever possible. If unavoidable (e.g., a US vendor with a Canadian subsidiary), the contract specifies which entity is invoicing and in which currency for each scope of work.
 
-**Benefits**:
-- Incentivizes vendor to complete project
-- Protects IOG investment
-- Aligns with value delivery
-- Reduces risk
+## Payment Methods
 
-**Example** ($200K project with balloon):
-- 20% ($40K) upfront
-- 15% ($30K) at milestone 1
-- 15% ($30K) at milestone 2  
-- 10% ($20K) at milestone 3
-- **40% ($80K) upon final acceptance** ← Balloon Payment
+### EFT (Electronic Funds Transfer) — Preferred
+- Default payment method for all approved vendors
+- Vendor provides void cheque or pre-authorized debit form during onboarding
+- Standard processing time: 2 to 3 business days after payment is released
+- No fee to RTL or vendor
 
----
+### Cheque
+- Available on request from vendors who cannot accept EFT
+- 7 to 10 business day processing time
+- Mailed to the vendor's remittance address on file
 
-### Payment Hold-backs
+### Wire Transfer
+- Used for cross-border USD payments and CAD payments over 100,000 CAD
+- Same-day or next-business-day processing
+- Vendor pays incoming wire fees (varies by bank)
 
-**Definition**: Percentage of payment withheld until final acceptance or warranty period.
+### Corporate Credit Card
+- Used only for small one-off purchases under 2,500 CAD where the vendor does not have a vendor account established
+- Requires Fleet Manager approval if over 500 CAD
+- Not permitted for recurring or contracted services
 
-**Standard Hold-back**: 10% for contracts >$100K
+## Invoice Requirements
+All vendor invoices must include:
+- RTL purchase order number (or MSA reference number)
+- Vendor name, HST registration number, and remittance address
+- Itemized line items with descriptions, quantities, and unit prices
+- HST line item, where applicable
+- Trailer unit number, when the work or part is trailer-specific
+- Service date or delivery date
+- Invoice date and invoice number
+- Total amount due
 
-**Release Conditions**:
-- All deliverables accepted
-- No outstanding issues
-- Warranty period complete (typically 30-90 days)
-- All documentation transferred
+Invoices missing required elements are returned and the payment clock resets to the resubmission date.
 
----
+## Approval Thresholds and Authority Limits
 
-## Time and Materials Payment Rules
+### Spend Authorization
+- Under 5,000 CAD: Shop Supervisor or Dispatcher (with same-day notification to the Fleet Manager)
+- 5,000 to 25,000 CAD: Fleet Manager
+- 25,000 to 100,000 CAD: Controller
+- 100,000 to 500,000 CAD: CFO
+- Over 500,000 CAD: CEO with board notification
 
-### Monthly Invoicing Required
-- Vendors submit invoices monthly
-- Include timesheets or usage reports
-- Detail hours/days worked by resource
-- Hourly/daily rates must match contract
+### Emergency Authority (Reefer Failure on the Road)
+When a reefer unit fails on the road and the load is at risk, dispatch may authorize roadside repair up to 10,000 CAD without prior approval. The Fleet Manager must be notified by the next business day with a follow-up PO.
 
-### Not-to-Exceed (NTE) Caps
-
-**Required**: All T&M contracts must have NTE amount
-
-**Purpose**: Prevents runaway costs
-
-**Monitoring**: Procurement tracks against NTE monthly
-
-**Approaching NTE**:
-- Vendor must notify when 75% utilized
-- IOG decides: authorize increase, reduce scope, or end project
-- Requires written approval for any NTE increase
-
-**Example**:
-- Estimated effort: 500 hours @ $150/hr = $75K
-- NTE set at: $85K (13% buffer)
-- At 375 hours ($56,250), vendor notifies IOG
-- IOG evaluates if additional budget needed
-
----
-
-## Contract Value Thresholds
-
-### Under $25,000:
-- **Approval**: Procurement Specialist
-- **Payment terms**: Net 30, standard terms apply
-- **PO required**: Yes
-- **Advance payments**: Not typical
-
-### $25,000 - $50,000:
-- **Approval**: Procurement Manager
-- **Payment terms**: Net 30, milestones for fixed price
-- **PO required**: Yes
-- **Advance payments**: Up to 20% if fixed price
-
-### $50,000 - $100,000:
-- **Approval**: Procurement Manager + CFO notification
-- **Payment terms**: Milestone-based preferred
-- **PO required**: Yes
-- **Advance payments**: Up to 20%, CFO aware
-
-### Over $100,000:
-- **Approval**: CFO required
-- **Payment terms**: Milestone-based required
-- **PO required**: Yes
-- **Hold-back**: 10% until final acceptance
-- **Advance payments**: 20% max, CFO approval
-
----
-
-## International Vendor Payment Rules
-
-### Wire Transfer Requirements:
-- SWIFT code required
-- IBAN for European vendors
-- Intermediary bank details if needed
-- Currency specified (USD preferred)
-
-### Additional Documentation:
-- W-8 tax form required
-- Foreign tax ID
-- Banking letter from vendor's bank
-- May require additional compliance documentation
-
-### Timing:
-- International wires take 5-7 business days
-- Build into project timelines
-- May incur bank fees (typically paid by recipient)
-
----
-
-## Early Payment Discounts
-
-### Standard Terms:
-IOG may offer **2/10 Net 30**:
-- 2% discount if paid within 10 days
-- Otherwise Net 30 terms apply
-
-### When Offered:
-- Vendor requested and IOG cash flow allows
-- Typically for large invoices (>$50K)
-- Requires CFO approval
-- Not automatic
-
----
+### Capital vs Operating
+- Operating expenses (repairs, parts, services) follow the spend authorization table above
+- Capital expenditures (trailer purchases, large telematics rollouts) always require CFO approval regardless of amount
 
 ## Late Payment Policy
 
-### Vendor Invoice Delays:
-If IOG payment is late:
-- Grace period: 5 business days
-- Late fees: As specified in contract (typically 1.5% per month)
-- Vendor should contact AP team if payment overdue
+### RTL Late Payments to Vendors
+If RTL is late paying a vendor invoice, vendors may charge interest at 1.5 percent per month (18 percent annualized) on overdue balances, provided this is stated in the underlying contract or PO.
 
-### Common Causes of Payment Delays:
-- Missing PO number on invoice
-- Deliverable not accepted
-- Invoice submitted to wrong email
-- Incomplete documentation
-- Discrepancy between invoice and PO
+### Customer Late Payments to RTL
+Customers who pay RTL lease or service invoices late are subject to:
+- Late fee of 1.5 percent per month on the overdue balance
+- After 30 days past due, RTL may suspend services or retrieve leased equipment
+- After 60 days past due, the account is referred to collections and may be reported to credit bureaus
 
-**Prevention**: Ensure all requirements met before invoicing
+## Disputed Invoices
 
----
+### Process
+1. Vendor invoice flagged for dispute within 10 days of receipt
+2. Disputed line items withheld from payment; undisputed lines paid on standard terms
+3. Procurement contacts vendor with written explanation of the dispute
+4. Resolution target: 15 business days from notification
 
-## Invoice Disputes
+### Common Dispute Reasons
+- Pricing variance from contracted rates
+- Quantity discrepancies (parts delivered vs invoiced)
+- Workmanship issues (repair did not resolve the problem)
+- Missing PO reference or trailer unit number
+- HST charged incorrectly (e.g., on a US vendor invoice)
 
-### Dispute Process:
-1. Vendor contacts AP team with concerns
-2. AP reviews invoice and PO
-3. Procurement team engaged if needed
-4. Dispute resolved within 10 business days (target)
+## Recurring Payments
 
-### Common Disputes:
-- Hours vs. contract rates don't match
-- Milestone deliverable not accepted
-- Unauthorized work invoiced
-- Invoice amount exceeds NTE
+### Subscription Services
+Recurring monthly or quarterly payments (telematics, fleet wash, PM contracts) are set up as auto-pay only after:
+- 90 days of satisfactory service under a manual payment cycle
+- Controller approval
 
-### Resolution:
-- May result in partial payment
-- Revised invoice requested
-- Project manager approval required
+### Lease Receivables
+Customer lease payments are configured for monthly auto-debit using pre-authorized debit (PAD) agreements signed at lease execution.
 
----
+## Foreign Currency Exposure
 
-## Progress Payments for Long Projects
+### Hedging Policy
+RTL does not actively hedge FX exposure on routine USD purchases under 50,000 CAD equivalent. For larger commitments (trailer purchases denominated in USD, large parts orders), the controller evaluates forward contracts on a case-by-case basis.
 
-For projects >6 months:
-
-**Recommended Structure**:
-- Monthly progress payments allowed
-- Based on % completion
-- Max 70% paid before completion
-- 30% held until final acceptance
-
-**Example** ($300K, 12-month project):
-- Months 1-10: $21K per month (70% total)
-- Month 12 (final): $90K upon acceptance (30%)
-
-**Requires**:
-- Monthly status reports
-- Demonstrated progress
-- Procurement Manager approval
-
----
-
-## Special Payment Situations
-
-### Retainer Agreements:
-- Monthly fixed fee for ongoing availability
-- Separate from hourly work
-- Net 30 terms
-- Evaluated quarterly for value
-
-### Performance Bonuses:
-- Must be specified in contract
-- Objective criteria required
-- Typically 5-10% of contract value
-- CFO approval required
-
-### Expense Reimbursements:
-- Must be pre-approved in contract
-- Receipts required
-- Reasonable and necessary expenses only
-- Submitted with monthly invoices
-
-### Early Termination Payments:
-- Contract must specify termination terms
-- May owe for work completed
-- No penalty for IOG termination for convenience
-- Prorated to work delivered
-
----
-
-## Payment Terms Glossary
-
-**Net 30**: Payment due 30 days after invoice date  
-**Net 60**: Payment due 60 days after invoice date  
-**2/10 Net 30**: 2% discount if paid in 10 days, otherwise due in 30  
-**PIA (Payment In Advance)**: Payment before work begins  
-**COD (Cash On Delivery)**: Payment upon receipt of goods  
-**Milestone Payment**: Payment upon completion of defined deliverable  
-**Progress Payment**: Payment based on % of work completed  
-**Hold-back**: Percentage withheld until final acceptance  
-**Balloon Payment**: Larger payment at project end  
-**NTE (Not To Exceed)**: Maximum amount payable under contract
-
----
-
-## Compliance and Audit
-
-### Record Keeping:
-- All invoices retained for 7 years
-- Payment records maintained by AP
-- Contract files maintained by procurement
-
-### Audit Requirements:
-- Vendors may be audited for T&M contracts
-- Must provide timesheet backup if requested
-- Required for contracts >$100K
-
-### Tax Compliance:
-- W-9 (domestic) or W-8 (international) required before first payment
-- 1099 issued annually to contractors (if applicable)
-- Vendor responsible for own tax obligations
-
----
-
-## Key Contacts
-
-**General Payment Questions**: ap@iog.com  
-**Invoice Disputes**: ap@iog.com (cc: procurement@iog.com)  
-**Contract Payment Terms**: Andrea Smith (andrea.smith@iog.com)  
-**PO Numbers**: procurement@iog.com  
-**International Payments**: ap@iog.com  
-**Tax Forms (W-9/W-8)**: ap@iog.com
-
----
-
-## Summary: Key Rules to Remember
-
-✅ **Net 30 standard for all vendors**  
-✅ **Max 20% upfront on fixed price contracts**  
-✅ **Balloon payments (30-50%) encouraged**  
-✅ **NTE cap required on all T&M contracts**  
-✅ **10% hold-back on contracts >$100K**  
-✅ **PO number required on all invoices**  
-✅ **W-9 or W-8 required before first payment**  
-❌ **No payment before deliverable acceptance**  
-❌ **No payment exceeding NTE without approval**  
-❌ **No upfront payment >20% without CFO approval**
+### Recording
+USD invoices are recorded at the Bank of Canada noon rate on the invoice date. Payment is recorded at the actual rate on the payment date; the FX gain or loss flows through other income.

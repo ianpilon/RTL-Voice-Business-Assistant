@@ -1,314 +1,175 @@
 # Contract Templates Guide
 
 ## Overview
-IOG maintains standard contract templates to streamline procurement and ensure consistent terms. Choosing the correct template is critical for proper risk management and compliance.
-
-## Template Categories
-
-### 1. Services Contracts
-
-#### Fixed Price Services Agreement
-**Use When**:
-- Scope is well-defined and measurable
-- Deliverables are clear and specific
-- Timeline is fixed
-- Budget is predetermined
-
-**Best For**:
-- Software development projects with defined requirements
-- Marketing campaigns with specific deliverables
-- Design work with mockups/specifications
-- One-time consulting engagements
-
-**Key Terms**:
-- Payment tied to milestones (typically 3-5 milestones)
-- Maximum 20% payment upfront
-- Final payment (30-40%) upon completion and acceptance
-- Change order process for scope changes
-
-**Examples**: Website redesign, marketing campaign execution, audit services
-
----
-
-#### Time and Materials Agreement
-**Use When**:
-- Scope may evolve during engagement
-- Ongoing or long-term services needed
-- Work is difficult to estimate upfront
-- Flexibility is more important than fixed cost
-
-**Best For**:
-- Staff augmentation
-- Ongoing development work
-- Long-term consulting
-- Research and development projects
-
-**Key Terms**:
-- Hourly or daily rates specified
-- Monthly invoicing
-- Not-to-exceed (NTE) cap required for all T&M contracts
-- Monthly status reports required
-
-**Examples**: DevOps support, ongoing marketing services, technical consulting
-
----
-
-#### Master Services Agreement (MSA)
-**Use When**:
-- Planning multiple projects with same vendor
-- Establishing long-term relationship
-- Want to streamline future engagements
-
-**Best For**:
-- Agencies handling multiple campaigns
-- Development firms for multiple projects
-- Recurring service providers
-
-**Key Terms**:
-- Sets general terms for relationship
-- Individual Statements of Work (SOWs) for each project
-- Pre-negotiated rates and terms
-- Typically 1-3 year term
-
-**Examples**: Marketing agency partnerships, development partner relationships
-
----
-
-### 2. Product/Licensing Contracts
-
-#### Software License Agreement
-**Use When**:
-- Purchasing software licenses or subscriptions
-- SaaS products
-- Tools and platforms
-
-**Best For**:
-- Marketing automation platforms
-- Development tools
-- Analytics platforms
-- Business software
-
-**Key Terms**:
-- Subscription vs. perpetual license
-- Number of users/seats
-- Data privacy and security terms
-- Service level agreements (SLAs)
-
-**Examples**: Salesforce, HubSpot, GitHub Enterprise, AWS
-
----
-
-#### Equipment Purchase Agreement
-**Use When**:
-- Buying physical equipment or hardware
-- Large capital purchases
-
-**Best For**:
-- Servers and infrastructure
-- Office equipment
-- Specialized hardware
-
-**Key Terms**:
-- Warranty terms
-- Delivery and installation
-- Payment terms (typically Net 30)
-- Maintenance and support options
-
----
-
-### 3. Specialized Contracts
-
-#### Non-Disclosure Agreement (NDA)
-**Use When**:
-- Sharing confidential information with potential vendors
-- Before detailed discussions begin
-- Protecting intellectual property
-
-**Types**:
-- **Mutual NDA**: Both parties share confidential info (most common)
-- **One-way NDA**: Only IOG shares confidential info
-
-**Key Terms**:
-- Definition of confidential information
-- Permitted uses
-- Term (typically 2-5 years)
-- Return or destruction of materials
-
----
-
-#### Independent Contractor Agreement
-**Use When**:
-- Engaging individual contractors (not companies)
-- Freelancers or consultants
-- Short-term specialized expertise
-
-**Best For**:
-- Individual developers or designers
-- Subject matter experts
-- Temporary specialized roles
-
-**Key Terms**:
-- Clear contractor vs. employee distinction
-- IP assignment provisions
-- Payment terms (typically milestone or monthly)
-- Termination clauses
-
----
-
-## Template Selection Decision Tree
-
-### Start Here: What are you procuring?
-
-**Services (work/labor)**:
-- Defined scope with clear deliverables? → **Fixed Price Services Agreement**
-- Ongoing work or evolving scope? → **Time and Materials Agreement**
-- Multiple future projects with same vendor? → **MSA with SOWs**
-
-**Software/Technology**:
-- Cloud/SaaS product? → **Software License Agreement**
-- Physical hardware? → **Equipment Purchase Agreement**
-
-**Individual Contractor**:
-- Single person (not a company)? → **Independent Contractor Agreement**
-
-**Just discussing potential work**:
-- Sharing confidential info during discussions? → **NDA** (then use service template once decided)
-
----
-
-## Contract Value and Approval Requirements
-
-### Under $25,000:
-- Standard template can be used as-is
-- Procurement Specialist (Maria Santos) approval
-- No legal review required for standard templates
-
-### $25,000 - $50,000:
-- Standard template with minor modifications allowed
-- Procurement Manager (Andrea Smith) approval required
-- Legal review if non-standard terms requested
-
-### $50,000 - $100,000:
-- Legal review recommended
-- Andrea Smith approval required
-- CFO notification
-
-### Over $100,000:
-- Legal review mandatory
-- CFO approval required
-- Board notification for contracts >$250K
-
----
-
-## Payment Terms by Template Type
-
-### Fixed Price Contracts:
-- **Payment Structure**: Milestone-based
-- **Upfront Payment**: Maximum 20% upon contract execution
-- **Interim Payments**: 10-30% per milestone
-- **Final Payment**: 30-40% upon completion and acceptance
-- **Balloon Payment**: Acceptable at end if justified
-
-**Example for $100K project**:
-- 20% ($20K) upon contract signing
-- 25% ($25K) at milestone 1
-- 25% ($25K) at milestone 2
-- 30% ($30K) upon final acceptance
-
-### Time and Materials Contracts:
-- **Payment Structure**: Monthly invoicing
-- **Terms**: Net 30 (payment within 30 days)
-- **Upfront Payment**: Not typical
-- **NTE Cap**: Required (typically 10-20% buffer above estimate)
-
-### Software Licenses:
-- **Payment Structure**: Annual or monthly subscription
-- **Terms**: Typically invoiced annually, Net 30
-- **Upfront Payment**: First year payment upon contract signing
-
----
-
-## Common Modifications and When They're Allowed
-
-### Acceptable Modifications (No Legal Review Needed):
-- Adjusting milestone schedules
-- Changing payment amounts within approved budget
-- Updating contact information
-- Extending deadlines by <30 days
-- Adding specific deliverable details
-
-### Require Legal Review:
-- Changing liability caps
-- Modifying IP ownership terms
-- Altering indemnification clauses
-- Adding international jurisdiction
-- Changing dispute resolution process
-- Removing IOG standard protections
-
----
-
-## Special Situations
-
-### International Vendors:
-- Additional terms needed for international wire transfers
-- May need country-specific compliance terms
-- Currency and exchange rate provisions
-- Export control compliance
-- Use MSA + SOW structure for flexibility
-
-### Vendors Requiring Their Own Paper:
-- Vendor insists on using their template? → Requires full legal review
-- Common with large SaaS vendors (Salesforce, Microsoft, etc.)
-- Budget extra time (2-3 weeks) for legal negotiation
-- Often results in vendor paper + IOG addendum
-
-### Government or Regulated Work:
-- Additional compliance terms required
-- May need flow-down clauses
-- Extra documentation and audit rights
-- Consult legal team early
-
----
-
-## How to Access Templates
-
-### Internal Repository:
-- All templates available in Confluence: ` IOG Procurement → Contract Templates`
-- SharePoint: `Legal → Templates → Procurement`
-
-### Template Versions:
-- Always use the latest version (check version number and date)
-- Templates reviewed annually (last update: January 2024)
-- Do not use templates from old projects without verification
-
-### Getting Help:
-- Template selection questions: procurement@iog.com
-- Template modification requests: Maria Santos
-- Legal review needed: legal@iog.com
-- Urgent template needs: Andrea Smith
-
----
-
-## Prohibited Terms (Never Accept These)
-
-🚫 **Unlimited Liability**: IOG liability should be capped
-🚫 **IP Assignment to Vendor**: IOG must own work product
-🚫 **Automatic Renewal Without Notice**: Must have opt-out window
-🚫 **Unreasonable Indemnification**: Must be mutual and fair
-🚫 **No Termination Rights**: IOG must have termination for convenience
-🚫 **Payment Before Delivery**: Upfront >20% on fixed price contracts
-
----
-
-## Timeline Estimates by Template
-
-| Template Type | Negotiation Time | Approval Time | Total |
-|---------------|------------------|---------------|-------|
-| Fixed Price (standard) | 3-5 days | 2-3 days | 5-8 days |
-| Time & Materials (standard) | 3-5 days | 2-3 days | 5-8 days |
-| MSA + SOW | 5-10 days | 3-5 days | 8-15 days |
-| Software License (vendor paper) | 10-15 days | 5-7 days | 15-22 days |
-| Independent Contractor | 2-3 days | 1-2 days | 3-5 days |
-| NDA | 1-2 days | 1 day | 2-3 days |
-
-*Add 5-10 days if full legal review required*
+RTL maintains standard contract templates to streamline procurement, ensure consistent terms across vendors, and protect the business against uninsured risk. Choosing the correct template is critical for proper risk management and compliance with Ontario regulations.
+
+All templates live in the procurement folder on the shared drive and must be used without alteration to standard clauses except where the procurement team has authorized a custom redline.
+
+## Template Selection Matrix
+
+### When to use which template
+- **Service Agreement (SA)**: Recurring or scheduled service from one vendor (e.g., preventive maintenance contracts, fleet wash standing orders)
+- **Master Service Agreement (MSA)**: Long-term umbrella agreement covering multiple work orders under one vendor (e.g., Polar Refrigeration for all Carrier work over a 12-month period)
+- **Purchase Order (PO)**: One-time goods purchase (parts, refrigerant drums, tires)
+- **Trailer Purchase Agreement (TPA)**: Capital purchase of a new or used reefer trailer
+- **Trailer Lease Agreement (TLA)**: Long-term lease of an RTL trailer to a customer (e.g., Maple Logistics, Northern Foods Co.)
+- **Per-Incident Service Order (PISO)**: One-off roadside or emergency service (no ongoing commitment)
+- **Confidentiality Agreement (NDA)**: When the vendor will receive sensitive customer or operational information
+
+## Template 1: Service Agreement (SA)
+
+### Use For
+- Annual preventive maintenance (PM) contracts on reefer units
+- Quarterly fleet wash standing orders
+- Annual tire rotation and replacement programs
+- Recurring refrigerant supply
+
+### Key Terms
+- **Term**: Typically 12 months with automatic renewal subject to 60 days' written notice
+- **Scope**: Itemized service catalogue with unit pricing
+- **Service Levels**: Response times, turnaround targets, and warranty on workmanship (minimum 90 days on labour)
+- **Pricing**: Fixed unit pricing with annual escalator capped at Ontario CPI plus 1 percent
+- **Insurance**: Vendor maintains insurance per the vendor onboarding requirements
+- **Termination**: 60 days' written notice without cause; immediate for material breach
+
+### Approval
+- Annual value under 25,000 CAD: Fleet Manager
+- Annual value 25,000 to 100,000 CAD: Controller
+- Annual value over 100,000 CAD: CFO
+
+## Template 2: Master Service Agreement (MSA)
+
+### Use For
+- Multi-work-order relationships with reefer service centers (e.g., Polar Refrigeration, Thermal Edge)
+- Ongoing parts supply relationships with parts wholesalers (e.g., CoolHaul Parts Direct, Maple Heavy-Duty Parts)
+
+### Structure
+The MSA establishes umbrella terms; individual work or jobs are dispatched via Work Orders or POs that reference the MSA.
+
+### Key Terms
+- **Term**: Typically 24 to 36 months
+- **Pricing**: Vendor maintains a fixed price list filed with RTL; updates require 30 days' notice
+- **Volume Commitments**: None unless RTL elects to take advantage of volume tier discounts
+- **Indemnification**: Vendor indemnifies RTL for workmanship defects, third-party damage caused by vendor employees, and refrigerant handling violations
+- **Limitation of Liability**: Mutual cap at the greater of insurance limits or annual revenue under the MSA
+- **Audit**: RTL may audit vendor records related to RTL invoices once per year
+
+### Approval
+MSAs require Controller or CFO approval depending on expected annual volume.
+
+## Template 3: Purchase Order (PO)
+
+### Use For
+- One-time parts purchases
+- Refrigerant drum orders
+- Tire purchases outside of an annual contract
+- Any goods purchase not covered by an existing MSA
+
+### Required Fields
+- Vendor name and RTL vendor ID
+- Part numbers, descriptions, quantities
+- Unit pricing in CAD (USD if cross-border, with exchange rate noted)
+- Expected delivery date
+- Shipping terms (FOB shipping point unless otherwise negotiated)
+- HST line item where applicable
+- Trailer unit number (if the parts are for a specific trailer)
+- Charge code or budget number
+
+### Approval Thresholds
+- Under 5,000 CAD: Shop Supervisor
+- 5,000 to 25,000 CAD: Fleet Manager
+- 25,000 to 100,000 CAD: Controller
+- Over 100,000 CAD: CFO
+
+## Template 4: Trailer Purchase Agreement (TPA)
+
+### Use For
+- Buying a new reefer trailer from an OEM dealer (e.g., Northbridge Trailer Sales)
+- Buying a used reefer trailer from a dealer or another fleet operator
+
+### Key Terms
+- **Specifications**: Make, model, year, reefer unit, length, axle configuration, electrical setup
+- **Acceptance**: 30-day acceptance period; defects discovered during acceptance must be remedied at vendor cost
+- **Title and Liens**: Vendor warrants clear title; RTL takes title on payment
+- **Warranty**: Manufacturer warranty plus dealer-specific extended warranty where available
+- **Delivery**: Delivered to RTL Toronto Yard or as specified
+- **Financing**: If financed, separate financing agreement applies
+
+### Approval
+All trailer purchases require CFO approval. Purchases over 250,000 CAD require board notification.
+
+## Template 5: Trailer Lease Agreement (TLA)
+
+### Use For
+- Long-term lease of an RTL trailer to a customer (Maple Logistics, Northern Foods Co., Apex Distribution)
+
+### Key Terms
+- **Term**: Typically 12 to 36 months; some short-term leases of 3 to 6 months
+- **Monthly Rate**: Fixed monthly rate based on unit age, condition, and reefer specifications
+- **Use Restrictions**: Customer agrees to operate within the trailer's temperature range and not exceed GVWR
+- **Maintenance**: RTL retains responsibility for reefer unit maintenance; customer responsible for tires, brake adjustments, and incidental damage
+- **Insurance**: Customer must maintain commercial auto and cargo coverage naming RTL as an additional insured and loss payee
+- **Return Condition**: Trailer returned in clean, food-grade condition with a final inspection
+- **Early Termination**: Permitted with 90 days' notice and an early termination fee of 3 monthly payments
+
+### Approval
+- Leases under 50,000 CAD total contract value: Fleet Manager
+- Leases over 50,000 CAD: Controller
+- Lease terms longer than 36 months: CFO
+
+## Template 6: Per-Incident Service Order (PISO)
+
+### Use For
+- One-off roadside assistance dispatches (SureRoad Roadside Network)
+- Emergency mobile reefer repairs (Thermal Edge Mobile Service)
+- Heavy-duty towing
+
+### Key Terms
+- No ongoing commitment; pricing is per the vendor's published rate sheet
+- RTL is responsible for the specific dispatch only
+- Vendor's standard liability terms apply (limited to direct damages)
+
+### Approval
+- Under 2,500 CAD: Dispatch on the road can authorize verbally with follow-up PO within 24 hours
+- 2,500 to 10,000 CAD: Fleet Manager approval required
+- Over 10,000 CAD: Controller approval required
+
+## Template 7: Confidentiality Agreement (NDA)
+
+### Use For
+- Telematics vendors with access to operational data
+- Insurance brokers receiving customer information
+- Any vendor exposed to RTL customer lists, route data, or financial information
+
+### Key Terms
+- **Definition of Confidential Information**: Broadly defined to include operational, customer, and financial data
+- **Term**: 3 years for general confidentiality, indefinite for trade secrets
+- **Use Restriction**: Vendor may use information only to perform the contracted service
+- **Return or Destruction**: All RTL information returned or destroyed at end of engagement
+
+## Key Contract Clauses
+
+### Warranty
+- Reefer unit repairs: minimum 90 days on labour, manufacturer warranty on parts
+- Trailer purchases: manufacturer warranty plus negotiated dealer warranty
+- Tire purchases: pro-rata mileage warranty
+- Workmanship deficiencies discovered within the warranty period must be remedied at vendor cost
+
+### Liability and Indemnification
+- Vendors indemnify RTL for damage caused by vendor employees on RTL premises
+- Vendors indemnify RTL for workmanship failures resulting in load loss or DOT/MTO non-compliance
+- Mutual limitation of liability capped at insurance limits or contract value
+
+### Refrigerant Handling
+- All refrigerant work must comply with Environment Canada refrigerant management regulations
+- Vendor warrants TDG-compliant transport of refrigerant
+- Refrigerant recovery and recycling records must be retained and made available to RTL on request
+
+### Termination
+- For convenience: 60 days' written notice (annual contracts) or 30 days (POs not yet fulfilled)
+- For cause: immediate, with cause defined as material breach uncured after 15 days' notice
+
+### Dispute Resolution
+- Disputes are first addressed by direct negotiation between the parties
+- If unresolved within 30 days, parties proceed to mediation in Toronto, Ontario
+- Arbitration in Toronto under the Arbitration Act, 1991 (Ontario) if mediation fails
