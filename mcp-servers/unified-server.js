@@ -111,25 +111,25 @@ app.post('/lookup-asset', (req, res) => {
 });
 
 // ============================================
-// PROCUREMENT RAG FUNCTIONALITY
+// POLICY SEARCH FUNCTIONALITY
 // ============================================
 
-const PROCUREMENT_DOCS_PATH = path.join(__dirname, 'procurement-rag/procurement-docs');
+const POLICY_DOCS_PATH = path.join(__dirname, 'policy-rag');
 let documents = [];
 
 function loadDocuments() {
   try {
-    if (!fs.existsSync(PROCUREMENT_DOCS_PATH)) {
-      console.log(`⚠️  Procurement docs directory not found: ${PROCUREMENT_DOCS_PATH}`);
+    if (!fs.existsSync(POLICY_DOCS_PATH)) {
+      console.log(`⚠️  Policy docs directory not found: ${POLICY_DOCS_PATH}`);
       return;
     }
 
-    const files = fs.readdirSync(PROCUREMENT_DOCS_PATH);
+    const files = fs.readdirSync(POLICY_DOCS_PATH);
     documents = [];
 
     files.forEach(file => {
       if (file.endsWith('.txt') || file.endsWith('.md')) {
-        const content = fs.readFileSync(path.join(PROCUREMENT_DOCS_PATH, file), 'utf8');
+        const content = fs.readFileSync(path.join(POLICY_DOCS_PATH, file), 'utf8');
 
         // Split on ## headers to create clean section boundaries
         const sections = content.split(/(?=##\s)/g).filter(section => section.trim().length > 0);
@@ -351,57 +351,6 @@ app.post('/search-vendors', (req, res) => {
 });
 
 // ============================================
-// REQUEST VALIDATION FUNCTIONALITY
-// ============================================
-
-function validateProcurementRequest(fields) {
-  const missing = [];
-  const warnings = [];
-
-  // Required fields
-  if (!fields.budget_number) missing.push("budget number");
-  if (!fields.milestones) missing.push("milestones");
-  if (!fields.costs) missing.push("cost breakdown");
-  if (!fields.description) missing.push("project description");
-  if (!fields.deadline) warnings.push("deadline or timeline");
-
-  return { missing, warnings };
-}
-
-// Request validation endpoint
-app.post('/validate-request', (req, res) => {
-  console.log('\n📥 Request validation:', JSON.stringify(req.body, null, 2));
-
-  const toolCallId = req.body.message?.toolCallList?.[0]?.id;
-  const fields = req.body.message?.toolCallList?.[0]?.function?.arguments || {};
-
-  console.log(`\n✓ Validating request fields...`);
-
-  const validation = validateProcurementRequest(fields);
-
-  let resultText = '';
-
-  if (validation.missing.length > 0) {
-    resultText = `Missing required fields: ${validation.missing.join(', ')}. Please provide these before I can submit your request.`;
-    console.log(`   ❌ Incomplete: ${validation.missing.join(', ')}`);
-  } else {
-    resultText = 'All required fields are present! Your request is ready to submit.';
-    console.log(`   ✅ Request is complete`);
-
-    if (validation.warnings.length > 0) {
-      resultText += ` Note: Consider adding: ${validation.warnings.join(', ')}.`;
-    }
-  }
-
-  res.json({
-    results: [{
-      toolCallId: toolCallId || 'unknown',
-      result: resultText
-    }]
-  });
-});
-
-// ============================================
 // UTILITY ENDPOINTS
 // ============================================
 
@@ -457,17 +406,16 @@ app.post('/reload', (req, res) => {
 loadDocuments();
 
 app.listen(port, () => {
-  console.log('\n🚀 RTL Voice Procurement - Unified MCP Server');
+  console.log('\n🚀 RTL Voice Business Assistant - Backend');
   console.log('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━');
   console.log(`📍 Server URL: http://localhost:${port}`);
   console.log('');
   console.log('📋 Available Endpoints:');
-  console.log('  🚛 POST /lookup-asset      - Reefer trailer asset lookup');
-  console.log('  📚 POST /search-policies   - Procurement policy search');
-  console.log('  🏢 POST /search-vendors    - Vendor history search');
-  console.log('  ✅ POST /validate-request  - Request completeness validation');
-  console.log('  💚 GET  /health            - Health check');
-  console.log('  🔄 POST /reload            - Reload data');
+  console.log('  🚛 POST /lookup-asset    - Reefer trailer asset lookup');
+  console.log('  📚 POST /search-policies - Policy search');
+  console.log('  🏢 POST /search-vendors  - Vendor history search');
+  console.log('  💚 GET  /health          - Health check');
+  console.log('  🔄 POST /reload          - Reload data');
   console.log('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━');
   console.log('');
   console.log('📊 Data Loaded:');

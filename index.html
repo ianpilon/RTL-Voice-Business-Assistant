@@ -543,7 +543,7 @@
     <div class="intro">
       <h2>How to test the voice AI</h2>
       <p><strong>Option 1 — Call from your browser:</strong> Click the <em>"📞 Call AI in browser"</em> button in the top right. Your browser will ask for mic permission (one time), then connect you directly to the AI. A live transcript appears below the header during the call.</p>
-      <p><strong>Option 2 — Real phone call:</strong> Dial <span class="phone">+1 (930) 254-9264</span>. The AI greets you with <em>"Hello, you've reached the RTL Procurement Office."</em></p>
+      <p><strong>Option 2 — Real phone call:</strong> Dial <span class="phone">+1 (930) 254-9264</span>. The AI greets you with <em>"Hello, you've reached the RTL Business Assistant."</em></p>
       <p><strong>Option 3 — Verify the data directly:</strong> Each section below has a live tester that hits the same backend endpoint the voice AI uses. If the tester returns the right data, the AI can use it on a call.</p>
     </div>
 
@@ -565,14 +565,12 @@
           <button class="tab active" data-tab="trailers" onclick="switchTab('trailers')">Reefer Trailers <span class="count" id="trailerCount">…</span></button>
           <button class="tab" data-tab="vendors" onclick="switchTab('vendors')">Vendors <span class="count" id="vendCount">…</span></button>
           <button class="tab" data-tab="policies" onclick="switchTab('policies')">Policy Docs <span class="count" id="polCount">…</span></button>
-          <button class="tab" data-tab="requests" onclick="switchTab('requests')">Requests</button>
         </div>
       </div>
       <div class="tool-body" style="display: block;">
         <div id="dataPanel-trailers" class="data-panel"></div>
         <div id="dataPanel-vendors" class="data-panel" style="display: none;"></div>
         <div id="dataPanel-policies" class="data-panel" style="display: none;"></div>
-        <div id="dataPanel-requests" class="data-panel" style="display: none;"></div>
       </div>
     </div>
 
@@ -620,8 +618,8 @@
     <!-- Tool 2: Policy Search -->
     <div class="tool" id="tool-policies" style="display: none;">
       <div class="tool-header">
-        <h3>Procurement Policy Search (RAG)</h3>
-        <div class="tech">tool: <code>search_procurement_policies</code> &nbsp;·&nbsp; endpoint: <code>POST /search-policies</code></div>
+        <h3>Policy Search</h3>
+        <div class="tech">tool: <code>search_policies</code> &nbsp;·&nbsp; endpoint: <code>POST /search-policies</code></div>
       </div>
       <div class="tool-body">
         <div class="col">
@@ -635,7 +633,7 @@
           </ul>
           <h4>What the AI should say back</h4>
           <p class="expected">"RTL's standard payment term is Net 30 from invoice date, except for capital trailer purchases over 50,000 dollars which are Net 60, and per-incident roadside dispatches which are Net 15." The AI cites the relevant policy section from the indexed docs.</p>
-          <p style="font-size: 13px; color: var(--muted); margin-top: 12px;"><strong>Policy docs indexed:</strong> vendor onboarding (Ontario WSIB, MTO, refrigerant cert), contract templates (service agreements, MSAs, trailer leases), payment rules (HST, CAD/USD, approval thresholds), procurement FAQ.</p>
+          <p style="font-size: 13px; color: var(--muted); margin-top: 12px;"><strong>Policy docs indexed:</strong> vendor onboarding (Ontario WSIB, MTO, refrigerant cert), contract templates (service agreements, MSAs, trailer leases), payment rules (HST, CAD/USD, approval thresholds), policy FAQ.</p>
         </div>
         <div class="col">
           <h4>Try it live</h4>
@@ -690,47 +688,6 @@
             <input id="vendorQuery" placeholder="e.g. reefer repair, tire retreading" />
             <button onclick="callTool('search-vendors', { query: document.getElementById('vendorQuery').value }, 'vendorResult')">Search vendors</button>
             <div class="result" id="vendorResult"></div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- Tool 4: Validate Request -->
-    <div class="tool" id="tool-requests" style="display: none;">
-      <div class="tool-header">
-        <h3>Request Validation</h3>
-        <div class="tech">tool: <code>validate_request</code> &nbsp;·&nbsp; endpoint: <code>POST /validate-request</code></div>
-      </div>
-      <div class="tool-body">
-        <div class="col">
-          <h4>What you can say on a call</h4>
-          <ul class="examples">
-            <li>"I need to submit a procurement request."</li>
-            <li>"I want to engage a new vendor for [project]."</li>
-            <li>"I'm trying to file a request for [thing]."</li>
-          </ul>
-          <h4>What the AI should say back</h4>
-          <p class="expected">The AI gathers four required fields by asking follow-ups: <strong>budget number, milestones, costs, description</strong> (and optionally deadline). If anything's missing it asks for it. Only complete requests get routed — this is what prevents the 50% incomplete-request waste.</p>
-          <p style="font-size: 13px; color: var(--muted); margin-top: 12px;">Try submitting partial fields below to see what validation flags as missing.</p>
-        </div>
-        <div class="col">
-          <h4>Try it live</h4>
-          <div class="tester">
-            <div class="quick-fills">
-              <button onclick="fillRequest('complete')">complete request</button>
-              <button onclick="fillRequest('missing')">missing fields</button>
-              <button onclick="fillRequest('empty')">empty</button>
-            </div>
-            <label>Budget number</label>
-            <input id="reqBudget" placeholder="e.g. BUD-2025-ENG-014" />
-            <label>Milestones / timeline</label>
-            <input id="reqMilestones" placeholder="e.g. Q2 2025 delivery" />
-            <label>Costs</label>
-            <input id="reqCosts" placeholder="e.g. $75,000" />
-            <label>Description</label>
-            <textarea id="reqDescription" placeholder="e.g. Bulk Carrier Vector compressor parts for PM program"></textarea>
-            <button onclick="validateRequest()">Validate</button>
-            <div class="result" id="validateResult"></div>
           </div>
         </div>
       </div>
@@ -874,15 +831,6 @@
       document.getElementById(id).value = value;
     }
 
-    function fillRequest(mode) {
-      const map = {
-        complete: { reqBudget: "BUD-2026-MAINT-014", reqMilestones: "Delivery within 2 weeks", reqCosts: "$22,800", reqDescription: "Bulk Carrier Vector compressor and evaporator parts for PM program" },
-        missing:  { reqBudget: "BUD-2026-MAINT-014", reqMilestones: "",                         reqCosts: "",         reqDescription: "Carrier compressor parts" },
-        empty:    { reqBudget: "",                  reqMilestones: "",                  reqCosts: "",        reqDescription: "" }
-      };
-      Object.entries(map[mode]).forEach(([k, v]) => document.getElementById(k).value = v);
-    }
-
     async function callTool(path, body, resultId) {
       const result = document.getElementById(resultId);
       result.className = "result show";
@@ -906,16 +854,6 @@
           "  • CORS not yet deployed (push the latest commit)\n" +
           "  • Network blocked";
       }
-    }
-
-    function validateRequest() {
-      const body = {
-        budget_number: document.getElementById("reqBudget").value,
-        milestones:    document.getElementById("reqMilestones").value,
-        costs:         document.getElementById("reqCosts").value,
-        description:   document.getElementById("reqDescription").value
-      };
-      callTool("validate-request", body, "validateResult");
     }
 
     async function checkHealth() {
@@ -943,7 +881,7 @@
     checkHealth();
 
     // ---- Data Browser ----
-    const TABS = ["trailers", "vendors", "policies", "requests"];
+    const TABS = ["trailers", "vendors", "policies"];
 
     function switchTab(name) {
       document.querySelectorAll(".tab").forEach(t => t.classList.toggle("active", t.dataset.tab === name));
@@ -1093,57 +1031,9 @@
       }
     }
 
-    function loadRequests() {
-      const panel = document.getElementById("dataPanel-requests");
-      panel.innerHTML = `
-        <p style="color:var(--muted);font-size:13px;margin:0 0 12px;">
-          The AI only routes <strong>complete</strong> procurement requests. Incomplete requests get rejected at validation time so they don't reach the procurement team half-formed.
-        </p>
-
-        <div class="data-card">
-          <div class="name">Required fields</div>
-          <div class="subtitle">Every request must include these four before validation passes:</div>
-          ${row("Budget number", "Charge code (e.g., BUD-2026-MAINT-014)")}
-          ${row("Milestones", "Timeline or service-by date")}
-          ${row("Costs", "Estimated total in CAD")}
-          ${row("Description", "What's being requested and what it's for")}
-          ${row("Deadline", '<span style="color:var(--muted);">Optional but recommended</span>')}
-        </div>
-
-        <div class="data-card">
-          <div class="name">Approval thresholds (CAD)</div>
-          ${row("Under 5,000", "Shop Supervisor")}
-          ${row("5,000–25,000", "Fleet Manager")}
-          ${row("25,000–100,000", "Controller")}
-          ${row("100,000–500,000", "CFO")}
-          ${row("Over 500,000", "CEO with board notification")}
-          ${row("Roadside emergency", "Dispatch may authorize up to 10,000 CAD if load is at risk")}
-        </div>
-
-        <div class="data-card">
-          <div class="name">Example complete request</div>
-          ${row("Budget", "BUD-2026-MAINT-014")}
-          ${row("Milestones", "Delivery within 2 weeks")}
-          ${row("Costs", "$22,800")}
-          ${row("Description", "Bulk Carrier Vector compressor and evaporator parts for PM program")}
-        </div>
-
-        <div class="data-card">
-          <div class="name">Common rejection reasons</div>
-          <ul style="margin:0;padding-left:18px;font-size:13px;">
-            <li>Missing budget code</li>
-            <li>No cost estimate provided</li>
-            <li>Description too vague to evaluate</li>
-            <li>Timeline missing for time-sensitive procurement</li>
-          </ul>
-        </div>
-      `;
-    }
-
     loadTrailers();
     loadVendors();
     loadPolicies();
-    loadRequests();
   </script>
 </body>
 </html>
