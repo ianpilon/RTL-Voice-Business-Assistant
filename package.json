@@ -2,9 +2,9 @@
   "name": "rtl-voice-procurement-system",
   "version": "1.0.0",
   "description": "AI voice assistant for RTL's Procurement team",
-  "main": "server.js",
+  "main": "mcp-servers/unified-server.js",
   "scripts": {
-    "start": "node server.js"
+    "start": "node mcp-servers/unified-server.js"
   },
   "dependencies": {
     "alawmulaw": "^6.0.0",
