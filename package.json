@@ -1,7 +1,7 @@
 {
-  "name": "rtl-voice-procurement-system",
+  "name": "rtl-voice-business-assistant",
   "version": "1.0.0",
-  "description": "AI voice assistant for RTL's Procurement team",
+  "description": "Voice AI business assistant for RTL (reefer trailer leasing and fleet operation)",
   "main": "mcp-servers/unified-server.js",
   "scripts": {
     "start": "node mcp-servers/unified-server.js"

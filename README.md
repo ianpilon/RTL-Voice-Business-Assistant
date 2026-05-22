@@ -1,6 +1,8 @@
-# RTL Voice Procurement System
+# RTL Voice Business Assistant
 
-A voice AI assistant for RTL, a reefer trailer leasing and fleet operation. Internal staff (drivers, dispatchers, shop, fleet managers) call a phone number and the assistant answers fleet, vendor, policy, and procurement questions, and validates new procurement requests before they reach Andrea's procurement team.
+A voice AI business assistant for RTL, a reefer trailer leasing and fleet operation. Internal staff (drivers, dispatchers, shop, fleet managers) call a phone number and the assistant answers fleet, vendor, policy, and procurement questions, and validates new procurement requests before they reach Andrea's procurement team.
+
+(The repo name and folder layout still say "procurement system" for historical reasons; the live product covers a broader internal-ops scope.)
 
 ## What it does
 
