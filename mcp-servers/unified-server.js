@@ -10,6 +10,9 @@ const port = process.env.PORT || 3001;
 app.use(cors());
 app.use(express.json());
 
+// Serve the dashboard UI (index.html at repo root) same-origin.
+app.get('/', (req, res) => res.sendFile(path.join(__dirname, '..', 'index.html')));
+
 // ============================================
 // ASSET (REEFER TRAILER) FUNCTIONALITY
 // ============================================
