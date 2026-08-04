@@ -492,15 +492,6 @@
       color: var(--muted);
       font-size: 14px;
     }
-    .footer-note {
-      background: #fff8e6;
-      border: 1px solid #f0d68a;
-      border-radius: 6px;
-      padding: 12px 16px;
-      margin: 24px 0;
-      font-size: 13px;
-      color: #5a4615;
-    }
     footer {
       text-align: center;
       padding: 24px;
@@ -545,10 +536,6 @@
       <p><strong>Option 1 — Call from your browser:</strong> Click the <em>"📞 Call AI in browser"</em> button in the top right. Your browser will ask for mic permission (one time), then connect you directly to the AI. A live transcript appears below the header during the call.</p>
       <p><strong>Option 2 — Real phone call:</strong> Dial <span class="phone">+1 (930) 254-9264</span>. The AI greets you with <em>"Hello, you've reached the RTL Business Assistant."</em></p>
       <p><strong>Option 3 — Verify the data directly:</strong> Each section below has a live tester that hits the same backend endpoint the voice AI uses. If the tester returns the right data, the AI can use it on a call.</p>
-    </div>
-
-    <div class="footer-note">
-      <strong>Cold-start note:</strong> The backend sleeps after 15 min of no traffic on Render's free tier. The first request after sleep takes ~30 seconds to wake up. The voice AI tools are set to wait 45 seconds, but if you hear a long pause on a call, that's why.
     </div>
 
     <div class="layout-grid">
