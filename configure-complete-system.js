@@ -2,7 +2,7 @@ require('dotenv').config();
 const fs = require('fs');
 
 // Defaults to the deployed Render URL; pass a different URL (e.g. an ngrok tunnel) for local dev.
-const BACKEND_URL = process.argv[2] || 'https://rtl-procurement-mcp.onrender.com';
+const BACKEND_URL = process.argv[2] || 'https://rtl-business.voiceclaw.ca';
 
 async function configureAssistant() {
   try {

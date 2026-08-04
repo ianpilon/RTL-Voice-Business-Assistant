@@ -43,7 +43,7 @@ Caller → Vapi (phone + STT/TTS + GPT-4 function calling) → Express server �
 
 ## Deployment
 
-The backend runs on Render. `render.yaml` builds with `npm install` and starts with `node mcp-servers/unified-server.js`, with `/health` as the health check.
+The backend runs on Ian's Mac mini (launchd service `com.voiceclaw.rtl-business`, plain `node mcp-servers/unified-server.js`, `PORT=8106`), exposed at `https://rtl-business.voiceclaw.ca` via Cloudflare Tunnel. It previously ran on Render's free tier; that service was deleted and the backend migrated on 2026-07-05.
 
 `npm start` runs the same entrypoint locally.
 
@@ -63,7 +63,7 @@ ngrok http 3001
 node configure-complete-system.js https://your-ngrok-url.ngrok-free.app
 ```
 
-`configure-complete-system.js` defaults to the deployed Render URL if no argument is passed.
+`configure-complete-system.js` defaults to the deployed mini URL if no argument is passed.
 
 ## Configuration
 
