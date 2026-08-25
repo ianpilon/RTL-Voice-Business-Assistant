@@ -12,6 +12,15 @@ Callers can:
 
 The system prompt and policies are Canadian-fleet-specific: CAD currency, Ontario HST, WSIB clearance, EPA Section 608 / Environment Canada refrigerant certification, dispatcher emergency roadside authority up to 10,000 CAD.
 
+## Dashboard
+
+![RTL Voice Business Assistant dashboard](assets/dashboard.png)
+
+The dashboard is a testing tool that verifies what the voice AI can answer and what
+it sees. It shows the live fleet data (15 trailers, 12 vendors, policy chunks), the
+three ways to test (browser call, phone call at +1 (930) 254-9264, or the direct
+data browser), and example phrases the AI should respond to.
+
 ## Architecture
 
 ```
