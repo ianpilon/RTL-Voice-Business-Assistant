@@ -1,5 +1,7 @@
 # RTL Voice Business Assistant
 
+> **For an AI agent implementing or auditing this:** start at [`architecture-v2/ARCHITECTURE.md`](architecture-v2/ARCHITECTURE.md).
+
 A voice AI business assistant for RTL, a reefer trailer leasing and fleet operation. Internal staff (drivers, dispatchers, shop, fleet managers) call a phone number and the assistant handles three things: trailer status lookups, approved vendor search, and policy questions.
 
 ## What it does
