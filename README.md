@@ -83,3 +83,73 @@ After any change, hit `POST /reload` to refresh in place without restarting.
 ## Assistant prompt
 
 The full conversation flow, tool-use rules, tone, and policy reference is in `system-prompt.txt`. Editing that file does not change the deployed assistant on its own; run `node configure-complete-system.js` to push the updated prompt into Vapi.
+
+---
+
+## Corrected Architecture (v2)
+
+A reference implementation of the corrected design lives in [`architecture-v2/`](architecture-v2/).
+It fixes the gaps between the live v1 assistant and the "100% accuracy" goal, and is
+built around one rule:
+
+> **The model is the interface, not the source.** It has tools; it calls them; the
+> tools are the only source of truth. If a tool returns "no data," the agent says
+> "no data" — never guesses.
+
+The accuracy equation:
+
+> Accuracy = the query is correct × the data is correct × the answer adds/drops/invents nothing.
+
+Three lanes:
+
+```
+caller's question
+   ├──► QUERY lane      → queries.js (deterministic, read-only) ──► live DB
+   ├──► RETRIEVAL lane  → policy-rag/ (markdown, with source citations)
+   └──► ACTION lane     → guarded mutation (explicit confirm)
+```
+
+The eight recommendations it implements (see `architecture-v2/ARCHITECTURE.md` for detail):
+
+1. Kill the duplicate policy — the prompt contains **zero** facts; policy lives only in `policy-rag/`.
+2. Live DB via the `db.js` seam, not hand-edited JSON.
+3. Citations + verbatim numbers (name the source; never paraphrase an amount).
+4. Curated read-only query catalog (`queries.js`) — never free-form SQL.
+5. Deterministic high-stakes facts (`approvalThreshold`, `paymentTerm`, `hstRate`).
+6. A "constitution" (`constitution.md`) — glossary + schema + business rules fed to the model.
+7. Ambiguity-safe unit lookup — ask "which one?" instead of silently picking.
+8. An audit log (`audit.log`) — every Q → tool → result → timestamp.
+
+## How to follow this architecture on the RTL app later
+
+The RTL portal (work-order + leasing features) is the **system of record**. When the
+chat/voice layer ("talk to your data") is added on top, follow this pattern:
+
+1. **Keep the portal database as the single source of truth.** The chat layer never
+   holds its own copy of numbers. `architecture-v2/db.js` is the seam — each getter
+   maps to a portal query (`SELECT …`), so swap the sample data for real queries.
+
+2. **Build the chat as a tool-grounded agent, not a freeform generator.** Expose the
+   owner's questions as a *curated read-only query catalog* (`queries.js`):
+   `openWorkOrders()`, `revenueBilled(division, period)`, `revenueCollected(...)`,
+   `overdueInspections()`, `overduePayments()`, `activeLeases()`, `fleetSummary()`,
+   `unitHistory(...)`, plus the deterministic facts (`approvalThreshold`,
+   `paymentTerm`, `hstRate`). To add a question, add a function — never free-form SQL.
+
+3. **Feed it the constitution.** `architecture-v2/constitution.md` is the glossary +
+   schema + business rules. It makes "open", "overdue", and "billed vs collected"
+   unambiguous — the difference between a wrong answer that's technically correct and
+   a right one.
+
+4. **Three lanes, three accuracy profiles.**
+   - *Fact queries* (counts, dollar totals, statuses) → deterministic functions, essentially 100% accurate.
+   - *Document questions* (policy, "summarize WO 456") → retrieve + cite + verbatim numbers, labeled as generated.
+   - *Actions* (create WO, mark invoiced) → explicit confirmation, typed read-back for VINs / part numbers / amounts.
+
+5. **Show your work.** Every answer cites the query it ran or the policy section it
+   read. Log every call to `audit.log` so a wrong answer can be traced and fixed at
+   the source.
+
+6. **Voice: read back precise values.** Fine for retrieval ("how many open work
+   orders?"); require typed confirmation for precise input (unit numbers, VINs,
+   dollar amounts).
